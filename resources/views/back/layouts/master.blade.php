@@ -7,7 +7,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Buy Brand Tools | Admin</title>
+    <title>@yield('title') | Admin Panel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Buy Brand Tools Admin" name="description" />
     <meta content="Buy Brand Tools Admin" name="author" />

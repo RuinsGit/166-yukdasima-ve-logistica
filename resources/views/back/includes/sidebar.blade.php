@@ -85,9 +85,40 @@
                         </a>
                     </li>  
 
+                   
+
                         
    
                     </ul>
+
+
+
+
+                    <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ri-home-line"></i>
+                        <span>Ana Səhifə</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                       
+                      
+                    <li>
+                        <a href="{{ route('back.pages.home-heroes.index') }}">
+                            <i class="ri-slideshow-line"></i>
+                            <span>Slayder</span>
+                        </a>
+                    </li> 
+                   
+
+                        
+   
+                    </ul>
+
+
+
+
+
+                     
             </ul>
         </div>
         <!-- Sidebar -->

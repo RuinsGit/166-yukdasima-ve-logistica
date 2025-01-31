@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\LogoController;
 use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\SocialshareController;
 use App\Http\Controllers\Admin\SocialfooterController;
+use App\Http\Controllers\Admin\HomeHeroController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,7 +66,7 @@ Route::prefix('admin')->group(function () {
              Route::post('seo', [SeoController::class, 'store'])->name('seo.store');
              Route::get('seo/{id}/edit', [SeoController::class, 'edit'])->name('seo.edit');
              Route::put('seo/{id}', [SeoController::class, 'update'])->name('seo.update');
-             Route::delete('seo/{id}', [SeoController::class, 'destroy'])->name('seo.destroy');
+             Route::delete('/seo/{seo}', [SeoController::class, 'destroy'])->name('seo.destroy');
 
              // Logo routes
              Route::resource('logos', LogoController::class);
@@ -111,11 +112,24 @@ Route::prefix('admin')->group(function () {
 
 
 
-
+              Route::prefix('home-heroes')->group(function () {
+                Route::get('/', [HomeHeroController::class, 'index'])->name('home-heroes.index');
+                Route::get('/create', [HomeHeroController::class, 'create'])->name('home-heroes.create');
+                Route::post('/', [HomeHeroController::class, 'store'])->name('home-heroes.store');
+                Route::get('/{homeHero}/edit', [HomeHeroController::class, 'edit'])->name('home-heroes.edit');
+                Route::put('/{homeHero}', [HomeHeroController::class, 'update'])->name('home-heroes.update');
+                Route::delete('/{homeHero}', [HomeHeroController::class, 'destroy'])->name('home-heroes.destroy');
+                Route::post('home-heroes/order', [HomeHeroController::class, 'order'])->name('home-heroes.order');
+                Route::post('home-heroes/toggle-status/{id}', [HomeHeroController::class, 'toggleStatus'])->name('home-heroes.toggle-status');
+                
+                
+            });
 
 
 
         });
+
+        
 
         
     });

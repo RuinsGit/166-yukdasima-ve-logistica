@@ -1,0 +1,13 @@
+/* Eski stilleri kaldırın */
+#altFields, #videoTitleField {
+    display: block !important; /* BU SATIRI TAMAMEN SİLİN */
+} 
+
+/* Yeni stil əlavə edin */
+.btn-group .btn {
+    transition: all 0.3s ease;
+}
+.btn-group .btn.active {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0,123,255,0.3);
+} 
