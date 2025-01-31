@@ -22,7 +22,7 @@
                 <li class="menu-title">Menu</li>
 
                 <li>
-                    <a href="№" class="waves-effect">
+                    <a href="{{ route('admin.dashboard') }}" class="waves-effect">
                         <i class="ri-dashboard-line"></i>
                         <span>Ana Səhifə</span>
                     </a>
