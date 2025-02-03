@@ -21,7 +21,7 @@
                         </a>
                         @else
                         <button class="btn btn-secondary" disabled>
-                            <i class="fas fa-plus"></i> Yalnız 1 bölmə əlavə edilə bilər
+                        <i class="fas fa-ban"></i> Maksimum sayda bölmə var
                         </button>
                         @endif
                     </div>

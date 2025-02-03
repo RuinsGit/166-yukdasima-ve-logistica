@@ -130,6 +130,13 @@
                         </a>
                     </li>
 
+                    <li>
+                        <a href="{{ route('back.pages.home-cart-twos.index') }}">
+                            <i class="ri-layout-grid-line"></i>
+                            <span>Bölmələr iki</span>
+                        </a>
+                    </li>
+
                         
    
                     </ul>

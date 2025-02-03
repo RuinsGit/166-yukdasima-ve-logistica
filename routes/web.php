@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\HomeHeroController;
 use App\Http\Controllers\Admin\HomeCartController;
 use App\Http\Controllers\Admin\HomeSectionController;
 use App\Http\Controllers\Admin\CountryFlagController;
+use App\Http\Controllers\Admin\HomeCartTwoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -158,7 +159,15 @@ Route::prefix('admin')->group(function () {
                 Route::post('/toggle-status/{id}', [CountryFlagController::class, 'toggleStatus'])->name('country-flags.toggle-status');
             });
             
-
+            Route::prefix('home-cart-twos')->group(function () {
+                Route::get('/', [HomeCartTwoController::class, 'index'])->name('home-cart-twos.index');
+                Route::get('/create', [HomeCartTwoController::class, 'create'])->name('home-cart-twos.create');
+                Route::post('/', [HomeCartTwoController::class, 'store'])->name('home-cart-twos.store');
+                Route::get('/{homeCartTwo}/edit', [HomeCartTwoController::class, 'edit'])->name('home-cart-twos.edit');
+                Route::put('/{homeCartTwo}', [HomeCartTwoController::class, 'update'])->name('home-cart-twos.update');
+                Route::delete('/{homeCartTwo}', [HomeCartTwoController::class, 'destroy'])->name('home-cart-twos.destroy');
+                Route::post('/toggle-status/{id}', [HomeCartTwoController::class, 'toggleStatus'])->name('home-cart-twos.toggle-status');
+            });
 
         });
 
