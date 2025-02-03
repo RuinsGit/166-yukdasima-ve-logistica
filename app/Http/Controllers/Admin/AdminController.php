@@ -9,6 +9,8 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Message;
 use App\Models\Customer;
+use App\Models\BlogType;
+use App\Models\Blog;
 
 class AdminController extends Controller
 {
@@ -44,6 +46,15 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        return redirect()->route('back.pages.index');
+        $statistics = [
+            'total_blog_types' => BlogType::count(),
+            'active_blog_types' => BlogType::where('status', true)->count(),
+            'total_blogs' => Blog::count(),
+            'active_blogs' => Blog::where('status', true)->count(),
+            'latest_blog_types' => BlogType::withCount('blogs')->latest()->take(5)->get(),
+            'latest_blogs' => Blog::with('type')->latest()->take(5)->get(),
+        ];
+
+        return view('back.admin.dashboard', compact('statistics'));
     }
 } 
