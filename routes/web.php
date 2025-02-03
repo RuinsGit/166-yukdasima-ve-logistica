@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\SocialfooterController;
 use App\Http\Controllers\Admin\HomeHeroController;
 use App\Http\Controllers\Admin\HomeCartController;
 use App\Http\Controllers\Admin\HomeSectionController;
+use App\Http\Controllers\Admin\CountryFlagController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -147,7 +148,16 @@ Route::prefix('admin')->group(function () {
                 Route::delete('/{homeSection}', [HomeSectionController::class, 'destroy'])->name('home-sections.destroy');
                 Route::post('/toggle-status/{id}', [HomeSectionController::class, 'toggleStatus'])->name('home-sections.toggle-status');
             });
-
+            Route::prefix('country-flags')->group(function () {
+                Route::get('/', [CountryFlagController::class, 'index'])->name('country-flags.index');
+                Route::get('/create', [CountryFlagController::class, 'create'])->name('country-flags.create');
+                Route::post('/', [CountryFlagController::class, 'store'])->name('country-flags.store');
+                Route::get('/{countryFlag}/edit', [CountryFlagController::class, 'edit'])->name('country-flags.edit');
+                Route::put('/{countryFlag}', [CountryFlagController::class, 'update'])->name('country-flags.update');
+                Route::delete('/{countryFlag}', [CountryFlagController::class, 'destroy'])->name('country-flags.destroy');
+                Route::post('/toggle-status/{id}', [CountryFlagController::class, 'toggleStatus'])->name('country-flags.toggle-status');
+            });
+            
 
 
         });
@@ -159,3 +169,4 @@ Route::prefix('admin')->group(function () {
         
     });
 });
+
