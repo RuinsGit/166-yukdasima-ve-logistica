@@ -137,6 +137,13 @@
                         </a>
                     </li>
 
+                    <li>
+                        <a href="{{ route('back.pages.services.index') }}">
+                            <i class="ri-service-line"></i>
+                            <span>Xidmətlər</span>
+                        </a>
+                    </li>
+
                         
    
                     </ul>

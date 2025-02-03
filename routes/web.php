@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\HomeCartController;
 use App\Http\Controllers\Admin\HomeSectionController;
 use App\Http\Controllers\Admin\CountryFlagController;
 use App\Http\Controllers\Admin\HomeCartTwoController;
+use App\Http\Controllers\Admin\ServiceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -169,13 +170,22 @@ Route::prefix('admin')->group(function () {
                 Route::post('/toggle-status/{id}', [HomeCartTwoController::class, 'toggleStatus'])->name('home-cart-twos.toggle-status');
             });
 
+            Route::prefix('services')->group(function () {
+                Route::get('/', [ServiceController::class, 'index'])->name('services.index');
+                Route::get('/create', [ServiceController::class, 'create'])->name('services.create');
+                Route::post('/', [ServiceController::class, 'store'])->name('services.store');
+                Route::get('/{service}/edit', [ServiceController::class, 'edit'])->name('services.edit');
+                Route::put('/{service}', [ServiceController::class, 'update'])->name('services.update');
+                Route::delete('/{service}', [ServiceController::class, 'destroy'])->name('services.destroy');
+                Route::post('/toggle-status/{id}', [ServiceController::class, 'toggleStatus'])->name('services.toggle-status');
+            });
+
+            
+
         });
-
-        
-
-        
-
         
     });
 });
+
+
 
