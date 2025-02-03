@@ -72,7 +72,7 @@
                                         <div><strong>RU:</strong> {{ Str::limit($cart->text_ru, 50) }}</div>
 
                                     </td>
-                                    <td>
+                                    
                                     <td>
                                         <form action="{{ route('back.pages.home-cart-twos.toggle-status', $cart->id) }}" method="POST">
                                             @csrf
