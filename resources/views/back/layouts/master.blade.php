@@ -35,6 +35,9 @@
     <link href="{{ asset('back/assets/') }}/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
     @stack('css')
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 
 <body data-topbar="dark">

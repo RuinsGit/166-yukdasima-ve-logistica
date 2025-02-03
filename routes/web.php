@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\SocialshareController;
 use App\Http\Controllers\Admin\SocialfooterController;
 use App\Http\Controllers\Admin\HomeHeroController;
+use App\Http\Controllers\Admin\HomeCartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -125,9 +126,22 @@ Route::prefix('admin')->group(function () {
                 
             });
 
+            Route::prefix('home-carts')->group(function () {
+                Route::get('/', [HomeCartController::class, 'index'])->name('home-carts.index');
+                Route::get('/create', [HomeCartController::class, 'create'])->name('home-carts.create');
+                Route::post('/', [HomeCartController::class, 'store'])->name('home-carts.store');
+                Route::get('/{homeCart}/edit', [HomeCartController::class, 'edit'])->name('home-carts.edit');
+                Route::put('/{homeCart}', [HomeCartController::class, 'update'])->name('home-carts.update');
+                Route::delete('/{homeCart}', [HomeCartController::class, 'destroy'])->name('home-carts.destroy');
+                Route::post('home-carts/order', [HomeCartController::class, 'order'])->name('home-carts.order');
+                Route::post('home-carts/toggle-status/{id}', [HomeCartController::class, 'toggleStatus'])->name('home-carts.toggle-status');
+            });
+
 
 
         });
+
+        
 
         
 

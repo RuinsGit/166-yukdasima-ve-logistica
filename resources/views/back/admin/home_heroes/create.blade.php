@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="page-content">
+<div class="page-content" style="background-color:rgb(255, 255, 255); border-radius: 10px; width: 97%; margin: 100px auto;">
     <div class="container-fluid">
         @if($errors->any())
             <div class="alert alert-danger">
@@ -20,7 +20,7 @@
             @csrf
             
             <!-- Medya Türü Seçim Butonları -->
-            <div class="mb-4">
+            <div class="mb-4" 
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-outline-primary media-type-btn" data-type="image">
                         <i class="ri-image-line me-2"></i>Şəkil

@@ -108,6 +108,13 @@
                             <span>Slayder</span>
                         </a>
                     </li> 
+
+                    <li>
+                        <a href="{{ route('back.pages.home-carts.index') }}">
+                            <i class="ri-pages-line"></i>
+                            <span>Kartlar</span>
+                        </a>
+                    </li> 
                    
 
                         
