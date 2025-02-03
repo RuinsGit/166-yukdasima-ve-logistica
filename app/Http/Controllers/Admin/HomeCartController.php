@@ -23,7 +23,7 @@ class HomeCartController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
             'alt_az' => 'required|string|max:255',
             'alt_en' => 'required|string|max:255',
             'alt_ru' => 'required|string|max:255',
@@ -50,11 +50,13 @@ class HomeCartController extends Controller
     public function update(Request $request, HomeCart $homeCart)
     {
         $request->validate([
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
             'alt_az' => 'required|string|max:255',
             'alt_en' => 'required|string|max:255',
             'alt_ru' => 'required|string|max:255',
         ]);
+
+
 
         if ($request->hasFile('image')) {
             Storage::disk('public')->delete($homeCart->image_path);

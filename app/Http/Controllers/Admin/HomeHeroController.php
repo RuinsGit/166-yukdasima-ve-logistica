@@ -31,7 +31,7 @@ class HomeHeroController extends Controller
                 'required',
                 function ($attribute, $value, $fail) use ($request) {
                     $ext = strtolower($value->extension());
-                    $allowedImage = ['jpg', 'jpeg', 'png', 'gif'];
+                    $allowedImage = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'];
                     $allowedVideo = ['mp4', 'mov', 'avi'];
                     
                     if ($request->media_type === 'image' && !in_array($ext, $allowedImage)) {
@@ -88,8 +88,9 @@ class HomeHeroController extends Controller
                 function ($attribute, $value, $fail) use ($request) {
                     if ($value) {
                         $ext = strtolower($value->extension());
-                        if ($request->media_type === 'image' && !in_array($ext, ['jpg', 'jpeg', 'png', 'gif'])) {
-                            $fail('Geçersiz resim formatı. İzin verilen formatlar: jpg, jpeg, png, gif');
+                        if ($request->media_type === 'image' && !in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'])) {
+                            $fail('Geçersiz resim formatı. İzin verilen formatlar: jpg, jpeg, png, gif, svg, webp');
+
                         } elseif ($request->media_type === 'video' && !in_array($ext, ['mp4', 'mov', 'avi'])) {
                             $fail('Geçersiz video formatı. İzin verilen formatlar: mp4, mov, avi');
                         }
