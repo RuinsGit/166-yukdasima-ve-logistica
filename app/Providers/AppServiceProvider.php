@@ -28,5 +28,10 @@ class AppServiceProvider extends ServiceProvider
         Str::macro('slug', function($string, $separator = '-') {
             return Str::slug($string, $separator);
         });
+
+        view()->composer('*', function ($view) {
+            $themeSettings = \App\Models\ThemeSetting::first() ?? new \App\Models\ThemeSetting();
+            $view->with('themeSettings', $themeSettings);
+        });
     }
 }

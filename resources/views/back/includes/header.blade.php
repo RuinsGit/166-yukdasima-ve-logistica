@@ -1,4 +1,4 @@
-<header id="page-topbar" style="background-color: white; border-bottom: 2px solid #e0e0e0;">
+<header id="page-topbar" style="background-color: {{ $themeSettings->header_color }};">
     <div class="navbar-header">
         <div class="d-flex">
             <!-- LOGO -->

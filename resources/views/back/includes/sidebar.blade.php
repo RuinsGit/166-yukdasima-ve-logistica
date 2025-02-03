@@ -52,6 +52,12 @@
                                 <span>Logo</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('back.pages.theme-settings.index') }}">
+                                <i class="ri-palette-line"></i>
+                                <span>Tema Ayarları</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
@@ -153,6 +159,8 @@
                         </a>
                     </li>
                     </ul>
+                    </li>
+                            
 
 
                     
@@ -166,3 +174,11 @@
     </div>
 </div>
 <!-- Left Sidebar End -->
+
+<!-- Ayarlar menüsüne ek -->
+<li>
+    <a href="{{ route('back.pages.theme-settings.index') }}" class="waves-effect">
+        <i class="ri-palette-line"></i>
+        <span>Tema Ayarları</span>
+    </a>
+</li>

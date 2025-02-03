@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\HomeCartTwoController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\BlogTypeController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\ThemeSettingsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -203,9 +204,11 @@ Route::prefix('admin')->group(function () {
                 Route::post('/toggle-status/{id}', [BlogController::class, 'toggleStatus'])->name('blogs.toggle-status');
                 
             });
-            
+            Route::get('theme-settings', [ThemeSettingsController::class, 'index'])->name('theme-settings.index');
+            Route::post('theme-settings/update', [ThemeSettingsController::class, 'update'])->name('theme-settings.update');
 
         });
+        
         
     });
 });

@@ -1,0 +1,17 @@
+/* Sidebar Genişlikleri */
+[data-sidebar-width="compact"] .vertical-menu {
+    width: 70px;
+}
+[data-sidebar-width="compact"] .navbar-brand-box {
+    width: 70px;
+}
+[data-sidebar-width="compact"] .logo span.logo-lg {
+    display: none;
+}
+[data-sidebar-width="compact"] .logo span.logo-sm {
+    display: block;
+}
+
+[data-sidebar-width="wide"] .vertical-menu {
+    width: 280px;
+} 

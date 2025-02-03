@@ -38,9 +38,15 @@
 
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <!-- App Css'den sonra ekle -->
+    <link href="{{ asset('back/assets/css/custom.css') }}" rel="stylesheet" type="text/css">
 </head>
 
-<body data-topbar="dark">
+<body data-topbar="dark" 
+      data-layout-color="{{ $themeSettings->dark_mode ? 'dark' : 'light' }}"
+      data-sidebar-width="{{ $themeSettings->sidebar_width }}"
+      style="@if($themeSettings->background_type === 'image') background-image: url('{{ asset($themeSettings->background_image) }}'); @else background-color: {{ $themeSettings->background_color }}; @endif background-size: cover; background-position: center;">
 
     <!-- <body data-layout="horizontal" data-topbar="dark"> -->
 
@@ -49,9 +55,9 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-        <div class="main-content">
+        <div class="main-content" style="background-color: {{ $themeSettings->background_color }}; background-image: url('{{ asset($themeSettings->background_image) }}'); background-size: cover; background-position: center; height: 100vh;">
             @yield('content')
-            @include('back.includes.footer')
+            @include('back.includes.footer', ['themeSettings' => $themeSettings])
         </div>
         <!-- end main content-->
 
@@ -102,6 +108,7 @@
         });
     </script>
     @stack('js')
+    <script src="{{ asset('back/assets/js/theme-settings.js') }}"></script>
 </body>
 
 
