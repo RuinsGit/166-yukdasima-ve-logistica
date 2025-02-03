@@ -59,14 +59,15 @@
                                              class="img-thumbnail" 
                                              style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
                                     </td>
-                                    <td>
-                                        <strong>AZ:</strong> {{ $flag->name_az }}<br>
+                                    <td style="display: flex; flex-direction: column;  align-items: start; gap: 15px;">
+                                        <div><strong>AZ:</strong> {{ $flag->name_az }}</div>
 
+                                        <div><strong>EN:</strong> {{ $flag->name_en }}</div>
 
-                                        <strong>EN:</strong> {{ $flag->name_en }}<br>
-                                        <strong>RU:</strong> {{ $flag->name_ru }}
+                                        <div><strong>RU:</strong> {{ $flag->name_ru }}</div>
                                     </td>
                                     <td>
+
                                         <form action="{{ route('back.pages.country-flags.toggle-status', $flag->id) }}" method="POST">
                                             @csrf
                                             <button type="submit" class="btn btn-sm btn-{{ $flag->status ? 'success' : 'danger' }}">

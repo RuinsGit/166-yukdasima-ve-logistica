@@ -65,10 +65,10 @@
                                              class="img-thumbnail" 
                                              style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
                                     </td>
-                                    <td>
-                                        <strong>AZ:</strong> {{ $cart->alt_az }}<br>
-                                        <strong>EN:</strong> {{ $cart->alt_en }}<br>
-                                        <strong>RU:</strong> {{ $cart->alt_ru }}
+                                    <td style="display: flex; flex-direction: column;  align-items: start; gap: 15px;">
+                                        <div><strong>AZ:</strong> {{ $cart->alt_az }}</div>
+                                        <div><strong>EN:</strong> {{ $cart->alt_en }}</div>
+                                        <div><strong>RU:</strong> {{ $cart->alt_ru }}</div>
                                     </td>
                                     <td>
                                         <form action="{{ route('back.pages.home-carts.toggle-status', $cart->id) }}" method="POST">

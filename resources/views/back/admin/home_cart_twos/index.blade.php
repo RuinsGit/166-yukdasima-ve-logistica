@@ -66,12 +66,13 @@
                                              class="img-thumbnail" 
                                              style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
                                     </td>
-                                    <td>
-                                        <strong>AZ:</strong> {{ Str::limit($cart->text_az, 50) }}<br>
+                                    <td style="display: flex; flex-direction: column;  align-items: start; gap: 15px;">
+                                        <div><strong>AZ:</strong> {{ Str::limit($cart->text_az, 50) }}</div>
+                                        <div><strong>EN:</strong> {{ Str::limit($cart->text_en, 50) }}</div>
+                                        <div><strong>RU:</strong> {{ Str::limit($cart->text_ru, 50) }}</div>
 
-                                        <strong>EN:</strong> {{ Str::limit($cart->text_en, 50) }}<br>
-                                        <strong>RU:</strong> {{ Str::limit($cart->text_ru, 50) }}
                                     </td>
+                                    <td>
                                     <td>
                                         <form action="{{ route('back.pages.home-cart-twos.toggle-status', $cart->id) }}" method="POST">
                                             @csrf

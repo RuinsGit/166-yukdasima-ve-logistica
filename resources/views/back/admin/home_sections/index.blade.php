@@ -79,15 +79,18 @@
                                              class="img-thumbnail" 
                                              style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
                                     </td>
-                                    <td>
-                                        <strong>AZ:</strong> {{ $section->name_az }}<br>
-                                        <strong>EN:</strong> {{ $section->name_en }}<br>
-                                        <strong>RU:</strong> {{ $section->name_ru }}
+                                    <td style="display: flex; flex-direction: column;  align-items: start; gap: 15px;">
+                                        <div><strong>AZ:</strong> {{ $section->name_az }}</div>
+                                        <div><strong>EN:</strong> {{ $section->name_en }}</div>
+                                        <div><strong>RU:</strong> {{ $section->name_ru }}</div>
+
                                     </td>
-                                    <td>
-                                        <strong>Birinci:</strong> {{ $section->number_one }}<br>
-                                        <strong>İkinci:</strong> {{ $section->number_two }}
+                                    <td >
+                                        <div><strong>Birinci:</strong> {{ $section->number_one }}</div>
+                                        <div style="margin-top: 50px;"><strong>İkinci:</strong> {{ $section->number_two }}</div>
                                     </td>
+
+
                                     <td>
                                         <form action="{{ route('back.pages.home-sections.toggle-status', $section->id) }}" method="POST">
                                             @csrf
