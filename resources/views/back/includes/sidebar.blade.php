@@ -52,8 +52,6 @@
                                 <span>Logo</span>
                             </a>
                         </li>
-
-
                     </ul>
                 </li>
 
@@ -84,16 +82,7 @@
                             <span>Sosial Footer</span>
                         </a>
                     </li>  
-
-                   
-
-                        
-   
                     </ul>
-
-
-
-
                     <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-home-line"></i>
@@ -136,6 +125,7 @@
                             <span>Bölmələr iki</span>
                         </a>
                     </li>
+                    </ul>
 
                     <li>
                         <a href="{{ route('back.pages.services.index') }}">
@@ -143,12 +133,29 @@
                             <span>Xidmətlər</span>
                         </a>
                     </li>
+                    <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ri-file-text-line"></i>
+                        <span>Blog</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                    <li>
+                        <a href="{{ route('back.pages.blog-types.index') }}">
+                            <i class="ri-folder-line"></i>
+                            <span>Blog Növləri</span>
+                        </a>
+                    </li>
 
-                        
-   
+                    <li>
+                        <a href="{{ route('back.pages.blogs.index') }}">
+                            <i class="ri-article-line"></i>
+                            <span>Bloglar</span>
+                        </a>
+                    </li>
                     </ul>
 
 
+                    
 
 
 

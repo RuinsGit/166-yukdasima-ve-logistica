@@ -15,6 +15,8 @@ use App\Http\Controllers\Admin\HomeSectionController;
 use App\Http\Controllers\Admin\CountryFlagController;
 use App\Http\Controllers\Admin\HomeCartTwoController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\BlogTypeController;
+use App\Http\Controllers\Admin\BlogController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -180,12 +182,34 @@ Route::prefix('admin')->group(function () {
                 Route::post('/toggle-status/{id}', [ServiceController::class, 'toggleStatus'])->name('services.toggle-status');
             });
 
+            Route::prefix('blog-types')->group(function () {
+                Route::get('/', [BlogTypeController::class, 'index'])->name('blog-types.index');
+                Route::get('/create', [BlogTypeController::class, 'create'])->name('blog-types.create');
+                Route::post('/', [BlogTypeController::class, 'store'])->name('blog-types.store');
+                Route::get('/{blogType}/edit', [BlogTypeController::class, 'edit'])->name('blog-types.edit');
+                Route::put('/{blogType}', [BlogTypeController::class, 'update'])->name('blog-types.update');
+                Route::delete('/{blogType}', [BlogTypeController::class, 'destroy'])->name('blog-types.destroy');
+                Route::post('/toggle-status/{id}', [BlogTypeController::class, 'toggleStatus'])->name('blog-types.toggle-status');
+            });
+            
+            Route::prefix('blogs')->group(function () {
+                Route::get('/', [BlogController::class, 'index'])->name('blogs.index');
+                Route::get('/create', [BlogController::class, 'create'])->name('blogs.create');
+                Route::post('/', [BlogController::class, 'store'])->name('blogs.store');
+                Route::get('/{blog}/edit', [BlogController::class, 'edit'])->name('blogs.edit');
+                Route::put('/{blog}', [BlogController::class, 'update'])->name('blogs.update');
+                Route::delete('/{blog}', [BlogController::class, 'destroy'])->name('blogs.destroy');
+                Route::post('/toggle-status/{id}', [BlogController::class, 'toggleStatus'])->name('blogs.toggle-status');
+            });
             
 
         });
         
     });
 });
+
+
+
 
 
 
