@@ -115,6 +115,13 @@
                             <span>Kartlar</span>
                         </a>
                     </li> 
+
+                    <li>
+                        <a href="{{ route('back.pages.home-sections.index') }}">
+                            <i class="ri-pages-line"></i>
+                            <span>Bölmələr</span>
+                        </a>
+                    </li> 
                    
 
                         

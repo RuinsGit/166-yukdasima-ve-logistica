@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\SocialshareController;
 use App\Http\Controllers\Admin\SocialfooterController;
 use App\Http\Controllers\Admin\HomeHeroController;
 use App\Http\Controllers\Admin\HomeCartController;
+use App\Http\Controllers\Admin\HomeSectionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -135,6 +136,16 @@ Route::prefix('admin')->group(function () {
                 Route::delete('/{homeCart}', [HomeCartController::class, 'destroy'])->name('home-carts.destroy');
                 Route::post('home-carts/order', [HomeCartController::class, 'order'])->name('home-carts.order');
                 Route::post('home-carts/toggle-status/{id}', [HomeCartController::class, 'toggleStatus'])->name('home-carts.toggle-status');
+            });
+
+            Route::prefix('home-sections')->group(function () {
+                Route::get('/', [HomeSectionController::class, 'index'])->name('home-sections.index');
+                Route::get('/create', [HomeSectionController::class, 'create'])->name('home-sections.create');
+                Route::post('/', [HomeSectionController::class, 'store'])->name('home-sections.store');
+                Route::get('/{homeSection}/edit', [HomeSectionController::class, 'edit'])->name('home-sections.edit');
+                Route::put('/{homeSection}', [HomeSectionController::class, 'update'])->name('home-sections.update');
+                Route::delete('/{homeSection}', [HomeSectionController::class, 'destroy'])->name('home-sections.destroy');
+                Route::post('/toggle-status/{id}', [HomeSectionController::class, 'toggleStatus'])->name('home-sections.toggle-status');
             });
 
 
