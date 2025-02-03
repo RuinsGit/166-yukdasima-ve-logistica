@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\BlogType;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\BlogType;
+use App\Models\Blog;
+use Illuminate\Http\Request;
 
 class BlogTypeController extends Controller
 {
     public function index()
     {
-        $types = BlogType::all();
+        $types = BlogType::withCount('blogs')->paginate(10);
         return view('back.admin.blog_types.index', compact('types'));
+    }
+
+    public function show($id)
+    {
+        $blogs = Blog::where('blog_type_id', $id)->paginate(10);
+        $type = BlogType::findOrFail($id);
+        return view('back.admin.blog_types.show', compact('blogs', 'type'));
     }
 
     public function create()

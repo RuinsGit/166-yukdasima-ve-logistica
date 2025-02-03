@@ -64,10 +64,11 @@
                                             <textarea class="form-control" name="description_az" rows="5" required></textarea>
                                         </div>
                                         <div class="mb-3">
-                                            <label>Slug (AZ)</label>
+                                            <label style="display: flex;"> <div style="color: orange; margin-right: 10px;">Slug</div> (Diqqət! Slug Avtomatik olaraq yaradılır)</label>
                                             <input type="text" class="form-control" name="slug_az" id="slug_az" required>
                                         </div>
                                         <div class="mb-3">
+
                                             <label>Meta Başlıq (AZ)</label>
                                             <input type="text" class="form-control" name="meta_title_az">
                                         </div>
@@ -92,10 +93,11 @@
                                             <textarea class="form-control" name="description_en" rows="5" required></textarea>
                                         </div>
                                         <div class="mb-3">
-                                            <label>Slug (EN)</label>
+                                            <label style="display: flex;"> <div style="color: orange; margin-right: 10px;">Slug</div> (Warning! Slug will be generated automatically)</label>
                                             <input type="text" class="form-control" name="slug_en" id="slug_en" required>
                                         </div>
                                         <div class="mb-3">
+
                                             <label>Meta Title (EN)</label>
                                             <input type="text" class="form-control" name="meta_title_en">
                                         </div>
@@ -120,10 +122,11 @@
                                             <textarea class="form-control" name="description_ru" rows="5" required></textarea>
                                         </div>
                                         <div class="mb-3">
-                                            <label>Slug (RU)</label>
+                                            <label style="display: flex;"> <div style="color: orange; margin-right: 10px;">Slug</div> (Внимание! Слаг будет сгенерирован автоматически)</label>
                                             <input type="text" class="form-control" name="slug_ru" id="slug_ru" required>
                                         </div>
                                         <div class="mb-3">
+
                                             <label>Мета заголовок (RU)</label>
                                             <input type="text" class="form-control" name="meta_title_ru">
                                         </div>
@@ -157,7 +160,7 @@
 
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label>Daxili Şəkil</label>
+                                        <label>Daxili Şəkil </label>
                                         <input type="file" class="form-control" name="bottom_image" required>
                                     </div>
                                     <div class="mb-3">

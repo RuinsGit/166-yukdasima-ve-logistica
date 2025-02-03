@@ -49,6 +49,7 @@
                                     <th>Ad (EN)</th>
                                     <th>Ad (RU)</th>
                                     <th>Status</th>
+                                    <th>Blog Sayı</th>
                                     <th>Əməliyyatlar</th>
                                 </tr>
 
@@ -77,6 +78,7 @@
                                             </button>
                                         </form>
                                     </td>
+                                    <td>{{ $type->blogs_count }}</td>
                                     <td>
                                         <a href="{{ route('back.pages.blog-types.edit', $type->id) }}" 
                                            class="btn btn-warning btn-sm" style="background-color: #5bf91b; border-color: green; color: white">
@@ -94,6 +96,10 @@
                                             @csrf
                                             @method('DELETE')
                                         </form>
+                                        <a href="{{ route('back.pages.blog-types.show', $type->id) }}" 
+                                           class="btn btn-info btn-sm">
+                                            <i class="fas fa-eye"></i> Blogları göstər
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach

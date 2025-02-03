@@ -19,4 +19,9 @@ class BlogType extends Model
     protected $casts = [
         'status' => 'boolean'
     ];
+
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
+    }
 } 

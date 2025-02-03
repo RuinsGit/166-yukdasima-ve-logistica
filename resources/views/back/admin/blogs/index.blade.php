@@ -53,7 +53,7 @@
                                 <tr>
                                     <th>Şəkil</th>
                                     <th>Daxili Şəkil</th>
-                                    <th>Adlar</th>
+                                    <th>Ad</th>
                                     <th>Tip</th>
                                     <th>Status</th>
                                     <th>Əməliyyatlar</th>

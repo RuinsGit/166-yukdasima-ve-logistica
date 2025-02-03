@@ -65,10 +65,12 @@
                                             <textarea class="form-control" name="description_az" rows="5" required>{{ $blog->description_az }}</textarea>
                                         </div>
                                         <div class="mb-3">
-                                            <label>Slug (AZ)</label>
+                                            <label style="display: flex;"> <div style="color: orange; margin-right: 10px;">Slug</div> (Diqqət! Slug Avtomatik olaraq yaradılır)</label>
                                             <input type="text" class="form-control" name="slug_az" id="slug_az" value="{{ $blog->slug_az }}" required>
                                         </div>
                                         <div class="mb-3">
+
+
                                             <label>Meta Başlıq (AZ)</label>
                                             <input type="text" class="form-control" name="meta_title_az" value="{{ $blog->meta_title_az }}">
                                         </div>
@@ -93,10 +95,11 @@
                                             <textarea class="form-control" name="description_en" rows="5" required>{{ $blog->description_en }}</textarea>
                                         </div>
                                         <div class="mb-3">
-                                            <label>Slug (EN)</label>
+                                            <label style="display: flex;"> <div style="color: orange; margin-right: 10px;">Slug</div> (Warning! Slug will be generated automatically)</label>
                                             <input type="text" class="form-control" name="slug_en" id="slug_en" value="{{ $blog->slug_en }}" required>
                                         </div>
                                         <div class="mb-3">
+
                                             <label>Meta Title (EN)</label>
                                             <input type="text" class="form-control" name="meta_title_en" value="{{ $blog->meta_title_en }}">
                                         </div>
@@ -121,10 +124,13 @@
                                             <textarea class="form-control" name="description_ru" rows="5" required>{{ $blog->description_ru }}</textarea>
                                         </div>
                                         <div class="mb-3">
-                                            <label>Slug (RU)</label>
+                                            <label style="display: flex;"> <div style="color: orange; margin-right: 10px;">Slug</div> (Внимание! Слаг будет сгенерирован автоматически)</label>
                                             <input type="text" class="form-control" name="slug_ru" id="slug_ru" value="{{ $blog->slug_ru }}" required>
                                         </div>
                                         <div class="mb-3">
+
+
+
                                             <label>Мета заголовок (RU)</label>
                                             <input type="text" class="form-control" name="meta_title_ru" value="{{ $blog->meta_title_ru }}">
                                         </div>
@@ -139,10 +145,12 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label>Əsas Şəkil</label>
+                                        <label>  <div style="color: orange;">Əsas Şəkil </div> (Diqqət! Şəkli Dəyişdirmək istəmirsinizsə boş qoyun)</label>
                                         <input type="file" class="form-control" name="image">
                                         @if($blog->image)
                                             <div class="mt-2">
+
+
                                                 <img src="{{ asset($blog->image) }}" alt="" class="img-thumbnail" style="max-height: 100px">
                                             </div>
                                         @endif
@@ -163,10 +171,14 @@
 
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label>Daxili Şəkil</label>
+                                        <label><div style="color: orange;">Daxili Şəkil</div> (Diqqət! Şəkli Dəyişdirmək istəmirsinizsə boş qoyun)</label>
                                         <input type="file" class="form-control" name="bottom_image">
                                         @if($blog->bottom_image)
                                             <div class="mt-2">
+
+
+
+
                                                 <img src="{{ asset($blog->bottom_image) }}" alt="" class="img-thumbnail" style="max-height: 100px">
                                             </div>
                                         @endif

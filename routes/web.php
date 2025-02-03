@@ -190,6 +190,7 @@ Route::prefix('admin')->group(function () {
                 Route::put('/{blogType}', [BlogTypeController::class, 'update'])->name('blog-types.update');
                 Route::delete('/{blogType}', [BlogTypeController::class, 'destroy'])->name('blog-types.destroy');
                 Route::post('/toggle-status/{id}', [BlogTypeController::class, 'toggleStatus'])->name('blog-types.toggle-status');
+                Route::get('/{blogType}', [BlogTypeController::class, 'show'])->name('blog-types.show');
             });
             
             Route::prefix('blogs')->group(function () {
@@ -200,6 +201,7 @@ Route::prefix('admin')->group(function () {
                 Route::put('/{blog}', [BlogController::class, 'update'])->name('blogs.update');
                 Route::delete('/{blog}', [BlogController::class, 'destroy'])->name('blogs.destroy');
                 Route::post('/toggle-status/{id}', [BlogController::class, 'toggleStatus'])->name('blogs.toggle-status');
+                
             });
             
 
