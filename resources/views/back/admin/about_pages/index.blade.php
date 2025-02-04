@@ -12,17 +12,30 @@
     <div class="container-fluid">
         <div class="row">
 
-            <div class="col-12">
+        <div class="col-12">
                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                    <h4 class="mb-0">Haqqımızda</h4>
+                    <h4 class="mb-0">Haqqımızda Tənzimləməsi</h4>
                     <div class="page-title-right">
-                        <a href="{{ route('back.pages.about-pages.create') }}" class="btn btn-primary">
-                            <i class="fas fa-plus"></i> Yeni Səhifə
+                        @if($aboutPages->isEmpty())
 
-                        </a>
+
+                            <a href="{{ route('back.pages.about-pages.create') }}" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Yeni Haqqımızda Əlavə Et
+                            </a>
+                        @else
+
+
+                            <button class="btn btn-secondary" disabled>
+                                <i class="fas fa-ban"></i> Maksimum sayda haqqımızda var
+                            </button>
+                        @endif
+
+
                     </div>
                 </div>
             </div>
+        </div>
+
         </div>
 
         @if(session('success'))

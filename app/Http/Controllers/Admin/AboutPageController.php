@@ -17,11 +17,18 @@ class AboutPageController extends Controller
 
     public function create()
     {
+        if (AboutPage::exists()) {
+            return redirect()->back()->with('error', 'Yalnız bir Haqqında səhifəsi ola bilər!');
+        }
         return view('back.admin.about_pages.create');
     }
 
     public function store(Request $request)
     {
+        if (AboutPage::exists()) {
+            return redirect()->back()->with('error', 'Yalnız bir Haqqında səhifəsi ola bilər!');
+        }
+        
         $request->validate([
             'name_az' => 'required|string|max:255',
             'name_en' => 'required|string|max:255',
