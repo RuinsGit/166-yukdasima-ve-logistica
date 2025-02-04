@@ -37,18 +37,18 @@
                                     <label class="form-label">Yan menyu eni</label>
                                     <select class="form-select" name="sidebar_width">
                                         <option value="default" {{ $settings->sidebar_width == 'default' ? 'selected' : '' }}>Standart</option>
-                                        <option value="compact" {{ $settings->sidebar_width == 'compact' ? 'selected' : '' }}>Komakt</option>
-                                        <option value="wide" {{ $settings->sidebar_width == 'wide' ? 'selected' : '' }}>Geniş</option>
+                                        <!-- <option value="compact" {{ $settings->sidebar_width == 'compact' ? 'selected' : '' }}>Komakt</option> -->
+                                        <!-- <option value="wide" {{ $settings->sidebar_width == 'wide' ? 'selected' : '' }}>Geniş</option> -->
                                     </select>
                                 </div>
 
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" name="dark_mode" 
                                                id="darkModeSwitch" {{ $settings->dark_mode ? 'checked' : '' }}>
                                         <label class="form-check-label" for="darkModeSwitch">Qaranlıq tema</label>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -94,21 +94,24 @@
                         </div>
                         <div class="card-body">
                             <div class="mb-3">
-                                <label class="form-label">Başlıq rəngi</label>
+                                <label class="form-label">Header Rəngi</label>
                                 <input type="color" class="form-control form-control-color" name="header_color" 
                                        value="{{ $settings->header_color }}">
                             </div>
+
                             
                             <div class="mb-3">
-                                <label class="form-label">Altlıq fon rəngi</label>
+                                <label class="form-label">Footer Rəngi</label>
                                 <input type="color" class="form-control form-control-color" name="footer_bg_color" 
                                        value="{{ $settings->footer_bg_color }}">
                             </div>
+
                             
                             <div class="mb-3">
-                                <label class="form-label">Altlıq mətn rəngi</label>
+                                <label class="form-label">Footer Mətn Rəngi</label>
                                 <input type="color" class="form-control form-control-color" name="footer_text_color" 
                                        value="{{ $settings->footer_text_color }}">
+
                             </div>
                         </div>
                     </div>
@@ -116,10 +119,11 @@
                     <!-- Altlıq mətni -->
                     <div class="card mt-4">
                         <div class="card-header bg-warning text-dark">
-                            <h5 class="card-title mb-0">Altlıq mətni</h5>
+                            <h5 class="card-title mb-0">Footer Mətni</h5>
                         </div>
                         <div class="card-body">
                             <textarea class="form-control" name="footer_text" rows="5" 
+
                                       placeholder="Altlıq mətninizi bura yazın...">{{ $settings->footer_text }}</textarea>
                         </div>
                     </div>
