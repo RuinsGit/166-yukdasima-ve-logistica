@@ -162,11 +162,32 @@
 
 
                     <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ri-phone-line"></i>
+                        <span>Contact</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+
+                    <li>
                         <a href="{{ route('back.pages.contacts.index') }}">
                             <i class="ri-phone-line"></i>
                             <span>Contact Ayarları</span>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="{{ route('back.pages.contact-requests.index') }}">
+                            <i class="ri-message-line"></i>
+                            <span>Contact Sorğuları</span>
+                        </a>
+                    </li>
+                   
+
+
+                    </ul>
+
+
+                   
 
                     </li>
                             

@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\BlogTypeController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ThemeSettingsController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\ContactRequestController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -219,11 +220,23 @@ Route::prefix('admin')->group(function () {
                 Route::post('/toggle-status/{id}', [ContactController::class, 'toggleStatus'])->name('contacts.toggle-status');
             });
 
+            // Contact Requests routes
+            Route::prefix('contact-requests')->group(function () {
+                Route::get('/', [ContactRequestController::class, 'index'])->name('contact-requests.index');
+                Route::get('/{contactRequest}/show', [ContactRequestController::class, 'show'])->name('contact-requests.show');
+                Route::delete('/{contactRequest}', [ContactRequestController::class, 'destroy'])->name('contact-requests.destroy');
+                Route::post('/toggle-status/{id}', [ContactRequestController::class, 'toggleStatus'])->name('contact-requests.toggle-status');
+            });
+
         });
         
         
     });
 });
+
+
+Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'store'])
+    ->name('contact.submit');
 
 
 
