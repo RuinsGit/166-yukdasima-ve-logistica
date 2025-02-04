@@ -30,12 +30,20 @@ class ContactController extends Controller
             'address_image' => 'required|image',
             'mail_image' => 'required|image',
             'number_image' => 'required|image',
+            'split_image_1' => 'nullable|image',
+            'split_image_2' => 'nullable|image',
         ]);
 
         // Resim yükleme işlemleri
         $validated['address_image'] = $request->file('address_image')->store('contacts', 'public');
         $validated['mail_image'] = $request->file('mail_image')->store('contacts', 'public');
         $validated['number_image'] = $request->file('number_image')->store('contacts', 'public');
+        if($request->hasFile('split_image_1')) {
+            $validated['split_image_1'] = $request->file('split_image_1')->store('contacts', 'public');
+        }
+        if($request->hasFile('split_image_2')) {
+            $validated['split_image_2'] = $request->file('split_image_2')->store('contacts', 'public');
+        }
 
         Contact::create($validated);
         return redirect()->route('back.pages.contacts.index')->with('success', 'Contact məlumatları uğurla əlavə edildi');
@@ -58,6 +66,8 @@ class ContactController extends Controller
             'address_image' => 'nullable|image',
             'mail_image' => 'nullable|image',
             'number_image' => 'nullable|image',
+            'split_image_1' => 'nullable|image',
+            'split_image_2' => 'nullable|image',
         ]);
 
         // Resim güncelleme işlemleri
@@ -69,6 +79,12 @@ class ContactController extends Controller
         }
         if($request->hasFile('number_image')) {
             $validated['number_image'] = $request->file('number_image')->store('contacts', 'public');
+        }
+        if($request->hasFile('split_image_1')) {
+            $validated['split_image_1'] = $request->file('split_image_1')->store('contacts', 'public');
+        }
+        if($request->hasFile('split_image_2')) {
+            $validated['split_image_2'] = $request->file('split_image_2')->store('contacts', 'public');
         }
 
         $contact->update($validated);

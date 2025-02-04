@@ -100,6 +100,39 @@
                                 </div>
                             </div>
 
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header  text-white" style="background-color:rgb(245, 245, 237);">
+                                            <h6>Split Şəkil 1</h6>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <div class="mb-3">
+
+                                                <label>Split Şəkil 1</label>
+                                                <input type="file" class="form-control" name="split_image_1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header  text-white" style="background-color:rgb(245, 245, 237);">
+                                            <h6>Split Şəkil 2</h6>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <div class="mb-3">
+
+                                                <label>Split Şəkil 2</label>
+                                                <input type="file" class="form-control" name="split_image_2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <button type="submit" class="btn btn-primary mt-3">Yadda Saxla</button>
                         </form>
                     </div>

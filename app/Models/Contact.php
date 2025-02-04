@@ -18,6 +18,8 @@ class Contact extends Model
         'mail_image',
         'number',
         'number_image',
-        'status'
+        'status',
+        'split_image_1',
+        'split_image_2'
     ];
 } 

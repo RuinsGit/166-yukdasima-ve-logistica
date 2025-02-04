@@ -114,6 +114,49 @@
                                 </div>
                             </div>
 
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header  text-white" style="background-color:rgb(245, 245, 237);">
+                                            <h6>Split Şəkil 1</h6>
+                                        </div>
+
+                                        <div class="card-body">
+
+
+
+                                            <div class="mb-3">
+                                                <label>Split Şəkil 1</label>
+                                                <input type="file" class="form-control" name="split_image_1">
+                                                @if($contact->split_image_1)
+                                                    <img src="{{ asset('storage/'.$contact->split_image_1) }}" class="img-thumbnail mt-2" 
+                                                         style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header bg-orange text-white" style="background-color:rgb(245, 245, 237);">
+                                            <h6>Split Şəkil 2</h6>
+                                        </div>
+                                        <div class="card-body">
+
+
+                                            <div class="mb-3">
+                                                <label>Split Şəkil 2</label>
+                                                <input type="file" class="form-control" name="split_image_2">
+                                                @if($contact->split_image_2)
+                                                    <img src="{{ asset('storage/'.$contact->split_image_2) }}" class="img-thumbnail mt-2" 
+                                                         style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <button type="submit" class="btn btn-primary mt-3">Yadda Saxla</button>
                         </form>
                     </div>
