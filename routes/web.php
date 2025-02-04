@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ThemeSettingsController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ContactRequestController;
+use App\Http\Controllers\Admin\AboutPageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -228,11 +229,22 @@ Route::prefix('admin')->group(function () {
                 Route::post('/toggle-status/{id}', [ContactRequestController::class, 'toggleStatus'])->name('contact-requests.toggle-status');
             });
 
+            Route::prefix('about-pages')->group(function () {
+                Route::get('/', [AboutPageController::class, 'index'])->name('about-pages.index');
+                Route::get('/create', [AboutPageController::class, 'create'])->name('about-pages.create');
+                Route::post('/', [AboutPageController::class, 'store'])->name('about-pages.store');
+                Route::get('/{aboutPage}/edit', [AboutPageController::class, 'edit'])->name('about-pages.edit');
+                Route::put('/{aboutPage}', [AboutPageController::class, 'update'])->name('about-pages.update');
+                Route::delete('/{aboutPage}', [AboutPageController::class, 'destroy'])->name('about-pages.destroy');
+                Route::post('/toggle-status/{id}', [AboutPageController::class, 'toggleStatus'])->name('about-pages.toggle-status');
+            });
+
         });
         
         
     });
 });
+
 
 
 Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'store'])

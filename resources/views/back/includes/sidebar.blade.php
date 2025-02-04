@@ -186,10 +186,15 @@
 
                     </ul>
 
-
-                   
-
+                    <li class="nav-item">
+                        <a href="{{ route('back.pages.about-pages.index') }}" class="nav-link">
+                            <i class="ri-information-line"></i>
+                            <span>Haqqımızda</span>
+                        </a>
                     </li>
+                
+                
+                </li>
                             
 
 
@@ -204,6 +209,9 @@
     </div>
 </div>
 <!-- Left Sidebar End -->
+
+<!-- Diğer menü öğeleri -->
+
 
 
 
