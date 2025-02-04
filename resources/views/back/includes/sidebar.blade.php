@@ -159,6 +159,15 @@
                         </a>
                     </li>
                     </ul>
+
+
+                    <li>
+                        <a href="{{ route('back.pages.contacts.index') }}">
+                            <i class="ri-phone-line"></i>
+                            <span>Contact Ayarları</span>
+                        </a>
+                    </li>
+
                     </li>
                             
 
@@ -174,5 +183,7 @@
     </div>
 </div>
 <!-- Left Sidebar End -->
+
+
 
 

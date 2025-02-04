@@ -2,17 +2,31 @@
     <div class="navbar-header">
         <div class="d-flex">
             <!-- LOGO -->
-            <div class="navbar-brand-box">
+            <div class="navbar-brand-box" style="padding: 0 1.5rem; text-align: center; width: 240px; display: flex; align-items: center; justify-content: center;">
                 <a href="{{ route('admin.dashboard') }}" class="logo logo-dark">
-                    <span class="logo-sm">
-                        <img src="{{ asset('back/assets/images/logo.svg') }}" alt="logo-sm" height="25">
+                    <span class="logo-sm"  >
+                        <img src="{{ asset('back/assets/images/logo.svg') }}" alt="logo-sm" height="25" >
                     </span>
                     <span class="logo-lg">
                         <img src="{{ asset('back/assets/images/logo.svg') }}" alt="logo-dark" height="50">
                     </span>
                 </a>
 
-                <a href="{{ route('admin.dashboard') }}" class="logo logo-light">
+                <a href="{{ route('admin.dashboard') }}" class="logo logo-light"
+                style="padding: 0 1.5rem; text-align:
+                 center; width: 240px; display: flex; 
+                 align-items: center; 
+                  justify-content: center;  
+                 background: #f3f3f3; 
+                  max-width: 100px;
+                  height: 60px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  overflow: hidden;
+                  border-radius: 50px;" >
+
+
                     <span class="logo-sm">
                         <img src="{{ asset('back/assets/images/logo.svg') }}" alt="logo-sm-light"
                             height="25">

@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\BlogTypeController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ThemeSettingsController;
+use App\Http\Controllers\Admin\ContactController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -206,6 +207,17 @@ Route::prefix('admin')->group(function () {
             });
             Route::get('theme-settings', [ThemeSettingsController::class, 'index'])->name('theme-settings.index');
             Route::post('theme-settings/update', [ThemeSettingsController::class, 'update'])->name('theme-settings.update');
+
+            // Contact routes
+            Route::prefix('contacts')->group(function () {
+                Route::get('/', [ContactController::class, 'index'])->name('contacts.index');
+                Route::get('/create', [ContactController::class, 'create'])->name('contacts.create');
+                Route::post('/', [ContactController::class, 'store'])->name('contacts.store');
+                Route::get('/{contact}/edit', [ContactController::class, 'edit'])->name('contacts.edit');
+                Route::put('/{contact}', [ContactController::class, 'update'])->name('contacts.update');
+                Route::delete('/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
+                Route::post('/toggle-status/{id}', [ContactController::class, 'toggleStatus'])->name('contacts.toggle-status');
+            });
 
         });
         

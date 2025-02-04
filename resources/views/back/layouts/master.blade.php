@@ -55,7 +55,14 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-        <div class="main-content" style="background-color: {{ $themeSettings->background_color }}; background-image: url('{{ asset($themeSettings->background_image) }}'); background-size: cover; background-position: center; height: 100vh;">
+        <div class="main-content" 
+             style="background-color: {{ $themeSettings->background_color }}; 
+                    background-image: url('{{ asset($themeSettings->background_image) }}'); 
+                    background-size: cover; 
+                    background-position: center; 
+                    height: calc(100vh - 120px);
+                    overflow-y: auto;
+                    padding: 20px;">
             @yield('content')
             @include('back.includes.footer', ['themeSettings' => $themeSettings])
         </div>
