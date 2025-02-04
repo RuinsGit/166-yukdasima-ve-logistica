@@ -45,7 +45,7 @@
             <div class="dropdown d-inline-block user-dropdown">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img width="80" src="{{ asset('back/assets/images/logo.svg') }}" alt="Header Avatar">
+                    <!-- <img width="80" src="{{ asset('back/assets/images/logo.svg') }}" alt="Header Avatar"> -->
                     <span class="d-none d-xl-inline-block ms-1" style="color: #000;">{{ auth()->guard('admin')->user()->name }}</span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block" style="color: #000;"></i>
                 </button>
