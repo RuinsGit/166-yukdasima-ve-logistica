@@ -1,5 +1,5 @@
 @extends('back.layouts.master')
-@section('title', 'Xidmətlər')
+@section('title', 'Xidmət Növləri')
 
 @section('content')
 
@@ -11,13 +11,12 @@
 <div class="page-content">
     <div class="container-fluid">
         <div class="row">
-
             <div class="col-12">
                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                    <h4 class="mb-0">Xidmətlər</h4>
+                    <h4 class="mb-0">Xidmət Növləri</h4>
                     <div class="page-title-right">
-                        <a href="{{ route('back.pages.services.create') }}" class="btn btn-primary">
-                            <i class="fas fa-plus"></i> Yeni Xidmət
+                        <a href="{{ route('back.pages.services-types.create') }}" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Yeni Növ
                         </a>
                     </div>
                 </div>
@@ -46,64 +45,56 @@
                         <table class="table table-bordered dt-responsive nowrap">
                             <thead>
                                 <tr>
-                                <th>Şəkil</th>
-                                <th>Alt Şəkil</th>
-                                    <th>Ad</th>
-                                    
-                                    <th>Slug</th>
-                                    <th>Qısa Mətn</th>
+                                    <th>Şəkil</th>
+                                    <th>Ad (AZ)</th>
+                                    <th>Name (EN)</th>
+                                    <th>Название (RU)</th>
+                                    <th>Sıra</th>
                                     <th>Status</th>
-                                    <th>Xidmət Növü</th>
                                     <th>Əməliyyatlar</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($services as $service)
+                                @foreach($types as $type)
                                 <tr>
-                                <td>
-                                        @if($service->image_main)
-                                            <img src="{{ asset('storage/'.$service->image_main) }}" 
-                                            class="img-thumbnail"
-                                            
-                                            style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
+                                    <td>
+                                        @if($type->image)
+                                            <img src="{{ asset('storage/'.$type->image) }}" 
+                                                 class="img-thumbnail" 
+                                                 style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
                                         @endif
                                     </td>
+                                    <td>{{ $type->name_az }}</td>
+                                    <td>{{ $type->name_en }}</td>
+                                    <td>{{ $type->name_ru }}</td>
+                                    <td>{{ $type->number }}</td>
                                     <td>
-                                        @if($service->image_bottom)
-                                            <img src="{{ asset('storage/'.$service->image_bottom) }}" 
-                                            class="img-thumbnail"
-                                            
-                                            style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
-                                        @endif
-                                    </td>
-                                    <td>{{ $service->slug_az }}</td>
-                                    <td>{{ $service->name_az }}</td>
-                                    <td>{{ Str::limit($service->text_az, 50) }}</td>
-                                    <td>
-                                        <form action="{{ route('back.pages.services.toggle-status', $service->id) }}" method="POST">
+                                        <form action="{{ route('back.pages.services-types.toggle-status', [$type->id]) }}" method="POST">
                                             @csrf
-                                            <button type="submit" class="btn btn-sm btn-{{ $service->status ? 'success' : 'danger' }}">
-                                                {{ $service->status ? 'Aktiv' : 'Deaktiv' }}
+
+
+                                            <button type="submit" class="btn btn-sm btn-{{ $type->status ? 'success' : 'danger' }}">
+                                                {{ $type->status ? 'Aktiv' : 'Deaktiv' }}
                                             </button>
                                         </form>
                                     </td>
-                                    <td>{{ $service->type->name_az }}</td>
                                     <td>
-                                        <a href="{{ route('back.pages.services.edit', $service->id) }}" 
+                                        <a href="{{ route('back.pages.services-types.edit', [$type->id]) }}" 
                                            class="btn btn-warning btn-sm" style="background-color: #5bf91b; border-color: green">
                                             <i class="fas fa-edit" style="color: white;"></i>
                                         </a>
+
                                         <button type="button" 
                                                 class="btn btn-danger btn-sm" 
-
-                                                onclick="deleteData({{ $service->id }})">
+                                                onclick="deleteData({{ $type->id }})">
                                             <i class="fas fa-trash"></i>
                                         </button>
-                                        <form id="delete-form-{{ $service->id }}" 
-                                              action="{{ route('back.pages.services.destroy', $service->id) }}" 
+                                        <form id="delete-form-{{ $type->id }}" 
+                                              action="{{ route('back.pages.services-types.destroy', [$type->id]) }}" 
                                               method="POST" 
                                               class="d-none">
                                             @csrf
+
                                             @method('DELETE')
                                         </form>
                                     </td>
@@ -117,7 +108,6 @@
         </div>
     </div>
 </div>
-
 
 <script>
 function deleteData(id) {
@@ -137,5 +127,4 @@ function deleteData(id) {
     });
 }
 </script>
-
-@endsection 
+@endsection

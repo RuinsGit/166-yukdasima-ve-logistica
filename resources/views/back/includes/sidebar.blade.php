@@ -139,6 +139,14 @@
                             <span>Xidmətlər</span>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="{{ route('back.pages.services-types.index') }}">
+                            <i class="ri-pie-chart-line"></i>
+                            <span>Xidmət Növləri</span>
+                        </a>
+                    </li>
+
                     <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-file-text-line"></i>
@@ -192,6 +200,7 @@
                             <span>Haqqımızda</span>
                         </a>
                     </li>
+
                 
                 
                 </li>

@@ -64,8 +64,9 @@
                                     <thead>
                                         <tr>
                                             <th>Sıra</th>
-                                            <th>Ad</th>
                                             <th>İkon</th>
+                                            <th>Ad</th>
+                                            
                                             <th>Link</th>
                                             <th>Status</th>
                                             <th>Əməliyyatlar</th>
@@ -75,7 +76,6 @@
                                         @foreach($socialshares as $socialshare)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $socialshare->name }}</td>
                                                 <td>
                                                     @if($socialshare->image)
                                                         <img src="{{ asset($socialshare->image) }}" alt="" style="height: 50px; width: 50px; object-fit: cover;">
@@ -83,6 +83,8 @@
                                                         <span class="text-muted">Şəkil yoxdur</span>
                                                     @endif
                                                 </td>
+                                                <td>{{ $socialshare->name }}</td>
+                                                
                                                 <td>{{ $socialshare->link }}</td>
                                                 <td>
                                                     <form action="{{ route('back.pages.socialshare.toggleStatus', $socialshare->id) }}" method="POST" class="d-inline-block">

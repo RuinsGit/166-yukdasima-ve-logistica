@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\ThemeSettingsController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ContactRequestController;
 use App\Http\Controllers\Admin\AboutPageController;
+use App\Http\Controllers\Admin\ServiceTypeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -238,6 +239,19 @@ Route::prefix('admin')->group(function () {
                 Route::delete('/{aboutPage}', [AboutPageController::class, 'destroy'])->name('about-pages.destroy');
                 Route::post('/toggle-status/{id}', [AboutPageController::class, 'toggleStatus'])->name('about-pages.toggle-status');
             });
+
+            
+            Route::prefix('services-types')->group(function () {
+                Route::get('/', [ServiceTypeController::class, 'index'])->name('services-types.index');
+                Route::get('/create', [ServiceTypeController::class, 'create'])->name('services-types.create');
+                Route::post('/', [ServiceTypeController::class, 'store'])->name('services-types.store');
+                Route::get('/{type}/edit', [ServiceTypeController::class, 'edit'])->name('services-types.edit');
+                Route::put('/{type}', [ServiceTypeController::class, 'update'])->name('services-types.update');
+                Route::delete('/{type}', [ServiceTypeController::class, 'destroy'])->name('services-types.destroy');
+                Route::post('/{type}/toggle-status', [ServiceTypeController::class, 'toggleStatus'])->name('services-types.toggle-status');
+            });
+
+    
 
         });
         
