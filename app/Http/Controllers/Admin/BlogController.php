@@ -12,20 +12,18 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $blogs = Blog::with('type')->paginate(10);
+        $blogs = Blog::paginate(10);
         return view('back.admin.blogs.index', compact('blogs'));
     }
 
     public function create()
     {
-        $types = BlogType::where('status', true)->get();
-        return view('back.admin.blogs.create', compact('types'));
+        return view('back.admin.blogs.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'blog_type_id' => 'required|exists:blog_types,id',
             'name_az' => 'required|string|max:255',
             'name_en' => 'required|string|max:255',
             'name_ru' => 'required|string|max:255',
@@ -52,13 +50,28 @@ class BlogController extends Controller
             'meta_description_az' => 'nullable|string|max:500',
             'meta_description_en' => 'nullable|string|max:500',
             'meta_description_ru' => 'nullable|string|max:500',
+            'description_3_az' => 'nullable|string',
+            'description_3_en' => 'nullable|string',
+            'description_3_ru' => 'nullable|string',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'multiple_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'text_2_az' => 'nullable|string',
+            'text_2_en' => 'nullable|string',
+            'text_2_ru' => 'nullable|string',
         ]);
 
         $imagePath = $request->file('image')->store('blogs', 'public');
         $bottomImagePath = $request->file('bottom_image')->store('blogs/bottom', 'public');
 
-        Blog::create([
-            'blog_type_id' => $request->blog_type_id,
+        $multipleImages = [];
+        if($request->hasFile('multiple_images')) {
+            foreach ($request->file('multiple_images') as $image) {
+                $path = $image->store('blogs/multiple', 'public');
+                $multipleImages[] = $path;
+            }
+        }
+
+        $blog = Blog::create([
             'name_az' => $request->name_az,
             'name_en' => $request->name_en,
             'name_ru' => $request->name_ru,
@@ -68,6 +81,9 @@ class BlogController extends Controller
             'description_az' => $request->description_az,
             'description_en' => $request->description_en,
             'description_ru' => $request->description_ru,
+            'description_3_az' => $request->description_3_az,
+            'description_3_en' => $request->description_3_en,
+            'description_3_ru' => $request->description_3_ru,
             'image_path' => $imagePath,
             'bottom_image_path' => $bottomImagePath,
             'alt_az' => $request->alt_az,
@@ -85,22 +101,31 @@ class BlogController extends Controller
             'meta_description_az' => $request->meta_description_az,
             'meta_description_en' => $request->meta_description_en,
             'meta_description_ru' => $request->meta_description_ru,
+            'multiple_image_path' => !empty($multipleImages) ? json_encode($multipleImages) : null,
+            'text_2_az' => $request->text_2_az,
+            'text_2_en' => $request->text_2_en,
+            'text_2_ru' => $request->text_2_ru,
         ]);
+
+        if($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('blogs/gallery', 'public');
+                $blog->images()->create(['image_path' => $path]);
+            }
+        }
 
         return redirect()->route('back.pages.blogs.index')->with('success', 'Blog uğurla əlavə edildi');
     }
 
     public function edit(Blog $blog)
     {
-        $types = BlogType::where('status', true)->get();
-        return view('back.admin.blogs.edit', compact('blog', 'types'));
+        return view('back.admin.blogs.edit', compact('blog'));
     }
     
 
     public function update(Request $request, Blog $blog)
     {
         $request->validate([
-            'blog_type_id' => 'required|exists:blog_types,id',
             'name_az' => 'required|string|max:255',
             'name_en' => 'required|string|max:255',
             'name_ru' => 'required|string|max:255',
@@ -127,9 +152,17 @@ class BlogController extends Controller
             'meta_description_az' => 'nullable|string|max:500',
             'meta_description_en' => 'nullable|string|max:500',
             'meta_description_ru' => 'nullable|string|max:500',
+            'description_3_az' => 'nullable|string',
+            'description_3_en' => 'nullable|string',
+            'description_3_ru' => 'nullable|string',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'multiple_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'text_2_az' => 'nullable|string',
+            'text_2_en' => 'nullable|string',
+            'text_2_ru' => 'nullable|string',
         ]);
 
-        $data = $request->except(['image', 'bottom_image']);
+        $data = $request->except(['image', 'bottom_image', 'multiple_images']);
 
         if ($request->hasFile('image')) {
             Storage::disk('public')->delete($blog->image_path);
@@ -141,7 +174,23 @@ class BlogController extends Controller
             $data['bottom_image_path'] = $request->file('bottom_image')->store('blogs/bottom', 'public');
         }
 
+        if ($request->hasFile('multiple_images')) {
+            $multipleImages = json_decode($blog->multiple_image_path, true) ?? [];
+            foreach ($request->file('multiple_images') as $image) {
+                $path = $image->store('blogs/multiple', 'public');
+                $multipleImages[] = $path;
+            }
+            $data['multiple_image_path'] = json_encode($multipleImages);
+        }
+
         $blog->update($data);
+
+        if($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('blogs/gallery', 'public');
+                $blog->images()->create(['image_path' => $path]);
+            }
+        }
 
         return redirect()->route('back.pages.blogs.index')->with('success', 'Blog uğurla yeniləndi');
     }
@@ -163,5 +212,44 @@ class BlogController extends Controller
         $blog->status = !$blog->status;
         $blog->save();
         return redirect()->back()->with('success', 'Status uğurla dəyişdirildi');
+    }
+
+    public function deleteImage(Blog $blog, $imageIndex)
+    {
+        try {
+            $images = json_decode($blog->multiple_image_path, true) ?? [];
+            
+            if(!isset($images[$imageIndex])) {
+                return response()->json(['success' => false, 'message' => 'Şəkil tapılmadı'], 404);
+            }
+
+
+            $imagePath = $images[$imageIndex];
+            
+            // Fiziksel dosyayı sil
+            if(Storage::disk('public')->exists($imagePath)) {
+                Storage::disk('public')->delete($imagePath);
+            }
+
+            // Diziden kaldır
+            array_splice($images, $imageIndex, 1);
+
+            // Veritabanını güncelle
+            $blog->update([
+                'multiple_image_path' => !empty($images) ? json_encode(array_values($images)) : null
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Şəkil uğurla silindi',
+                'removed_index' => $imageIndex
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Silmə zamanı xəta baş verdi: '.$e->getMessage()
+            ], 500);
+        }
     }
 } 

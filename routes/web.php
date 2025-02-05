@@ -250,6 +250,9 @@ Route::prefix('admin')->group(function () {
 Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'store'])
     ->name('contact.submit');
 
+Route::delete('/blogs/{blog}/delete-image/{index}', [BlogController::class, 'deleteImage'])
+     ->name('back.pages.blogs.delete-image');
+
 
 
 

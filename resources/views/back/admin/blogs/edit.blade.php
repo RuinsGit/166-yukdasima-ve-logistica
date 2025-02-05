@@ -1,6 +1,12 @@
 @extends('back.layouts.master')
 @section('title', 'Blog Redaktə')
 @section('content')
+<style>
+    .swal2-popup {
+        border-radius: 50px;
+    }
+    
+</style>
 <div class="page-content">
     <div class="container-fluid">
         <div class="row">
@@ -26,17 +32,6 @@
                             @method('PUT')
 
                             <div class="mb-4">
-                                <div class="mb-3">
-                                    <label>Blog Növü</label>
-                                    <select class="form-select" name="blog_type_id" required>
-                                        @foreach($types as $type)
-                                            <option value="{{ $type->id }}" {{ $blog->blog_type_id == $type->id ? 'selected' : '' }}>
-                                                {{ $type->name_az }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#azTab">AZ</a>
@@ -61,16 +56,44 @@
                                             <textarea class="form-control" name="text_az" rows="3" required>{{ $blog->text_az }}</textarea>
                                         </div>
                                         <div class="mb-3">
+                                            <label>Ətraflı Mətn Başlığı (AZ)</label>
+                                            <textarea class="form-control" name="text_2_az" rows="3">{{ $blog->text_2_az }}</textarea>
+                                        </div>
+                                        <div class="mb-3">
                                             <label>Ətraflı Mətn (AZ)</label>
-                                            <textarea class="form-control" name="description_az" rows="5" required>{{ $blog->description_az }}</textarea>
+                                            <textarea class="form-control summernote" name="description_az" rows="5" required>{{ $blog->description_az }}</textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>Çoxlu Şəkillər</label>
+                                            <input type="file" class="form-control" name="multiple_images[]" multiple>
+                                            @if($blog->multiple_image_path)
+                                                <div class="mt-2">
+                                                    @foreach(json_decode($blog->multiple_image_path) as $index => $image)
+                                                        <div class="position-relative d-inline-block me-2" data-image-index="{{ $index }}"
+                                                        style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
+                                                            <img src="{{ asset('storage/'.$image) }}" class="img-thumbnail"
+                                                             style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
+                                                            <button type="button" 
+                                                                    class="btn btn-danger btn-sm position-absolute top-0 end-0"
+                                                                    onclick="deleteImage({{ $index }}, '{{ $image }}')"
+                                                                    title="Sil">
+
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>Ətraflı Mətn 2 (AZ)</label>
+                                            <textarea class="form-control summernote" name="description_3_az" rows="5">{{ $blog->description_3_az }}</textarea>
                                         </div>
                                         <div class="mb-3">
                                             <label style="display: flex;"> <div style="color: orange; margin-right: 10px;">Slug</div> (Diqqət! Slug Avtomatik olaraq yaradılır)</label>
                                             <input type="text" class="form-control" name="slug_az" id="slug_az" value="{{ $blog->slug_az }}" required>
                                         </div>
                                         <div class="mb-3">
-
-
                                             <label>Meta Başlıq (AZ)</label>
                                             <input type="text" class="form-control" name="meta_title_az" value="{{ $blog->meta_title_az }}">
                                         </div>
@@ -91,15 +114,44 @@
                                             <textarea class="form-control" name="text_en" rows="3" required>{{ $blog->text_en }}</textarea>
                                         </div>
                                         <div class="mb-3">
+                                            <label>Detailed Text Title (EN)</label>
+                                            <textarea class="form-control" name="text_2_en" rows="3">{{ $blog->text_2_en }}</textarea>
+                                        </div>
+                                        <div class="mb-3">
                                             <label>Detailed Text (EN)</label>
-                                            <textarea class="form-control" name="description_en" rows="5" required>{{ $blog->description_en }}</textarea>
+                                            <textarea class="form-control summernote" name="description_en" rows="5" required>{{ $blog->description_en }}</textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>Multiple Images</label>
+                                            <input type="file" class="form-control" name="multiple_images[]" multiple>
+                                            @if($blog->multiple_image_path)
+                                                <div class="mt-2">
+                                                    @foreach(json_decode($blog->multiple_image_path) as $index => $image)
+                                                        <div class="position-relative d-inline-block me-2" data-image-index="{{ $index }}"
+                                                        style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
+                                                            <img src="{{ asset('storage/'.$image) }}" class="img-thumbnail"
+                                                             style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
+                                                            <button type="button" 
+                                                                    class="btn btn-danger btn-sm position-absolute top-0 end-0"
+                                                                    onclick="deleteImage({{ $index }}, '{{ $image }}')"
+                                                                    title="Sil">
+
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>Detailed Text 2 (EN)</label>
+                                            <textarea class="form-control summernote" name="description_3_en" rows="5">{{ $blog->description_3_en }}</textarea>
                                         </div>
                                         <div class="mb-3">
                                             <label style="display: flex;"> <div style="color: orange; margin-right: 10px;">Slug</div> (Warning! Slug will be generated automatically)</label>
                                             <input type="text" class="form-control" name="slug_en" id="slug_en" value="{{ $blog->slug_en }}" required>
                                         </div>
                                         <div class="mb-3">
-
                                             <label>Meta Title (EN)</label>
                                             <input type="text" class="form-control" name="meta_title_en" value="{{ $blog->meta_title_en }}">
                                         </div>
@@ -120,17 +172,44 @@
                                             <textarea class="form-control" name="text_ru" rows="3" required>{{ $blog->text_ru }}</textarea>
                                         </div>
                                         <div class="mb-3">
+                                            <label>Заголовок подробного текста (RU)</label>
+                                            <textarea class="form-control" name="text_2_ru" rows="3">{{ $blog->text_2_ru }}</textarea>
+                                        </div>
+                                        <div class="mb-3">
                                             <label>Подробный текст (RU)</label>
-                                            <textarea class="form-control" name="description_ru" rows="5" required>{{ $blog->description_ru }}</textarea>
+                                            <textarea class="form-control summernote" name="description_ru" rows="5" required>{{ $blog->description_ru }}</textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>Множественные изображения</label>
+                                            <input type="file" class="form-control" name="multiple_images[]" multiple>
+                                            @if($blog->multiple_image_path)
+                                                <div class="mt-2">
+                                                    @foreach(json_decode($blog->multiple_image_path) as $index => $image)
+                                                        <div class="position-relative d-inline-block me-2" data-image-index="{{ $index }}"
+                                                        style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
+                                                            <img src="{{ asset('storage/'.$image) }}" class="img-thumbnail"
+                                                             style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
+                                                            <button type="button" 
+                                                                    class="btn btn-danger btn-sm position-absolute top-0 end-0"
+                                                                    onclick="deleteImage({{ $index }}, '{{ $image }}')"
+                                                                    title="Sil">
+
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>Подробный текст 2 (RU)</label>
+                                            <textarea class="form-control summernote" name="description_3_ru" rows="5">{{ $blog->description_3_ru }}</textarea>
                                         </div>
                                         <div class="mb-3">
                                             <label style="display: flex;"> <div style="color: orange; margin-right: 10px;">Slug</div> (Внимание! Слаг будет сгенерирован автоматически)</label>
                                             <input type="text" class="form-control" name="slug_ru" id="slug_ru" value="{{ $blog->slug_ru }}" required>
                                         </div>
                                         <div class="mb-3">
-
-
-
                                             <label>Мета заголовок (RU)</label>
                                             <input type="text" class="form-control" name="meta_title_ru" value="{{ $blog->meta_title_ru }}">
                                         </div>
@@ -149,8 +228,6 @@
                                         <input type="file" class="form-control" name="image">
                                         @if($blog->image)
                                             <div class="mt-2">
-
-
                                                 <img src="{{ asset($blog->image) }}" alt="" class="img-thumbnail" style="max-height: 100px">
                                             </div>
                                         @endif
@@ -175,10 +252,6 @@
                                         <input type="file" class="form-control" name="bottom_image">
                                         @if($blog->bottom_image)
                                             <div class="mt-2">
-
-
-
-
                                                 <img src="{{ asset($blog->bottom_image) }}" alt="" class="img-thumbnail" style="max-height: 100px">
                                             </div>
                                         @endif
@@ -291,4 +364,6 @@ document.addEventListener('DOMContentLoaded', function() {
     border-color: #3b5de7;
 }
 </style>
+
+
 @endsection

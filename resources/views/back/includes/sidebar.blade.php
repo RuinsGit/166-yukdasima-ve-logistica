@@ -145,12 +145,12 @@
                         <span>Blog</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                    <li>
+                    <!-- <li>
                         <a href="{{ route('back.pages.blog-types.index') }}">
                             <i class="ri-folder-line"></i>
                             <span>Blog Növləri</span>
                         </a>
-                    </li>
+                    </li> -->
 
                     <li>
                         <a href="{{ route('back.pages.blogs.index') }}">

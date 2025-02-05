@@ -54,7 +54,6 @@
                                     <th>Şəkil</th>
                                     <th>Daxili Şəkil</th>
                                     <th>Ad</th>
-                                    <th>Tip</th>
                                     <th>Status</th>
                                     <th>Əməliyyatlar</th>
                                 </tr>
@@ -79,9 +78,6 @@
                                         <div><strong>RU:</strong> {{ $blog->name_ru }}</div>
                                     </td>
 
-                                    <td>
-                                        <strong>{{ $blog->type->name_az }}</strong>
-                                    </td>
                                     <td>
                                         <form action="{{ route('back.pages.blogs.toggle-status', $blog->id) }}" method="POST">
                                             @csrf

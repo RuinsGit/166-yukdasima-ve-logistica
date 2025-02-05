@@ -2,9 +2,15 @@
 @section('title', 'Yeni Blog Əlavə Et')
 
 @section('content')
+<style>
+    .swal2-popup {
+        border-radius: 50px;
+    }
+</style>
 <div class="page-content">
     <div class="container-fluid">
         <div class="row">
+
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
@@ -27,15 +33,6 @@
                             @csrf
 
                             <div class="mb-4">
-                                <div class="mb-3">
-                                    <label>Blog Növü</label>
-                                    <select class="form-select" name="blog_type_id" required>
-                                        @foreach($types as $type)
-                                            <option value="{{ $type->id }}">{{ $type->name_az }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#azTab">AZ</a>
@@ -60,15 +57,26 @@
                                             <textarea class="form-control" name="text_az" rows="3" required></textarea>
                                         </div>
                                         <div class="mb-3">
+                                            <label>Ətraflı Mətn Başlığı (AZ)</label>
+                                            <textarea class="form-control" name="text_2_az" rows="3"></textarea>
+                                        </div>
+                                        <div class="mb-3">
                                             <label>Ətraflı Mətn (AZ)</label>
-                                            <textarea class="form-control" name="description_az" rows="5" required></textarea>
+                                            <textarea class="form-control summernote" name="description_az" rows="5" required></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>Çoxlu Şəkillər</label>
+                                            <input type="file" class="form-control" name="multiple_images[]" multiple>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>Ətraflı Mətn 2 (AZ)</label>
+                                            <textarea class="form-control summernote" name="description_3_az" rows="5"></textarea>
                                         </div>
                                         <div class="mb-3">
                                             <label style="display: flex;"> <div style="color: orange; margin-right: 10px;">Slug</div> (Diqqət! Slug Avtomatik olaraq yaradılır)</label>
                                             <input type="text" class="form-control" name="slug_az" id="slug_az" required>
                                         </div>
                                         <div class="mb-3">
-
                                             <label>Meta Başlıq (AZ)</label>
                                             <input type="text" class="form-control" name="meta_title_az">
                                         </div>
@@ -89,15 +97,26 @@
                                             <textarea class="form-control" name="text_en" rows="3" required></textarea>
                                         </div>
                                         <div class="mb-3">
+                                            <label>Detailed Text Title (EN)</label>
+                                            <textarea class="form-control" name="text_2_en" rows="3"></textarea>
+                                        </div>
+                                        <div class="mb-3">
                                             <label>Detailed Text (EN)</label>
-                                            <textarea class="form-control" name="description_en" rows="5" required></textarea>
+                                            <textarea class="form-control summernote" name="description_en" rows="5" required></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>Çoxlu Şəkillər</label>
+                                            <input type="file" class="form-control" name="multiple_images[]" multiple>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>Detailed Text 2 (EN)</label>
+                                            <textarea class="form-control summernote" name="description_3_en" rows="5"></textarea>
                                         </div>
                                         <div class="mb-3">
                                             <label style="display: flex;"> <div style="color: orange; margin-right: 10px;">Slug</div> (Warning! Slug will be generated automatically)</label>
                                             <input type="text" class="form-control" name="slug_en" id="slug_en" required>
                                         </div>
                                         <div class="mb-3">
-
                                             <label>Meta Title (EN)</label>
                                             <input type="text" class="form-control" name="meta_title_en">
                                         </div>
@@ -118,15 +137,26 @@
                                             <textarea class="form-control" name="text_ru" rows="3" required></textarea>
                                         </div>
                                         <div class="mb-3">
+                                            <label>подробный текст заголовка (RU)</label>
+                                            <textarea class="form-control" name="text_2_ru" rows="3"></textarea>
+                                        </div>
+                                        <div class="mb-3">
                                             <label>Подробный текст (RU)</label>
-                                            <textarea class="form-control" name="description_ru" rows="5" required></textarea>
+                                            <textarea class="form-control summernote" name="description_ru" rows="5" required></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>Çoxlu Şəkillər</label>
+                                            <input type="file" class="form-control" name="multiple_images[]" multiple>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>Подробный текст 2 (RU)</label>
+                                            <textarea class="form-control summernote" name="description_3_ru" rows="5"></textarea>
                                         </div>
                                         <div class="mb-3">
                                             <label style="display: flex;"> <div style="color: orange; margin-right: 10px;">Slug</div> (Внимание! Слаг будет сгенерирован автоматически)</label>
                                             <input type="text" class="form-control" name="slug_ru" id="slug_ru" required>
                                         </div>
                                         <div class="mb-3">
-
                                             <label>Мета заголовок (RU)</label>
                                             <input type="text" class="form-control" name="meta_title_ru">
                                         </div>
@@ -168,12 +198,10 @@
                                         <input type="text" class="form-control" name="bottom_alt_az" required>
                                     </div>
                                     <div class="mb-3">
-
                                         <label>Daxili Alt Mətn (EN)</label>
                                         <input type="text" class="form-control" name="bottom_alt_en" required>
                                     </div>
                                     <div class="mb-3">
-
                                         <label>Daxili Alt Mətn (RU)</label>
                                         <input type="text" class="form-control" name="bottom_alt_ru" required>
                                     </div>
@@ -259,5 +287,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
 @endsection
 

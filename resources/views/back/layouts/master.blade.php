@@ -41,6 +41,9 @@
 
     <!-- App Css'den sonra ekle -->
     <link href="{{ asset('back/assets/css/custom.css') }}" rel="stylesheet" type="text/css">
+
+    <!-- Summernote CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 </head>
 
 <body data-topbar="dark" 
@@ -116,6 +119,78 @@
     </script>
     @stack('js')
     <script src="{{ asset('back/assets/js/theme-settings.js') }}"></script>
+
+    <!-- Summernote JS -->
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+    <!-- Summernote init script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        $('.summernote').summernote({
+            height: 300,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+        });
+    });
+    </script>
+
+    <script>
+    function deleteImage(index, imagePath) {
+        Swal.fire({
+            title: 'Əminsiniz?',
+            text: "Bu şəkli silmək istədiyinizə əminsiniz?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Bəli, sil!',
+            cancelButtonText: 'İmtina'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const blogId = {{ $blog->id ?? 0 }};
+                const url = `{{ route('back.pages.blogs.delete-image', ['blog' => ':blog', 'index' => ':index']) }}`
+                    .replace(':blog', blogId)
+                    .replace(':index', index);
+
+                fetch(url, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if(!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if(data.success) {
+                        // Tüm resim container'larını yeniden yükle
+                        document.querySelectorAll(`[data-image-index="${index}"]`).forEach(element => {
+                            element.remove();
+                        });
+                        Swal.fire('Silindi!', data.message, 'success');
+                    } else {
+                        Swal.fire('Xəta!', data.message, 'error');
+                    }
+                })
+                .catch(error => {
+                    Swal.fire('Xəta!', error.message, 'error');
+                });
+            }
+        })
+    }
+    </script>
 </body>
 
 

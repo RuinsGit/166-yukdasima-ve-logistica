@@ -11,18 +11,27 @@ class Blog extends Model
     use HasFactory;
 
     protected $fillable = [
-        'blog_type_id',
         'name_az',
         'name_en',
         'name_ru',
         'text_az',
         'text_en', 
         'text_ru',
+        'text_2_az',
+        'text_2_en',
+        'text_2_ru',
         'description_az',
         'description_en',
         'description_ru',
+        'description_2_az',
+        'description_2_en',
+        'description_2_ru',
+        'description_3_az',
+        'description_3_en',
+        'description_3_ru',
         'image_path',
         'bottom_image_path',
+        'multiple_image_path',
         'alt_az',
         'alt_en',
         'alt_ru',
@@ -42,7 +51,8 @@ class Blog extends Model
     ];
 
     protected $casts = [
-        'status' => 'boolean'
+        'status' => 'boolean',
+        'multiple_image_path' => 'array'
     ];
 
     protected static function boot()
@@ -56,8 +66,8 @@ class Blog extends Model
         });
     }
 
-    public function type()
+    public function images()
     {
-        return $this->belongsTo(BlogType::class, 'blog_type_id');
+        return $this->hasMany(BlogImage::class);
     }
 } 
