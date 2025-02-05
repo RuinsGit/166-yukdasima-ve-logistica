@@ -21,30 +21,7 @@
         <!-- Blog Statistik Kartları -->
         <div class="row">
             <!-- Blog Növləri -->
-            <div class="col-xl-3 col-md-6">
-                <div class="card card-animate">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                <p class="fw-medium text-muted mb-0">Blog Növləri</p>
-                                <h2 class="mt-4 ff-secondary fw-semibold">
-                                    {{ $statistics['total_blog_types'] }}
-                                </h2>
-                                <p class="mb-0 text-muted">
-                                    <span class="badge bg-success">
-                                        {{ $statistics['active_blog_types'] }} Aktiv
-                                    </span>
-                                </p>
-                            </div>
-                            <div class="avatar-sm flex-shrink-0">
-                                <span class="avatar-title bg-soft-info rounded-circle fs-2">
-                                    <i class="ri-folder-line"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
 
             <!-- Ümumi Bloglar -->
             <div class="col-xl-3 col-md-6">
@@ -118,17 +95,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($statistics['latest_blog_types'] as $type)
-                                    <tr>
-                                        <td>{{ $type->name_az }}</td>
-                                        <td>{{ $type->blogs_count }}</td>
-                                        <td>
-                                            <span class="badge bg-{{ $type->status ? 'success' : 'danger' }}">
-                                                {{ $type->status ? 'Aktiv' : 'Deaktiv' }}
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    @endforeach
+                                   
                                 </tbody>
                             </table>
                         </div>
@@ -152,19 +119,7 @@
                                         <th>Status</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach($statistics['latest_blogs'] as $blog)
-                                    <tr>
-                                        <td>{{ $blog->name_az }}</td>
-                                        <td>{{ $blog->type->name_az }}</td>
-                                        <td>
-                                            <span class="badge bg-{{ $blog->status ? 'success' : 'danger' }}">
-                                                {{ $blog->status ? 'Aktiv' : 'Deaktiv' }}
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
+                              
                             </table>
                         </div>
                     </div>

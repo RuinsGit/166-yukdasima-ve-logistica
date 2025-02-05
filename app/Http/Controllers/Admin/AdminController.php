@@ -48,15 +48,15 @@ class AdminController extends Controller
     public function dashboard()
     {
         $statistics = [
-            'total_blog_types' => BlogType::count(),
-            'active_blog_types' => BlogType::where('status', true)->count(),
+           
             'total_blogs' => Blog::count(),
             'active_blogs' => Blog::where('status', true)->count(),
-            'latest_blog_types' => BlogType::withCount('blogs')->latest()->take(3)->get(),
-            'latest_blogs' => Blog::with('type')->latest()->take(3)->get(),
+           
+            'latest_blogs' => Blog::latest()->take(3)->get(),
             'total_services' => Service::count(),
             'active_services' => Service::where('status', true)->count(),
             'latest_services' => Service::latest()->take(3)->get(),
+
         ];
 
         return view('back.admin.dashboard', compact('statistics'));
