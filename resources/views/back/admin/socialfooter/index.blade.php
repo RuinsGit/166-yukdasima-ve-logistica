@@ -74,10 +74,14 @@
                                             <tr id="order-{{ $socialfooter->id }}">
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>
-                                                    <img src="{{ asset($socialfooter->image) }}" alt="" style="height: 50px; width: 50px; object-fit: cover; ">
+                                                    <img src="{{ asset($socialfooter->image) }}" alt="" 
+                                                         style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;"
+                                                         class="img-thumbnail"
+                                                        >
                                                 </td>
                                                 <td>{{ $socialfooter->link }}</td>
                                                 <td>
+
                                                     <form action="{{ route('back.pages.socialfooter.toggle-status', $socialfooter->id) }}" method="POST" class="d-inline-block">
                                                         @csrf
                                                         <button type="submit" class="btn btn-sm btn-{{ $socialfooter->status ? 'success' : 'danger' }}">

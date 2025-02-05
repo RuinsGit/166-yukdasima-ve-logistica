@@ -64,9 +64,10 @@
                                     <thead>
                                         <tr>
                                             <th>Sıra</th>
-                                            <th>İkon</th>
+                                            <th>Şəkil</th>
                                             <th>Ad</th>
                                             
+
                                             <th>Link</th>
                                             <th>Status</th>
                                             <th>Əməliyyatlar</th>
@@ -78,7 +79,10 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>
                                                     @if($socialshare->image)
-                                                        <img src="{{ asset($socialshare->image) }}" alt="" style="height: 50px; width: 50px; object-fit: cover;">
+                                                        <img src="{{ asset($socialshare->image) }}" alt="" 
+                                                         style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;"
+                                                         class="img-thumbnail"
+                                                        >
                                                     @else
                                                         <span class="text-muted">Şəkil yoxdur</span>
                                                     @endif

@@ -74,10 +74,14 @@
                                             <tr id="order-{{ $social->id }}">
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>
-                                                    <img src="{{ asset($social->image) }}" alt="" style="height: 50px; width: 50px; object-fit: cover;">
+                                                    <img src="{{ asset($social->image) }}" alt="" 
+                                                         style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;"
+                                                         class="img-thumbnail"
+                                                        >
                                                 </td>
                                                 <td>{{ $social->link }}</td>
                                                 <td>
+
                                                     <form action="{{ route('back.pages.social.toggle-status', $social->id) }}" method="POST" class="d-inline-block">
                                                         @csrf
                                                         <button type="submit" class="btn btn-sm btn-{{ $social->status ? 'success' : 'danger' }}">
