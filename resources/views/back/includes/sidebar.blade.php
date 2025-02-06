@@ -208,6 +208,12 @@
                         </a>
                     </li>
 
+                    <li>
+                        <a href="{{ route('back.pages.networks.index') }}">
+                            <i class="ri-earth-line"></i>
+                            <span>Global Networks</span>
+                        </a>
+                    </li>
                 
                 
                 </li>

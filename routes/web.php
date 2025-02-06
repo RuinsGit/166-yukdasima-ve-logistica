@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\ContactRequestController;
 use App\Http\Controllers\Admin\AboutPageController;
 use App\Http\Controllers\Admin\ServiceTypeController;
 use App\Http\Controllers\Admin\TeamController;
+use App\Http\Controllers\Admin\NetworkController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -260,6 +261,16 @@ Route::prefix('admin')->group(function () {
                 Route::put('/{team}', [TeamController::class, 'update'])->name('teams.update');
                 Route::delete('/{team}', [TeamController::class, 'destroy'])->name('teams.destroy');
                 Route::post('/toggle-status/{id}', [TeamController::class, 'toggleStatus'])->name('teams.toggle-status');
+            });
+
+            Route::prefix('networks')->group(function () {
+                Route::get('/', [NetworkController::class, 'index'])->name('networks.index');
+                Route::get('/create', [NetworkController::class, 'create'])->name('networks.create');
+                Route::post('/', [NetworkController::class, 'store'])->name('networks.store');
+                Route::get('/{network}/edit', [NetworkController::class, 'edit'])->name('networks.edit');
+                Route::put('/{network}', [NetworkController::class, 'update'])->name('networks.update');
+                Route::delete('/{network}', [NetworkController::class, 'destroy'])->name('networks.destroy');
+                Route::post('/toggle-status/{id}', [NetworkController::class, 'toggleStatus'])->name('networks.toggle-status');
             });
     
 
