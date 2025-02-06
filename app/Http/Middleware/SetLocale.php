@@ -12,7 +12,7 @@ class SetLocale
         $locale = $request->header('Accept-Language');
         
         if (!in_array($locale, ['az', 'en', 'ru'])) {
-            $locale = 'az'; 
+            $locale = 'en';
         }
         
         app()->setLocale($locale);
