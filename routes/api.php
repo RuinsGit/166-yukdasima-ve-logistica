@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\SeoController;
 use App\Http\Controllers\Api\SocialMediaApiController;
 use App\Http\Controllers\Api\SocialshareApiController;
 use App\Http\Controllers\Api\SocialfooterApiController;
+use App\Http\Controllers\Api\AboutPageApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,3 +68,15 @@ Route::prefix('social-footer')->group(function () {
     Route::put('/{id}', [SocialfooterApiController::class, 'update']);
     Route::delete('/{id}', [SocialfooterApiController::class, 'destroy']);
 });
+
+// About Page Routes
+Route::prefix('about')->group(function () {
+    Route::get('/', [AboutPageApiController::class, 'index']);
+    Route::get('/{id}', [AboutPageApiController::class, 'show']);
+});
+
+Route::apiResource('about-pages', \App\Http\Controllers\Api\AboutPageApiController::class)
+    ->except(['create', 'edit']);
+
+// Status toggle için ek route
+Route::post('/about-pages/{id}/toggle-status', [AboutPageApiController::class, 'toggleStatus']);

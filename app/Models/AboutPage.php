@@ -25,7 +25,52 @@ class AboutPage extends Model
         'status'
     ];
 
+    
+    public function getNameAttribute()
+    {
+        return $this->{'name_' . app()->getLocale()};
+    }
+
+    public function getTextAttribute()
+    {
+        return $this->{'text_' . app()->getLocale()};
+    }
+
+    public function getDescriptionAttribute()
+    {
+        return $this->{'description_' . app()->getLocale()};
+    }
+
+    public function getServicesTextAttribute()
+    {
+        return $this->{'services_text_' . app()->getLocale()};
+    }
+
+    public function getCustomerTextAttribute()
+    {
+        return $this->{'customer_text_' . app()->getLocale()};
+    }
+
+    public function getSatisfiedTextAttribute()
+    {
+        return $this->{'satisfied_text_' . app()->getLocale()};
+    }
+
+    public function getTransportationTextAttribute()
+    {
+        return $this->{'transportation_text_' . app()->getLocale()};
+    }
+    
+    
+    
+    
+
+
+
+    
+
     public function setImagePathAttribute($value)
+
     {
         if ($value instanceof \Illuminate\Http\UploadedFile) {
             $this->attributes['image_path'] = $value->store('about', 'public');
