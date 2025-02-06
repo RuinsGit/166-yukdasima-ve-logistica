@@ -215,13 +215,13 @@ Route::prefix('admin')->group(function () {
 
             // Contact routes
             Route::prefix('contacts')->group(function () {
-                Route::get('/', [ContactController::class, 'index'])->name('contacts.index');
-                Route::get('/create', [ContactController::class, 'create'])->name('contacts.create');
-                Route::post('/', [ContactController::class, 'store'])->name('contacts.store');
-                Route::get('/{contact}/edit', [ContactController::class, 'edit'])->name('contacts.edit');
-                Route::put('/{contact}', [ContactController::class, 'update'])->name('contacts.update');
-                Route::delete('/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
-                Route::post('/toggle-status/{id}', [ContactController::class, 'toggleStatus'])->name('contacts.toggle-status');
+                Route::get('/', [ContactController::class, 'index'])->name('contact.index');
+                Route::get('/create', [ContactController::class, 'create'])->name('contact.create');
+                Route::post('/', [ContactController::class, 'store'])->name('contact.store');
+                Route::get('/{contact}/edit', [ContactController::class, 'edit'])->name('contact.edit');
+                Route::put('/{contact}', [ContactController::class, 'update'])->name('contact.update');
+                Route::delete('/{contact}', [ContactController::class, 'destroy'])->name('contact.destroy');
+                Route::post('/toggle-status/{id}', [ContactController::class, 'toggleStatus'])->name('contact.toggle-status');
             });
 
             // Contact Requests routes

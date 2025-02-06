@@ -26,11 +26,17 @@ class NetworkController extends Controller
 
     public function create()
     {
+        if(Network::count() >= 195) {
+            return redirect()->back()->with('error', 'Maksimum 195 şəbəkə əlavə edilə bilər');
+        }
         return view('back.admin.networks.create');
     }
 
     public function store(Request $request)
     {
+        if(Network::count() >= 195) {
+            return redirect()->back()->with('error', 'Maksimum 195 şəbəkə əlavə edilə bilər');
+        }
         $request->validate([
             'name_az' => 'required|string|max:255',
             'name_en' => 'required|string|max:255',

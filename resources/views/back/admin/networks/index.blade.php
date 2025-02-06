@@ -36,9 +36,11 @@
                                 @endif
                             </div>
                         </form>
-                        <a href="{{ route('back.pages.networks.create') }}" class="btn btn-primary">
-                            <i class="fas fa-plus"></i> Yeni Şəbəkə
-                        </a>
+                        @if(\App\Models\Network::count() < 195)
+                            <a href="{{ route('back.pages.networks.create') }}" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Yeni Şəbəkə
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -111,12 +113,12 @@
                                            class="btn btn-warning btn-sm" style="background-color: #5bf91b; border-color: green">
                                             <i class="fas fa-edit" style="color: white"></i>
                                         </a>
-                                        <button type="button" 
+                                        <!-- <button type="button" 
                                                 class="btn btn-danger btn-sm" 
 
                                                 onclick="deleteData({{ $network->id }})">
                                             <i class="fas fa-trash"></i>
-                                        </button>
+                                        </button> -->
                                         <form id="delete-form-{{ $network->id }}" 
                                               action="{{ route('back.pages.networks.destroy', $network->id) }}" 
                                               method="POST" 

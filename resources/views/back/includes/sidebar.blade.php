@@ -177,7 +177,7 @@
                     <ul class="sub-menu" aria-expanded="false">
 
                     <li>
-                        <a href="{{ route('back.pages.contacts.index') }}">
+                        <a href="{{ route('back.pages.contact.index') }}">
                             <i class="ri-phone-line"></i>
                             <span>Contact Ayarları</span>
                         </a>

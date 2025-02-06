@@ -52,21 +52,21 @@
                                 <div class="tab-content mt-3">
                                     <div class="tab-pane fade show active" id="nameAz">
                                         <label>Ad (Azərbaycanca)</label>
-                                        <input type="text" class="form-control" name="name_az" value="{{ $network->name_az }}" required>
+                                        <input type="text" class="form-control" name="name_az" value="{{ $network->name_az }}" readonly required>
                                         
                                         <label class="mt-3">Ünvan (AZ)</label>
                                         <textarea class="form-control" name="address_az" rows="3">{{ $network->address_az }}</textarea>
                                     </div>
                                     <div class="tab-pane fade" id="nameEn">
                                         <label>Name (English)</label>
-                                        <input type="text" class="form-control" name="name_en" value="{{ $network->name_en }}" required>
+                                        <input type="text" class="form-control" name="name_en" value="{{ $network->name_en }}" readonly required>
                                         
                                         <label class="mt-3">Address (EN)</label>
                                         <textarea class="form-control" name="address_en" rows="3">{{ $network->address_en }}</textarea>
                                     </div>
                                     <div class="tab-pane fade" id="nameRu">
                                         <label>Название (Русский)</label>
-                                        <input type="text" class="form-control" name="name_ru" value="{{ $network->name_ru }}" required>
+                                        <input type="text" class="form-control" name="name_ru" value="{{ $network->name_ru }}" readonly required>
                                         
                                         <label class="mt-3">Адрес (RU)</label>
                                         <textarea class="form-control" name="address_ru" rows="3">{{ $network->address_ru }}</textarea>

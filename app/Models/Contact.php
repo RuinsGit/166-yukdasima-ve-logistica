@@ -2,24 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Contact extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
+        'number',
+        'number_image',
+        'mail',
+        'mail_image',
         'address_az',
         'address_en',
         'address_ru',
         'address_image',
-        'mail',
-        'mail_image',
-        'number',
-        'number_image',
-        'status',
-        'split_image_1',
-        'split_image_2'
+        'filial_description'
     ];
+
+    public function getAddressAttribute()
+    {
+        return $this->{'address_' . app()->getLocale()};
+    }
 } 
