@@ -17,7 +17,7 @@
                     <div class="page-title-right d-flex align-items-center ">
                         <form action="{{ route('back.pages.networks.index') }}" method="GET" class="me-2">
                             <div class="input-group">
-                                <input type="text" style="background-color: #fff; border: 2px solid rgb(250, 205, 122);"
+                                <input type="text" style="background-color: #fff; border: 2px solid #0f9cf3;"
                                        class="form-control form-control-sm btn " 
 
 
