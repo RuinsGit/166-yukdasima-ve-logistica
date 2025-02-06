@@ -201,6 +201,13 @@
                         </a>
                     </li>
 
+                    <li>
+                        <a href="{{ route('back.pages.teams.index') }}">
+                            <i class="ri-team-line"></i>
+                            <span>Komandamız</span>
+                        </a>
+                    </li>
+
                 
                 
                 </li>

@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ContactRequestController;
 use App\Http\Controllers\Admin\AboutPageController;
 use App\Http\Controllers\Admin\ServiceTypeController;
+use App\Http\Controllers\Admin\TeamController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -251,6 +252,15 @@ Route::prefix('admin')->group(function () {
                 Route::post('/{type}/toggle-status', [ServiceTypeController::class, 'toggleStatus'])->name('services-types.toggle-status');
             });
 
+            Route::prefix('teams')->group(function () {
+                Route::get('/', [TeamController::class, 'index'])->name('teams.index');
+                Route::get('/create', [TeamController::class, 'create'])->name('teams.create');
+                Route::post('/', [TeamController::class, 'store'])->name('teams.store');
+                Route::get('/{team}/edit', [TeamController::class, 'edit'])->name('teams.edit');
+                Route::put('/{team}', [TeamController::class, 'update'])->name('teams.update');
+                Route::delete('/{team}', [TeamController::class, 'destroy'])->name('teams.destroy');
+                Route::post('/toggle-status/{id}', [TeamController::class, 'toggleStatus'])->name('teams.toggle-status');
+            });
     
 
         });
