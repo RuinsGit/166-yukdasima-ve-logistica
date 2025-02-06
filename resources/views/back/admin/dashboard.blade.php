@@ -18,12 +18,12 @@
             </div>
         </div>
 
-        <!-- Blog Statistik Kartları -->
+        
         <div class="row">
-            <!-- Blog Növləri -->
+            
             
 
-            <!-- Ümumi Bloglar -->
+            
             <div class="col-xl-3 col-md-6">
                 <div class="card card-animate">
                     <div class="card-body">
@@ -49,10 +49,11 @@
                 </div>
             </div>
 
-            <!-- Ümumi Xidmətlər -->
+            
             <div class="col-xl-3 col-md-6">
                 <div class="card card-animate">
                     <div class="card-body">
+
                         <div class="d-flex justify-content-between">
                             <div>
                                 <p class="fw-medium text-muted mb-0">Ümumi Xidmətlər</p>
@@ -76,9 +77,9 @@
             </div>
         </div>
 
-        <!-- Son Əlavələr -->
+        
         <div class="row mt-4">
-            <!-- Son Blog Növləri -->
+        
             <div class="col-xl-6">
                 <div class="card">
                     <div class="card-header">
@@ -103,7 +104,7 @@
                 </div>
             </div>
 
-            <!-- Son Bloglar -->
+           
             <div class="col-xl-6">
                 <div class="card">
                     <div class="card-header">
@@ -127,10 +128,10 @@
             </div>
         </div>
 
-        <!-- Son Eklenenler Bölümüne Eklenecek Kısım -->
+        
         <div class="row mt-4">
             <div class="col-xl-6">
-                <!-- Son Servisler Tablosu -->
+                
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title mb-0">Son Xidmətlər</h5>
