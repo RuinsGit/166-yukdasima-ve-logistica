@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\AboutPageController;
 use App\Http\Controllers\Admin\ServiceTypeController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\NetworkController;
+use App\Http\Controllers\Admin\ContactDataController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -272,7 +273,18 @@ Route::prefix('admin')->group(function () {
                 Route::delete('/{network}', [NetworkController::class, 'destroy'])->name('networks.destroy');
                 Route::post('/toggle-status/{id}', [NetworkController::class, 'toggleStatus'])->name('networks.toggle-status');
             });
-    
+
+            Route::prefix('contact-data')->group(function () {
+                Route::get('/', [ContactDataController::class, 'index'])->name('contact-data.index');
+                Route::get('/create', [ContactDataController::class, 'create'])->name('contact-data.create');
+                Route::post('/', [ContactDataController::class, 'store'])->name('contact-data.store');
+                Route::get('/{contactData}/edit', [ContactDataController::class, 'edit'])->name('contact-data.edit');
+                Route::put('/{contactData}', [ContactDataController::class, 'update'])->name('contact-data.update');
+                Route::delete('/{contactData}', [ContactDataController::class, 'destroy'])->name('contact-data.destroy');
+                Route::post('/toggle-status/{id}', [ContactDataController::class, 'toggleStatus'])->name('contact-data.toggle-status');
+            });
+
+            
 
         });
         

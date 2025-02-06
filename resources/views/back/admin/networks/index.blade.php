@@ -36,7 +36,7 @@
                                 @endif
                             </div>
                         </form>
-                        @if(\App\Models\Network::count() < 195)
+                        @if(\App\Models\Network::count() < 194)
                             <a href="{{ route('back.pages.networks.create') }}" class="btn btn-primary">
                                 <i class="fas fa-plus"></i> Yeni Şəbəkə
                             </a>

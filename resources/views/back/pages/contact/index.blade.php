@@ -57,26 +57,46 @@
                                 <td>{{ $contact->number }}</td>
                                 <td>
                                     @if($contact->number_image)
-                                        <img src="{{ asset($contact->number_image) }}" alt="" style="max-height: 50px">
+                                        <img src="{{ asset($contact->number_image) }}" alt="" 
+                                        class="img-thumbnail" 
+                                             style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;"
+                                        
+                                        >
                                     @endif
                                 </td>
                                 <td>{{ $contact->mail }}</td>
                                 <td>
                                     @if($contact->mail_image)
-                                        <img src="{{ asset($contact->mail_image) }}" alt="" style="max-height: 50px">
+                                        <img src="{{ asset($contact->mail_image) }}" alt="" 
+                                        class="img-thumbnail" 
+                                             style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;"
+                                        
+                                        >
                                     @endif
                                 </td>
                                 <td>{{ $contact->address_az }}</td>
                                 <td>
+
                                     @if($contact->address_image)
-                                        <img src="{{ asset($contact->address_image) }}" alt="" style="max-height: 50px">
+                                        <img src="{{ asset($contact->address_image) }}" alt="" 
+                                        class="img-thumbnail" 
+                                             style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;"
+                                        
+                                        >
                                     @endif
                                 </td>
+
                                 <td>
-                                    <a href="{{ route('back.pages.contact.edit', $contact->id) }}" class="btn btn-sm btn-warning">Düzəliş et</a>
-                                    <button type="button" class="btn btn-sm btn-danger" onclick="deleteContact({{ $contact->id }})">Sil</button>
+                                    <a href="{{ route('back.pages.contact.edit', $contact->id) }}" class="btn btn-sm btn-warning"
+                                    style="background-color: #5bf91b; border-color: green">
+                                            <i class="fas fa-edit" style="color: white"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-sm btn-danger" onclick="deleteContact({{ $contact->id }})">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
                                     <form id="delete-form-{{ $contact->id }}" action="{{ route('back.pages.contact.destroy', $contact->id) }}" method="POST" style="display: none;">
                                         @csrf
+
                                         @method('DELETE')
                                     </form>
                                 </td>

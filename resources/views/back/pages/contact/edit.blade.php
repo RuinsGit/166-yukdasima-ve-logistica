@@ -47,10 +47,15 @@
                                             @enderror
                                             @if($contact->number_image)
                                             <div class="mt-2">
-                                                <img src="{{ asset($contact->number_image) }}" alt="" class="img-fluid" style="max-height: 100px">
+                                                <img src="{{ asset($contact->number_image) }}" alt="" 
+                                                class="img-thumbnail" 
+                                                     style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;"
+                                                
+                                                >
                                             </div>
                                             @endif
                                         </div>
+
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
@@ -68,10 +73,15 @@
                                             @enderror
                                             @if($contact->mail_image)
                                             <div class="mt-2">
-                                                <img src="{{ asset($contact->mail_image) }}" alt="" class="img-fluid" style="max-height: 100px">
+                                                <img src="{{ asset($contact->mail_image) }}" alt="" 
+                                                class="img-thumbnail" 
+                                                     style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;"
+                                                
+                                                >
                                             </div>
                                             @endif
                                         </div>
+
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
@@ -82,9 +92,14 @@
                                             @enderror
                                             @if($contact->address_image)
                                             <div class="mt-2">
-                                                <img src="{{ asset($contact->address_image) }}" alt="" class="img-fluid" style="max-height: 100px">
+                                                <img src="{{ asset($contact->address_image) }}" alt="" 
+                                                class="img-thumbnail" 
+                                                     style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;"
+                                                
+                                                >
                                             </div>
                                             @endif
+
                                         </div>
                                     </div>
                                 </div>

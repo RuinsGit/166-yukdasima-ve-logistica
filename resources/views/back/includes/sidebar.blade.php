@@ -179,7 +179,7 @@
                     <li>
                         <a href="{{ route('back.pages.contact.index') }}">
                             <i class="ri-phone-line"></i>
-                            <span>Contact Ayarları</span>
+                            <span>Contact Məlumatları</span>
                         </a>
                     </li>
 
@@ -187,6 +187,13 @@
                         <a href="{{ route('back.pages.contact-requests.index') }}">
                             <i class="ri-message-line"></i>
                             <span>Contact Sorğuları</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('back.pages.contact-data.index') }}">
+                            <i class="ri-phone-line"></i>
+                            <span>Contact Parametrləri</span>
                         </a>
                     </li>
                    
@@ -232,7 +239,7 @@
 </div>
 <!-- Left Sidebar End -->
 
-<!-- Diğer menü öğeleri -->
+
 
 
 
