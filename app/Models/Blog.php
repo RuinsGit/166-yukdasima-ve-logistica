@@ -49,6 +49,75 @@ class Blog extends Model
         'meta_description_en',
         'meta_description_ru',
     ];
+    public function getNameAttribute()
+    {
+        return $this->{'name_' . app()->getLocale()};
+    }
+    public function getTextAttribute()
+    {
+        return $this->{'text_' . app()->getLocale()};
+    }
+    public function getText2Attribute()
+    {
+        return $this->{'text_2_' . app()->getLocale()};
+    }
+    public function getDescriptionAttribute()
+    {
+        return $this->{'description_' . app()->getLocale()};
+    }
+
+    public function getDescription2Attribute()
+    {
+        return $this->{'description_2_' . app()->getLocale()};
+    }
+    public function getDescription3Attribute()
+    {
+        return $this->{'description_3_' . app()->getLocale()};
+    }
+    public function getImageAttribute()
+    {
+        return $this->{'image_path_' . app()->getLocale()};
+    }
+    public function getBottomImageAttribute()
+    {
+        return $this->{'bottom_image_path_' . app()->getLocale()};
+    }
+    public function getMultipleImageAttribute()
+    {
+        return $this->{'multiple_image_path_' . app()->getLocale()};
+    }
+    public function getAltAttribute()
+    {
+        return $this->{'alt_' . app()->getLocale()};
+    }
+    public function getBottomAltAttribute()
+    {
+        return $this->{'bottom_alt_' . app()->getLocale()};
+    }
+    public function getSlugAttribute()
+    {
+        return $this->{'slug_' . app()->getLocale()};
+    }
+    public function getMetaTitleAttribute()
+    {
+        return $this->{'meta_title_' . app()->getLocale()};
+    }
+    public function getMetaDescriptionAttribute()
+    {
+        return $this->{'meta_description_' . app()->getLocale()};
+    }
+    public function getMultipleImagePathAttribute()
+    {
+        return $this->{'multiple_image_path_' . app()->getLocale()};
+    }
+
+    
+
+
+
+
+
+
 
     protected $casts = [
         'status' => 'boolean',

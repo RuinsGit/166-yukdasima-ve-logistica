@@ -10,6 +10,8 @@ use App\Http\Controllers\Api\SocialshareApiController;
 use App\Http\Controllers\Api\SocialfooterApiController;
 use App\Http\Controllers\Api\AboutPageApiController;
 use App\Http\Controllers\Api\ContactApiController;
+use App\Http\Controllers\Api\HomeCartApiController;
+use App\Http\Controllers\Api\BlogApiController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -90,3 +92,14 @@ Route::prefix('contacts')->group(function () {
     Route::put('/{id}', [ContactApiController::class, 'update']);
     Route::delete('/{id}', [ContactApiController::class, 'destroy']);
 });
+
+// Home Cart Routes
+Route::apiResource('home-carts', \App\Http\Controllers\Api\HomeCartApiController::class);
+Route::put('home-carts/{id}/toggle-status', [\App\Http\Controllers\Api\HomeCartApiController::class, 'toggleStatus']);
+
+// Blog Routes
+Route::get('blogs', [BlogApiController::class, 'index']);
+Route::get('blogs/{id}', [BlogApiController::class, 'show']);
+Route::get('blogs/featured', [BlogApiController::class, 'getFeatured']);
+
+Route::put('blogs/{id}/toggle-status', [\App\Http\Controllers\Api\BlogApiController::class, 'toggleStatus']);
