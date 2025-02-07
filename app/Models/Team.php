@@ -21,6 +21,19 @@ class Team extends Model
         'position_ru'
     ];
 
+    public function getNameAttribute()
+    {
+        return $this->{'name_' . app()->getLocale()};
+    }
+
+    public function getPositionAttribute()  
+    {
+        return $this->{'position_' . app()->getLocale()};
+    }
+
+
+
+
     protected $casts = [
         'status' => 'boolean'
     ];
