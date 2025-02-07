@@ -21,4 +21,43 @@ class OurClient extends Model
         'meta_title_az', 'meta_title_en', 'meta_title_ru',
         'meta_description_az', 'meta_description_en', 'meta_description_ru'
     ];
+
+    protected $casts = [
+        'status' => 'boolean'
+    ];
+
+    public function getTextAttribute()
+    {
+        return $this->{"text_".app()->getLocale()};
+    }
+
+    public function getDescriptionAttribute()
+    {
+        return $this->{"description_".app()->getLocale()};
+    }
+
+    public function getMainAltAttribute()
+    {
+        return $this->{"main_alt_".app()->getLocale()};
+    }
+
+    public function getBottom1AltAttribute()
+    {
+        return $this->{"bottom1_alt_".app()->getLocale()};
+    }
+
+    public function getBottom2AltAttribute()
+    {
+        return $this->{"bottom2_alt_".app()->getLocale()};
+    }
+
+    public function getMetaTitleAttribute()
+    {
+        return $this->{"meta_title_".app()->getLocale()};
+    }
+
+    public function getMetaDescriptionAttribute()
+    {
+        return $this->{"meta_description_".app()->getLocale()};
+    }
 } 

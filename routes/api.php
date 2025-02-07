@@ -18,6 +18,8 @@ use App\Http\Controllers\Api\CountryFlagApiController;
 use App\Http\Controllers\Api\HomeCartTwoApiController;
 use App\Http\Controllers\Api\HomeHeroApiController;
 use App\Http\Controllers\Api\HomeSectionApiController;
+use App\Http\Controllers\Api\TeamApiController;
+use App\Http\Controllers\Api\OurClientApiController;
 
 
 /*
@@ -146,3 +148,12 @@ Route::get('home-heroes/{id}', [\App\Http\Controllers\Api\HomeHeroApiController:
 Route::get('home-sections', [\App\Http\Controllers\Api\HomeSectionApiController::class, 'index']);
 Route::get('home-sections/{id}', [\App\Http\Controllers\Api\HomeSectionApiController::class, 'show']);
 
+// Team Routes
+Route::get('teams', [\App\Http\Controllers\Api\TeamApiController::class, 'index']);
+Route::get('teams/{id}', [\App\Http\Controllers\Api\TeamApiController::class, 'show']);
+Route::put('teams/{id}/toggle-status', [\App\Http\Controllers\Api\TeamApiController::class, 'toggleStatus']);
+
+// Our Client Routes
+Route::get('our-clients', [\App\Http\Controllers\Api\OurClientApiController::class, 'index']);
+Route::get('our-clients/{id}', [\App\Http\Controllers\Api\OurClientApiController::class, 'show']);
+Route::put('our-clients/{id}/toggle-status', [\App\Http\Controllers\Api\OurClientApiController::class, 'toggleStatus']);
