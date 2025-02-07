@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\AboutPageApiController;
 use App\Http\Controllers\Api\ContactApiController;
 use App\Http\Controllers\Api\HomeCartApiController;
 use App\Http\Controllers\Api\BlogApiController;
+use App\Http\Controllers\Api\ContactDataApiController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -101,5 +102,16 @@ Route::put('home-carts/{id}/toggle-status', [\App\Http\Controllers\Api\HomeCartA
 Route::get('blogs', [BlogApiController::class, 'index']);
 Route::get('blogs/{id}', [BlogApiController::class, 'show']);
 Route::get('blogs/featured', [BlogApiController::class, 'getFeatured']);
-
+Route::get('blogs/latest', [BlogApiController::class, 'getLatest']);
+Route::get('blogs/popular', [BlogApiController::class, 'getPopular']);
+Route::get('blogs/category/{category}', [BlogApiController::class, 'getByCategory']);
+Route::get('blogs/tag/{tag}', [BlogApiController::class, 'getByTag']);
+Route::get('blogs/search', [BlogApiController::class, 'search']);
+Route::get('blogs/related', [BlogApiController::class, 'getRelated']);
 Route::put('blogs/{id}/toggle-status', [\App\Http\Controllers\Api\BlogApiController::class, 'toggleStatus']);
+
+// Contact Data Routes
+Route::get('contact-data', [ContactDataApiController::class, 'index']);
+Route::get('contact-data/{id}', [ContactDataApiController::class, 'show']);
+Route::put('contact-data/{id}/toggle-status', [\App\Http\Controllers\Api\ContactDataApiController::class, 'toggleStatus']);
+

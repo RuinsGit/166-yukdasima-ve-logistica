@@ -22,4 +22,24 @@ class ContactData extends Model
         'image_path',
         'status'
     ];
+    public function getTextAttribute()
+    {
+        return $this->{'text_' . app()->getLocale()};
+    }
+    public function getContactTitleAttribute()
+    {
+        return $this->{'contact_title_' . app()->getLocale()};
+    }
+    public function getTitleAttribute()
+    {
+        return $this->{'title_' . app()->getLocale()};
+    }
+    public function getImageAttribute()
+    {
+        return $this->image_path ? asset("storage/{$this->image_path}") : null;
+    }
+
+    
+
+
 } 
