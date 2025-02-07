@@ -26,14 +26,10 @@ class Team extends Model
         return $this->{'name_' . app()->getLocale()};
     }
 
-    public function getPositionAttribute()  
+    public function getPositionAttribute()
     {
         return $this->{'position_' . app()->getLocale()};
     }
-
-
-
-
     protected $casts = [
         'status' => 'boolean'
     ];
