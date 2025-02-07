@@ -16,7 +16,7 @@ class NetworkResource extends JsonResource
             'image' => $this->image_path ? asset("storage/{$this->image_path}") : null,
             'country_code' => $this->country_code,
             'status' => $this->status,
-            'created_at' => $this->created_at->format('d.m.Y H:i')
+           
         ];
     }
 } 
