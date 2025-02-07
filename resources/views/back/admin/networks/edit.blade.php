@@ -75,6 +75,13 @@
                             </div>
 
                             <div class="mb-3">
+                                <label>Ölkə Kodu</label>
+                                <input type="text" class="form-control" name="country_code" 
+                                       value="{{ old('country_code', $network->country_code) }}" 
+                                       required maxlength="3" readonly>
+                            </div>
+
+                            <div class="mb-3">
                                 <label>Yeni Logo Seçin (Dəyişdirmək istəmirsinizsə boş buraxın)</label>
                                 <input type="file" class="form-control" name="image">
                             </div>

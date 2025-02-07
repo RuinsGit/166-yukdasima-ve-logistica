@@ -46,6 +46,9 @@
                                         
                                         <label class="mt-3">Ünvan (AZ)</label>
                                         <textarea class="form-control" name="address_az" rows="3"></textarea>
+
+                                        <label class="mt-3">Ölkə Kodu (AZE, RUS vb.)</label>
+                                        <input type="text" class="form-control" name="country_code" required maxlength="3">
                                     </div>
                                     <div class="tab-pane fade" id="nameEn">
                                         <label>Country Name (EN)</label>

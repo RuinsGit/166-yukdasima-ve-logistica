@@ -17,7 +17,8 @@ class Network extends Model
         'address_en',
         'address_ru',
         'image_path',
-        'status'
+        'status',
+        'country_code'
     ];
 
     protected $casts = [

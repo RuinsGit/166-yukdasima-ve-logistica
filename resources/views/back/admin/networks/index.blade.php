@@ -71,6 +71,7 @@
                                     <th>Logo</th>
                                     <th>Adlar</th>
                                     <th>Ünvanlar</th>
+                                    <th>Ölkə Kodu</th>
                                     <th>Status</th>
                                     <th>Əməliyyatlar</th>
                                 </tr>
@@ -100,6 +101,7 @@
                                         </div>
 
                                     </td>
+                                    <td>{{ $network->country_code }}</td>
                                     <td>
                                         <form action="{{ route('back.pages.networks.toggle-status', $network->id) }}" method="POST">
                                             @csrf

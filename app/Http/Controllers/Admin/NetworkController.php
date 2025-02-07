@@ -45,6 +45,7 @@ class NetworkController extends Controller
             'address_en' => 'nullable|string',
             'address_ru' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'country_code' => 'required|string|size:3',
         ]);
 
         $imagePath = $request->hasFile('image') 
@@ -59,7 +60,8 @@ class NetworkController extends Controller
             'address_en' => $request->address_en,
             'address_ru' => $request->address_ru,
             'image_path' => $imagePath,
-            'status' => true
+            'status' => true,
+            'country_code' => strtoupper($request->country_code),
         ]);
 
         return redirect()->route('back.pages.networks.index')->with('success', 'Şəbəkə uğurla əlavə edildi');
@@ -80,6 +82,7 @@ class NetworkController extends Controller
             'address_en' => 'nullable|string',
             'address_ru' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'country_code' => 'required|string|size:3',
         ]);
 
         if ($request->hasFile('image')) {
@@ -91,6 +94,7 @@ class NetworkController extends Controller
         }
 
         $network->update($request->except('image'));
+        $network->country_code = strtoupper($request->country_code);
 
         return redirect()->route('back.pages.networks.index')->with('success', 'Şəbəkə uğurla yeniləndi');
     }
