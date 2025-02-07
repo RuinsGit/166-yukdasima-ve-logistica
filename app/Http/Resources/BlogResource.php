@@ -31,9 +31,14 @@ class BlogResource extends JsonResource
             'meta_title' => $this->meta_title,
             'meta_description' => $this->meta_description,
             'status' => $this->status,
-            'created_at' => $this->created_at->format('d.m.Y'),
+            
             'description_3' => $this->description_3,
-            'text_2' => $this->text_2
+            'text_2' => $this->text_2,
+            'created_at' => $this->created_at->format('d.m.Y'),
+            'updated_at' => $this->updated_at->format('d.m.Y'),
+            
         ];
     }
 }
+
+
