@@ -16,6 +16,10 @@ use App\Http\Controllers\Api\ContactDataApiController;
 use App\Http\Controllers\Api\ContactRequestApiController;
 use App\Http\Controllers\Api\CountryFlagApiController;
 use App\Http\Controllers\Api\HomeCartTwoApiController;
+use App\Http\Controllers\Api\HomeHeroApiController;
+use App\Http\Controllers\Api\HomeSectionApiController;
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -133,4 +137,12 @@ Route::put('country-flags/{id}/toggle-status', [\App\Http\Controllers\Api\Countr
 Route::get('home-cart-twos', [HomeCartTwoApiController::class, 'index']);
 Route::get('home-cart-twos/{id}', [HomeCartTwoApiController::class, 'show']);
 Route::put('home-cart-twos/{id}/toggle-status', [\App\Http\Controllers\Api\HomeCartTwoApiController::class, 'toggleStatus']);
+
+// Home Hero Routes
+Route::get('home-heroes', [\App\Http\Controllers\Api\HomeHeroApiController::class, 'index']);
+Route::get('home-heroes/{id}', [\App\Http\Controllers\Api\HomeHeroApiController::class, 'show']);
+
+// Home Section Routes
+Route::get('home-sections', [\App\Http\Controllers\Api\HomeSectionApiController::class, 'index']);
+Route::get('home-sections/{id}', [\App\Http\Controllers\Api\HomeSectionApiController::class, 'show']);
 

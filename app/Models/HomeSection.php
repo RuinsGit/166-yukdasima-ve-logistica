@@ -27,8 +27,20 @@ class HomeSection extends Model
         'alt_ru',
         'status'
     ];
-
+    public function getTextOneAttribute()
+    {
+        return $this->{'text_one_' . app()->getLocale()};
+    }
+    public function getTextTwoAttribute()
+    {
+        return $this->{'text_two_' . app()->getLocale()};
+    }
+    public function getAltAttribute()
+    {
+        return $this->{'alt_' . app()->getLocale()};
+    }
     protected $casts = [
         'status' => 'boolean'
     ];
+
 } 

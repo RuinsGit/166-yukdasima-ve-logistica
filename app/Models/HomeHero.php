@@ -18,4 +18,19 @@ class HomeHero extends Model
         'video_title',
         'status'
     ];
+
+    protected $casts = [
+        'status' => 'boolean'
+    ];
+
+    public function getAltAttribute()
+    {
+        $locale = app()->getLocale();
+        return $this->{"alt_$locale"};
+    }
+
+    public function getMediaUrlAttribute()
+    {
+        return asset("storage/{$this->media_path}");
+    }
 } 
