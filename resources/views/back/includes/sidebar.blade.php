@@ -104,12 +104,7 @@
                         </a>
                     </li> 
 
-                    <li>
-                        <a href="{{ route('back.pages.home-carts.index') }}">
-                            <i class="ri-pages-line"></i>
-                            <span>Kartlar</span>
-                        </a>
-                    </li> 
+                   
 
                     <li>
                         <a href="{{ route('back.pages.home-sections.index') }}">
@@ -221,6 +216,33 @@
                             <span>Global Networks</span>
                         </a>
                     </li>
+
+                   
+
+
+                    <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ri-user-line"></i>
+                        <span>Müştərilərimiz</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+
+                    
+                    <li class="nav-item">
+                        <a href="{{ route('back.pages.our-clients.index') }}" class="nav-link">
+                            <i class="ri-team-line"></i>
+                            <span>Müştərilərimiz</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('back.pages.home-carts.index') }}">
+                            <i class="ri-pages-line"></i>
+                            <span>Kartlar</span>
+                        </a>
+                    </li> 
+
+
+                    </ul>
                 
                 
                 </li>

@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\ServiceTypeController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\NetworkController;
 use App\Http\Controllers\Admin\ContactDataController;
+use App\Http\Controllers\Admin\OurClientController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -284,7 +285,15 @@ Route::prefix('admin')->group(function () {
                 Route::post('/toggle-status/{id}', [ContactDataController::class, 'toggleStatus'])->name('contact-data.toggle-status');
             });
 
-            
+            Route::prefix('our-clients')->group(function () {
+                Route::get('/', [OurClientController::class, 'index'])->name('our-clients.index');
+                Route::get('/create', [OurClientController::class, 'create'])->name('our-clients.create');
+                Route::post('/', [OurClientController::class, 'store'])->name('our-clients.store');
+                Route::get('/{ourClient}/edit', [OurClientController::class, 'edit'])->name('our-clients.edit');
+                Route::put('/{ourClient}', [OurClientController::class, 'update'])->name('our-clients.update');
+                Route::delete('/{ourClient}', [OurClientController::class, 'destroy'])->name('our-clients.destroy');
+                Route::post('/toggle-status/{id}', [OurClientController::class, 'toggleStatus'])->name('our-clients.toggle-status');
+            });
 
         });
         
