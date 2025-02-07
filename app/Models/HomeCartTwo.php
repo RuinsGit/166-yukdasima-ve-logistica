@@ -19,7 +19,14 @@ class HomeCartTwo extends Model
         'alt_ru',
         'status'
     ];
-
+    public function getTextAttribute()
+    {
+        return $this->{'text_' . app()->getLocale()};
+    }
+    public function getAltAttribute()
+    {
+        return $this->{'alt_' . app()->getLocale()};
+    }
     protected $casts = [
         'status' => 'boolean'
     ];

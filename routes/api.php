@@ -14,6 +14,8 @@ use App\Http\Controllers\Api\HomeCartApiController;
 use App\Http\Controllers\Api\BlogApiController;
 use App\Http\Controllers\Api\ContactDataApiController;
 use App\Http\Controllers\Api\ContactRequestApiController;
+use App\Http\Controllers\Api\CountryFlagApiController;
+use App\Http\Controllers\Api\HomeCartTwoApiController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -121,4 +123,14 @@ Route::post('contact-requests', [ContactRequestApiController::class, 'store']);
 Route::get('contact-requests', [ContactRequestApiController::class, 'index']);
 Route::get('contact-requests/{id}', [ContactRequestApiController::class, 'show']);
 Route::put('contact-requests/{id}/toggle-status', [\App\Http\Controllers\Api\ContactRequestApiController::class, 'toggleStatus']);
+
+// Country Flag Routes
+Route::get('country-flags', [CountryFlagApiController::class, 'index']);
+Route::get('country-flags/{id}', [CountryFlagApiController::class, 'show']);
+Route::put('country-flags/{id}/toggle-status', [\App\Http\Controllers\Api\CountryFlagApiController::class, 'toggleStatus']);
+
+// Home Cart Two Routes
+Route::get('home-cart-twos', [HomeCartTwoApiController::class, 'index']);
+Route::get('home-cart-twos/{id}', [HomeCartTwoApiController::class, 'show']);
+Route::put('home-cart-twos/{id}/toggle-status', [\App\Http\Controllers\Api\HomeCartTwoApiController::class, 'toggleStatus']);
 

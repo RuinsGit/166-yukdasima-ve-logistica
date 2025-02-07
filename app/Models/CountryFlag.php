@@ -19,6 +19,16 @@ class CountryFlag extends Model
         'alt_ru',
         'status'
     ];
+    public function getNameAttribute()
+    {
+        return $this->{'name_' . app()->getLocale()};
+    }
+    public function getAltAttribute()
+    {
+        return $this->{'alt_' . app()->getLocale()};
+    }
+
+
 
     protected $casts = [
         'status' => 'boolean'
