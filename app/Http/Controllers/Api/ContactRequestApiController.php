@@ -21,7 +21,7 @@ class ContactRequestApiController extends Controller
             'email' => $request->email,
             'website' => $request->website,
             'comment' => $request->comment,
-            'status' => false // Default olarak okunmamış olarak işaretle
+            'status' => false 
         ]);
 
         return new ContactRequestResource($contactRequest);
