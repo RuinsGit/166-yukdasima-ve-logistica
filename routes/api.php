@@ -20,6 +20,9 @@ use App\Http\Controllers\Api\HomeHeroApiController;
 use App\Http\Controllers\Api\HomeSectionApiController;
 use App\Http\Controllers\Api\TeamApiController;
 use App\Http\Controllers\Api\OurClientApiController;
+use App\Http\Controllers\Api\ServiceTypeApiController;
+use App\Http\Controllers\Api\ServiceApiController;
+use App\Http\Controllers\Api\NetworkApiController;
 
 
 /*
@@ -157,3 +160,18 @@ Route::put('teams/{id}/toggle-status', [\App\Http\Controllers\Api\TeamApiControl
 Route::get('our-clients', [\App\Http\Controllers\Api\OurClientApiController::class, 'index']);
 Route::get('our-clients/{id}', [\App\Http\Controllers\Api\OurClientApiController::class, 'show']);
 Route::put('our-clients/{id}/toggle-status', [\App\Http\Controllers\Api\OurClientApiController::class, 'toggleStatus']);
+
+// Service Type Routes
+Route::get('service-types', [\App\Http\Controllers\Api\ServiceTypeApiController::class, 'index']);
+Route::get('service-types/{id}', [\App\Http\Controllers\Api\ServiceTypeApiController::class, 'show']);
+Route::put('service-types/{id}/toggle-status', [\App\Http\Controllers\Api\ServiceTypeApiController::class, 'toggleStatus']);
+
+// Service Routes
+Route::get('services', [\App\Http\Controllers\Api\ServiceApiController::class, 'index']);
+Route::get('services/{slug}', [\App\Http\Controllers\Api\ServiceApiController::class, 'show']);
+Route::put('services/{id}/toggle-status', [\App\Http\Controllers\Api\ServiceApiController::class, 'toggleStatus']);
+
+// Network Routes
+Route::get('networks', [\App\Http\Controllers\Api\NetworkApiController::class, 'index']);
+Route::get('networks/{id}', [\App\Http\Controllers\Api\NetworkApiController::class, 'show']);
+Route::put('networks/{id}/toggle-status', [\App\Http\Controllers\Api\NetworkApiController::class, 'toggleStatus']);

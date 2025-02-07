@@ -21,7 +21,19 @@ class Network extends Model
         'country_code'
     ];
 
+    public function getNameAttribute()
+    {
+        return $this->{'name_' . app()->getLocale()};
+    }
+
+    public function getAddressAttribute()
+    {
+        return $this->{'address_' . app()->getLocale()};
+    }
+
+
     protected $casts = [
         'status' => 'boolean'
     ];
+
 } 

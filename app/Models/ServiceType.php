@@ -18,8 +18,17 @@ class ServiceType extends Model
         'status'
     ];
 
+    protected $casts = [
+        'status' => 'boolean'
+    ];
+
     public function services()
     {
         return $this->hasMany(Service::class);
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->{'name_'.app()->getLocale()};
     }
 } 

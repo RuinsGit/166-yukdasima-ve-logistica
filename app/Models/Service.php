@@ -45,4 +45,44 @@ class Service extends Model
     {
         return $this->belongsTo(ServiceType::class, 'service_type_id');
     }
+
+    public function getNameAttribute()
+    {
+        return $this->{'name_'.app()->getLocale()};
+    }
+
+    public function getTextAttribute()
+    {
+        return $this->{'text_'.app()->getLocale()};
+    }
+
+    public function getDescriptionAttribute()
+    {
+        return $this->{'description_'.app()->getLocale()};
+    }
+
+    public function getImageMainAltAttribute()
+    {
+        return $this->{'image_main_alt_'.app()->getLocale()};
+    }
+
+    public function getImageBottomAltAttribute()
+    {
+        return $this->{'image_bottom_alt_'.app()->getLocale()};
+    }
+
+    public function getMetaTitleAttribute()
+    {
+        return $this->{'meta_title_'.app()->getLocale()};
+    }
+
+    public function getMetaDescriptionAttribute()
+    {
+        return $this->{'meta_description_'.app()->getLocale()};
+    }
+
+    public function getSlugAttribute()
+    {
+        return $this->{'slug_'.app()->getLocale()};
+    }
 } 
