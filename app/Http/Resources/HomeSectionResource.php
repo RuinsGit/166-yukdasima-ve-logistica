@@ -23,8 +23,11 @@ class HomeSectionResource extends JsonResource
                 ],
                 [
                     'id' => 3,
+                    'title' => $this->name,
                     'image' => asset("storage/{$this->image_path}"),
+                    'bottom_image' => asset("storage/{$this->bottom_image_path}"),
                     'alt' => $this->alt
+
                 ]
             ],
             

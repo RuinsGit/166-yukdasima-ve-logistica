@@ -39,8 +39,14 @@ class HomeSection extends Model
     {
         return $this->{'alt_' . app()->getLocale()};
     }
+    public function getNameAttribute()
+    {
+        return $this->{'name_' . app()->getLocale()};
+    }
+
     protected $casts = [
         'status' => 'boolean'
     ];
+
 
 } 
