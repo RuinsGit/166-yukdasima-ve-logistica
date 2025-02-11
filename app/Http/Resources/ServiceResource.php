@@ -15,19 +15,12 @@ class ServiceResource extends JsonResource
             'slug' => $this->slug,
             'text' => $this->text,
             'description' => $this->description,
-            
-                'main' => asset("storage/{$this->image_main}"),
-                'bottom' => asset("storage/{$this->image_bottom}"),
-           
-            
-                'main' => $this->image_main_alt,
-                'bottom' => $this->image_bottom_alt,
-            
+            'description2' => $this->description2,
+            'main_image' => asset("storage/{$this->image_main}"),
+            'bottom_image' => asset("storage/{$this->image_bottom}"),
+            'main_image_alt' => $this->image_main_alt,
+            'bottom_image_alt' => $this->image_bottom_alt,
             'type' => new ServiceTypeResource($this->type),
-                
-                'title' => $this->meta_title,
-                'description' => $this->meta_description,
-            
             'created_at' => $this->created_at->format('d.m.Y H:i')
         ];
     }
