@@ -27,7 +27,7 @@
                         </div>
                         @endif
 
-                        <form action="{{ route('back.pages.blogs.update', $blog->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('back.pages.blogs.update', $blog->id) }}" method="POST" enctype="multipart/form-data" id="blogForm">
                             @csrf
                             @method('PUT')
 
@@ -62,28 +62,6 @@
                                         <div class="mb-3">
                                             <label>Ətraflı Mətn (AZ)</label>
                                             <textarea class="form-control summernote" name="description_az" rows="5" required>{{ $blog->description_az }}</textarea>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label>Çoxlu Şəkillər</label>
-                                            <input type="file" class="form-control" name="multiple_images[]" multiple>
-                                            @if($blog->multiple_image_path)
-                                                <div class="mt-2">
-                                                    @foreach(json_decode($blog->multiple_image_path) as $index => $image)
-                                                        <div class="position-relative d-inline-block me-2" data-image-index="{{ $index }}"
-                                                        style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
-                                                            <img src="{{ asset('storage/'.$image) }}" class="img-thumbnail"
-                                                             style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
-                                                            <button type="button" 
-                                                                    class="btn btn-danger btn-sm position-absolute top-0 end-0"
-                                                                    onclick="deleteImage({{ $index }}, '{{ $image }}')"
-                                                                    title="Sil">
-
-                                                                <i class="fas fa-times"></i>
-                                                            </button>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            @endif
                                         </div>
                                         <div class="mb-3">
                                             <label>Ətraflı Mətn 2 (AZ)</label>
@@ -122,28 +100,6 @@
                                             <textarea class="form-control summernote" name="description_en" rows="5" required>{{ $blog->description_en }}</textarea>
                                         </div>
                                         <div class="mb-3">
-                                            <label>Multiple Images</label>
-                                            <input type="file" class="form-control" name="multiple_images[]" multiple>
-                                            @if($blog->multiple_image_path)
-                                                <div class="mt-2">
-                                                    @foreach(json_decode($blog->multiple_image_path) as $index => $image)
-                                                        <div class="position-relative d-inline-block me-2" data-image-index="{{ $index }}"
-                                                        style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
-                                                            <img src="{{ asset('storage/'.$image) }}" class="img-thumbnail"
-                                                             style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
-                                                            <button type="button" 
-                                                                    class="btn btn-danger btn-sm position-absolute top-0 end-0"
-                                                                    onclick="deleteImage({{ $index }}, '{{ $image }}')"
-                                                                    title="Sil">
-
-                                                                <i class="fas fa-times"></i>
-                                                            </button>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            @endif
-                                        </div>
-                                        <div class="mb-3">
                                             <label>Detailed Text 2 (EN)</label>
                                             <textarea class="form-control summernote" name="description_3_en" rows="5">{{ $blog->description_3_en }}</textarea>
                                         </div>
@@ -180,28 +136,6 @@
                                             <textarea class="form-control summernote" name="description_ru" rows="5" required>{{ $blog->description_ru }}</textarea>
                                         </div>
                                         <div class="mb-3">
-                                            <label>Множественные изображения</label>
-                                            <input type="file" class="form-control" name="multiple_images[]" multiple>
-                                            @if($blog->multiple_image_path)
-                                                <div class="mt-2">
-                                                    @foreach(json_decode($blog->multiple_image_path) as $index => $image)
-                                                        <div class="position-relative d-inline-block me-2" data-image-index="{{ $index }}"
-                                                        style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
-                                                            <img src="{{ asset('storage/'.$image) }}" class="img-thumbnail"
-                                                             style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
-                                                            <button type="button" 
-                                                                    class="btn btn-danger btn-sm position-absolute top-0 end-0"
-                                                                    onclick="deleteImage({{ $index }}, '{{ $image }}')"
-                                                                    title="Sil">
-
-                                                                <i class="fas fa-times"></i>
-                                                            </button>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            @endif
-                                        </div>
-                                        <div class="mb-3">
                                             <label>Подробный текст 2 (RU)</label>
                                             <textarea class="form-control summernote" name="description_3_ru" rows="5">{{ $blog->description_3_ru }}</textarea>
                                         </div>
@@ -224,7 +158,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label>  <div style="color: orange;">Əsas Şəkil </div> (Diqqət! Şəkli Dəyişdirmək istəmirsinizsə boş qoyun)</label>
+                                        <label><div style="color: orange;">Əsas Şəkil</div> (Diqqət! Şəkli Dəyişdirmək istəmirsinizsə boş qoyun)</label>
                                         <input type="file" class="form-control" name="image">
                                         @if($blog->image)
                                             <div class="mt-2">

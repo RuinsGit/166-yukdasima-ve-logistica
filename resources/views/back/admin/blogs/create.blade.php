@@ -65,10 +65,6 @@
                                             <textarea class="form-control summernote" name="description_az" rows="5" required></textarea>
                                         </div>
                                         <div class="mb-3">
-                                            <label>Çoxlu Şəkillər</label>
-                                            <input type="file" class="form-control" name="multiple_images[]" multiple>
-                                        </div>
-                                        <div class="mb-3">
                                             <label>Ətraflı Mətn 2 (AZ)</label>
                                             <textarea class="form-control summernote" name="description_3_az" rows="5"></textarea>
                                         </div>
@@ -105,10 +101,6 @@
                                             <textarea class="form-control summernote" name="description_en" rows="5" required></textarea>
                                         </div>
                                         <div class="mb-3">
-                                            <label>Çoxlu Şəkillər</label>
-                                            <input type="file" class="form-control" name="multiple_images[]" multiple>
-                                        </div>
-                                        <div class="mb-3">
                                             <label>Detailed Text 2 (EN)</label>
                                             <textarea class="form-control summernote" name="description_3_en" rows="5"></textarea>
                                         </div>
@@ -143,10 +135,6 @@
                                         <div class="mb-3">
                                             <label>Подробный текст (RU)</label>
                                             <textarea class="form-control summernote" name="description_ru" rows="5" required></textarea>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label>Çoxlu Şəkillər</label>
-                                            <input type="file" class="form-control" name="multiple_images[]" multiple>
                                         </div>
                                         <div class="mb-3">
                                             <label>Подробный текст 2 (RU)</label>

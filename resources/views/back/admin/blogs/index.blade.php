@@ -70,6 +70,8 @@
                                         <img src="{{ asset('storage/'.$blog->bottom_image_path) }}" 
                                              class="img-thumbnail">
                                     </td>
+                                   
+
                                     <td style="display: flex; flex-direction: column;  align-items: start; gap: 15px;">
 
 

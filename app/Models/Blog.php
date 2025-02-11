@@ -121,7 +121,7 @@ class Blog extends Model
 
     protected $casts = [
         'status' => 'boolean',
-        'multiple_image_path' => 'array'
+        'multiple_image_path' => 'array',
     ];
 
     protected static function boot()
@@ -137,6 +137,6 @@ class Blog extends Model
 
     public function images()
     {
-        return $this->hasMany(BlogImage::class);
+        return $this->hasMany(BlogImage::class, 'blog_id');
     }
 } 

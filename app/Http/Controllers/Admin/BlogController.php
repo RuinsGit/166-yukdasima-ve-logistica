@@ -53,7 +53,6 @@ class BlogController extends Controller
             'description_3_az' => 'nullable|string',
             'description_3_en' => 'nullable|string',
             'description_3_ru' => 'nullable|string',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
             'multiple_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
             'text_2_az' => 'nullable|string',
             'text_2_en' => 'nullable|string',
@@ -107,13 +106,6 @@ class BlogController extends Controller
             'text_2_ru' => $request->text_2_ru,
         ]);
 
-        if($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $path = $image->store('blogs/gallery', 'public');
-                $blog->images()->create(['image_path' => $path]);
-            }
-        }
-
         return redirect()->route('back.pages.blogs.index')->with('success', 'Blog uğurla əlavə edildi');
     }
 
@@ -155,52 +147,68 @@ class BlogController extends Controller
             'description_3_az' => 'nullable|string',
             'description_3_en' => 'nullable|string',
             'description_3_ru' => 'nullable|string',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
             'multiple_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
             'text_2_az' => 'nullable|string',
             'text_2_en' => 'nullable|string',
             'text_2_ru' => 'nullable|string',
         ]);
 
-        $data = $request->except(['image', 'bottom_image', 'multiple_images']);
+        $data = $request->except(['_token', '_method']);
+        
+        // Resim işlemlerini tek elden yönet
+        $imageFields = [
+            'image' => 'blogs',
+            'bottom_image' => 'blogs/bottom',
+            'multiple_images' => 'blogs/multiple'
+        ];
 
-        if ($request->hasFile('image')) {
-            Storage::disk('public')->delete($blog->image_path);
-            $data['image_path'] = $request->file('image')->store('blogs', 'public');
-        }
-
-        if ($request->hasFile('bottom_image')) {
-            Storage::disk('public')->delete($blog->bottom_image_path);
-            $data['bottom_image_path'] = $request->file('bottom_image')->store('blogs/bottom', 'public');
-        }
-
-        if ($request->hasFile('multiple_images')) {
-            $multipleImages = json_decode($blog->multiple_image_path, true) ?? [];
-            foreach ($request->file('multiple_images') as $image) {
-                $path = $image->store('blogs/multiple', 'public');
-                $multipleImages[] = $path;
+        foreach ($imageFields as $field => $path) {
+            if ($request->hasFile($field)) {
+                
+                // Çoklu resimler için özel işlem
+                if($field === 'multiple_images') {
+                    $existing = $blog->multiple_image_path ?? [];
+                    foreach($request->file($field) as $file) {
+                        $existing[] = $file->store($path, 'public');
+                    }
+                    $data[$field.'_path'] = $existing;
+                } 
+                // Tekil resimler
+                else {
+                    // Eski resmi sil
+                    if($blog->{$field.'_path'}) {
+                        Storage::delete($blog->{$field.'_path'});
+                    }
+                    $data[$field.'_path'] = $request->file($field)->store($path, 'public');
+                }
             }
-            $data['multiple_image_path'] = json_encode($multipleImages);
         }
 
-        $blog->update($data);
-
-        if($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $path = $image->store('blogs/gallery', 'public');
-                $blog->images()->create(['image_path' => $path]);
-            }
+        // Veritabanı güncelleme
+        try {
+            $blog->update($data);
+            return redirect()->route('back.pages.blogs.index')->with('success', 'Güncelleme başarılı!');
+        } catch (\Exception $e) {
+            \Log::error('Blog Update Error: '.$e->getMessage());
+            return back()->withInput()->with('error', 'Güncelleme başarısız: '.$e->getMessage());
         }
-
-        return redirect()->route('back.pages.blogs.index')->with('success', 'Blog uğurla yeniləndi');
     }
 
     public function destroy(Blog $blog)
     {
+        // Ana ve alt resimleri sil
         Storage::disk('public')->delete([
             $blog->image_path,
             $blog->bottom_image_path
         ]);
+        
+        // Çoklu resimleri sil
+        if ($blog->multiple_image_path) {
+            $multipleImages = json_decode($blog->multiple_image_path, true);
+            foreach ($multipleImages as $image) {
+                Storage::disk('public')->delete($image);
+            }
+        }
         
         $blog->delete();
         return redirect()->back()->with('success', 'Blog uğurla silindi');
@@ -223,7 +231,6 @@ class BlogController extends Controller
                 return response()->json(['success' => false, 'message' => 'Şəkil tapılmadı'], 404);
             }
 
-
             $imagePath = $images[$imageIndex];
             
             // Fiziksel dosyayı sil
@@ -231,18 +238,18 @@ class BlogController extends Controller
                 Storage::disk('public')->delete($imagePath);
             }
 
-            // Diziden kaldır
-            array_splice($images, $imageIndex, 1);
+            // Diziden kaldır ve yeniden indeksle
+            unset($images[$imageIndex]);
+            $images = array_values($images);
 
             // Veritabanını güncelle
             $blog->update([
-                'multiple_image_path' => !empty($images) ? json_encode(array_values($images)) : null
+                'multiple_image_path' => !empty($images) ? json_encode($images) : null
             ]);
 
             return response()->json([
                 'success' => true,
-                'message' => 'Şəkil uğurla silindi',
-                'removed_index' => $imageIndex
+                'message' => 'Şəkil uğurla silindi'
             ]);
 
         } catch (\Exception $e) {

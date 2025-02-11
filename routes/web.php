@@ -210,7 +210,7 @@ Route::prefix('admin')->group(function () {
                 Route::put('/{blog}', [BlogController::class, 'update'])->name('blogs.update');
                 Route::delete('/{blog}', [BlogController::class, 'destroy'])->name('blogs.destroy');
                 Route::post('/toggle-status/{id}', [BlogController::class, 'toggleStatus'])->name('blogs.toggle-status');
-                
+                Route::post('/delete-image/{blog}/{imageIndex}', [BlogController::class, 'deleteImage'])->name('blogs.delete-image');
             });
             Route::get('theme-settings', [ThemeSettingsController::class, 'index'])->name('theme-settings.index');
             Route::post('theme-settings/update', [ThemeSettingsController::class, 'update'])->name('theme-settings.update');
