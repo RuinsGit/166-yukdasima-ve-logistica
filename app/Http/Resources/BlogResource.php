@@ -16,11 +16,11 @@ class BlogResource extends JsonResource
             'description' => $this->description,
             'image_path' => $this->image_path ? asset("storage/{$this->image_path}") : null,
             'bottom_image_path' => $this->bottom_image_path ? asset("storage/{$this->bottom_image_path}") : null,
-            'multiple_image_path' => $this->multiple_image_path ? 
-                collect(json_decode($this->multiple_image_path, true))
-                    ->map(fn($image) => asset("storage/{$image}"))
-                    ->toArray() 
-                : [],
+            // 'multiple_image_path' => $this->multiple_image_path ? 
+            //     collect(json_decode($this->multiple_image_path, true))
+            //         ->map(fn($image) => asset("storage/{$image}"))
+            //         ->toArray() 
+            //     : [],
             'alt' => $this->alt,
             'bottom_alt' => $this->bottom_alt,
             'slug' => [

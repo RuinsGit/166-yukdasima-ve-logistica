@@ -13,6 +13,7 @@ class BlogListResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'image_path' => $this->image_path ? asset("storage/{$this->image_path}") : null,
+            'created_at' => $this->created_at->format('d.m.Y'),
             'slug' => [
                 'az' => $this->slug_az,
                 'en' => $this->slug_en,
