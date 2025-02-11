@@ -111,9 +111,12 @@ Route::apiResource('home-carts', \App\Http\Controllers\Api\HomeCartApiController
 Route::put('home-carts/{id}/toggle-status', [\App\Http\Controllers\Api\HomeCartApiController::class, 'toggleStatus']);
 
 // Blog Routes
-Route::get('blogs', [BlogApiController::class, 'index']);
-Route::get('blogs/{id}', [BlogApiController::class, 'show']);
-Route::get('blogs/featured', [BlogApiController::class, 'getFeatured']);
+Route::prefix('blogs')->group(function () {
+    Route::get('/', [BlogApiController::class, 'listAll']);
+    Route::get('/detail', [BlogApiController::class, 'index']);
+    Route::get('/{lang}/{slug}', [BlogApiController::class, 'getBySlug']);
+    Route::get('/featured', [BlogApiController::class, 'getFeatured']);
+});
 Route::get('blogs/latest', [BlogApiController::class, 'getLatest']);
 Route::get('blogs/popular', [BlogApiController::class, 'getPopular']);
 Route::get('blogs/category/{category}', [BlogApiController::class, 'getByCategory']);
