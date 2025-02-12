@@ -69,8 +69,11 @@ class Blog extends Model
 
     public function getDescription2Attribute()
     {
-        return $this->{'description_2_' . app()->getLocale()};
+        $locale = app()->getLocale();
+        // Fallback mekanizması ekleyelim (örneğin İngilizce)
+        return $this->{"description_2_$locale"} ?? $this->description_2_en;
     }
+    
     public function getDescription3Attribute()
     {
         return $this->{'description_3_' . app()->getLocale()};

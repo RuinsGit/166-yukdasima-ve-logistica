@@ -127,6 +127,26 @@
                                 <input type="file" class="form-control" name="image" required>
                             </div>
 
+                            <div class="mb-3">
+                                <label>Alt Şəkil</label>
+                                <input type="file" class="form-control" name="bottom_image">
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Alt Şəkil ALT Mətni (AZ)</label>
+                                <input type="text" class="form-control" name="bottom_alt_az">
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Alt Şəkil ALT Mətni (EN)</label>
+                                <input type="text" class="form-control" name="bottom_alt_en">
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Alt Şəkil ALT Mətni (RU)</label>
+                                <input type="text" class="form-control" name="bottom_alt_ru">
+                            </div>
+
                             <button type="submit" class="btn btn-primary">Yadda Saxla</button>
                         </form>
                     </div>

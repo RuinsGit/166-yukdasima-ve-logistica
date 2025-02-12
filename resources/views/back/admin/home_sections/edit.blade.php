@@ -35,6 +35,18 @@
                                      style="width: 200px; height: 150px;">
                             </div>
 
+                            <!-- Mövcud alt şəkil -->
+                            <div class="mb-3">
+                                <label>Mövcud Alt Şəkil</label><br>
+                                @if($homeSection->bottom_image_path)
+                                    <img src="{{ asset('storage/'.$homeSection->bottom_image_path) }}" 
+                                         class="img-thumbnail" 
+                                         style="width: 200px; height: 150px;">
+                                @else
+                                    <div class="alert alert-info">Alt şəkil yüklənməyib</div>
+                                @endif
+                            </div>
+
                             <!-- Ad sahəsi -->
                             <div class="mb-4">
                                 <ul class="nav nav-tabs">
@@ -137,6 +149,29 @@
                             <div class="mb-3">
                                 <label>Yeni Şəkil Seçin (Dəyişdirmək istəmirsinizsə boş buraxın)</label>
                                 <input type="file" class="form-control" name="image">
+                            </div>
+
+                            <!-- Yeni alt şəkil seçimi -->
+                            <div class="mb-3">
+                                <label>Yeni Alt Şəkil Seçin</label>
+                                <input type="file" class="form-control" name="bottom_image">
+                            </div>
+
+                            <!-- Alt şəkil ALT mətnləri -->
+                            <div class="mb-3">
+                                <label>Alt Şəkil ALT Mətni (AZ)</label>
+                                <input type="text" class="form-control" name="bottom_alt_az" 
+                                       value="{{ $homeSection->bottom_alt_az }}">
+                            </div>
+                            <div class="mb-3">
+                                <label>Alt Şəkil ALT Mətni (EN)</label>
+                                <input type="text" class="form-control" name="bottom_alt_en" 
+                                       value="{{ $homeSection->bottom_alt_en }}">
+                            </div>
+                            <div class="mb-3">
+                                <label>Alt Şəkil ALT Mətni (RU)</label>
+                                <input type="text" class="form-control" name="bottom_alt_ru" 
+                                       value="{{ $homeSection->bottom_alt_ru }}">
                             </div>
 
                             <button type="submit" class="btn btn-primary">Yenilə</button>

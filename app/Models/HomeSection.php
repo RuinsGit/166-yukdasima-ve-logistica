@@ -25,12 +25,17 @@ class HomeSection extends Model
         'alt_az',
         'alt_en',
         'alt_ru',
-        'status'
+        'status',
+        'bottom_image_path',
+        'bottom_alt_az',
+        'bottom_alt_en',
+        'bottom_alt_ru'
     ];
     public function getTextOneAttribute()
     {
         return $this->{'text_one_' . app()->getLocale()};
     }
+    
     public function getTextTwoAttribute()
     {
         return $this->{'text_two_' . app()->getLocale()};
@@ -39,6 +44,8 @@ class HomeSection extends Model
     {
         return $this->{'alt_' . app()->getLocale()};
     }
+        
+    
     public function getNameAttribute()
     {
         return $this->{'name_' . app()->getLocale()};
@@ -48,5 +55,13 @@ class HomeSection extends Model
         'status' => 'boolean'
     ];
 
+    public function getBottomImageAttribute()
+    {
+        return $this->bottom_image_path ? asset('storage/'.$this->bottom_image_path) : null;
+    }
 
+    public function getBottomAltAttribute()
+    {
+        return $this->{'bottom_alt_'.app()->getLocale()};
+    }
 } 

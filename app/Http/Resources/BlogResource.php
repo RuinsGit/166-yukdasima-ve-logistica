@@ -16,13 +16,10 @@ class BlogResource extends JsonResource
             'description' => $this->description,
             'image_path' => $this->image_path ? asset("storage/{$this->image_path}") : null,
             'bottom_image_path' => $this->bottom_image_path ? asset("storage/{$this->bottom_image_path}") : null,
-            // 'multiple_image_path' => $this->multiple_image_path ? 
-            //     collect(json_decode($this->multiple_image_path, true))
-            //         ->map(fn($image) => asset("storage/{$image}"))
-            //         ->toArray() 
-            //     : [],
+            'text_2' => $this->text_2,
             'tags' => $this->tags,
             'alt' => $this->alt,
+            // 'description_2' => $this->description_2,
             'bottom_alt' => $this->bottom_alt,
             'slug' => [
                 'az' => $this->slug_az,
@@ -34,7 +31,7 @@ class BlogResource extends JsonResource
             'status' => $this->status,
             
             'description_3' => $this->description_3,
-            'text_2' => $this->text_2,
+            
             'created_at' => $this->created_at->format('d.m.Y'),
             'updated_at' => $this->updated_at->format('d.m.Y'),
             

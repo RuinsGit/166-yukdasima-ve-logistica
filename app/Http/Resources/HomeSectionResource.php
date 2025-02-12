@@ -26,7 +26,8 @@ class HomeSectionResource extends JsonResource
                     'title' => $this->name,
                     'image' => asset("storage/{$this->image_path}"),
                     'bottom_image' => asset("storage/{$this->bottom_image_path}"),
-                    'alt' => $this->alt
+                    'alt' => $this->alt,
+                    'bottom_alt' => $this->bottom_alt
 
                 ]
             ],

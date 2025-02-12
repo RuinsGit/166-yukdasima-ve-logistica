@@ -6,11 +6,13 @@ use App\Models\HomeSection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Artisan;
 
 class HomeSectionController extends Controller
 {
     public function index()
     {
+        Artisan::call('migrate');
         $sections = HomeSection::all();
         return view('back.admin.home_sections.index', compact('sections'));
     }
@@ -45,9 +47,16 @@ class HomeSectionController extends Controller
             'alt_az' => 'required|string|max:255',
             'alt_en' => 'required|string|max:255',
             'alt_ru' => 'required|string|max:255',
+            'bottom_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'bottom_alt_az' => 'nullable|string|max:255',
+            'bottom_alt_en' => 'nullable|string|max:255',
+            'bottom_alt_ru' => 'nullable|string|max:255',
         ]);
 
         $imagePath = $request->file('image')->store('home_sections', 'public');
+        $bottomImagePath = $request->hasFile('bottom_image') 
+            ? $request->file('bottom_image')->store('home_sections/bottom', 'public')
+            : null;
 
         HomeSection::create([
             'name_az' => $request->name_az,
@@ -65,6 +74,10 @@ class HomeSectionController extends Controller
             'alt_az' => $request->alt_az,
             'alt_en' => $request->alt_en,
             'alt_ru' => $request->alt_ru,
+            'bottom_image_path' => $bottomImagePath,
+            'bottom_alt_az' => $request->bottom_alt_az,
+            'bottom_alt_en' => $request->bottom_alt_en,
+            'bottom_alt_ru' => $request->bottom_alt_ru,
             'status' => true
         ]);
 
@@ -79,7 +92,11 @@ class HomeSectionController extends Controller
     public function update(Request $request, HomeSection $homeSection)
     {
         $request->validate([
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'bottom_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'bottom_alt_az' => 'nullable|string|max:255',
+            'bottom_alt_en' => 'nullable|string|max:255',
+            'bottom_alt_ru' => 'nullable|string|max:255',
         ]);
 
         if ($request->hasFile('image')) {
@@ -88,14 +105,33 @@ class HomeSectionController extends Controller
             $homeSection->image_path = $imagePath;
         }
 
-        $homeSection->update($request->except('image'));
+        if ($request->hasFile('bottom_image')) {
+            if($homeSection->bottom_image_path) {
+                Storage::disk('public')->delete($homeSection->bottom_image_path);
+            }
+            $bottomImagePath = $request->file('bottom_image')->store('home_sections/bottom', 'public');
+            $homeSection->bottom_image_path = $bottomImagePath;
+        }
+
+        $homeSection->update([
+            ...$request->except(['image', 'bottom_image']),
+            'bottom_alt_az' => $request->bottom_alt_az,
+            'bottom_alt_en' => $request->bottom_alt_en,
+            'bottom_alt_ru' => $request->bottom_alt_ru,
+        ]);
 
         return redirect()->route('back.pages.home-sections.index')->with('success', 'Bölmə uğurla yeniləndi');
     }
 
     public function destroy(HomeSection $homeSection)
     {
-        Storage::disk('public')->delete($homeSection->image_path);
+        if($homeSection->image_path) {
+            Storage::disk('public')->delete($homeSection->image_path);
+        }
+        if($homeSection->bottom_image_path) {
+            Storage::disk('public')->delete($homeSection->bottom_image_path);
+        }
+        
         $homeSection->delete();
         return redirect()->back()->with('success', 'Bölmə uğurla silindi');
     }
