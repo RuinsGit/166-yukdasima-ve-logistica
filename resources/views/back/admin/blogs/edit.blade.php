@@ -6,6 +6,27 @@
         border-radius: 50px;
     }
     
+    .tagify {
+        --tags-border-color: #3b5de7;
+        --tags-hover-border-color: #2a4ac7;
+        --tag-bg: #3b5de7;
+        --tag-text-color: white;
+        --tag-remove-btn-color: white;
+        padding: 8px;
+        border-radius: 6px;
+    }
+
+    .tag-input {
+        position: relative;
+    }
+    .remove-tag {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 0 8px;
+        border-radius: 50%;
+    }
 </style>
 <div class="page-content">
     <div class="container-fluid">
@@ -22,7 +43,12 @@
 
                         @if($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <i class="fas fa-exclamation-circle me-2"></i>Xəta: Zəhmət olmasa bütün tələb olunan sahələri doldurun
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            <ul class="mb-0">
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                         @endif
@@ -192,17 +218,34 @@
                                     </div>
                                     <div class="mb-3">
                                         <label>Daxili Alt Mətn (AZ)</label>
-                                        <input type="text" class="form-control" name="bottom_alt_az" value="{{ $blog->bottom_alt_az }}" required>
+                                        <input type="text" class="form-control" name="bottom_alt_az" value="{{ $blog->bottom_alt_az }}">
                                     </div>
                                     <div class="mb-3">
                                         <label>Daxili Alt Mətn (EN)</label>
-                                        <input type="text" class="form-control" name="bottom_alt_en" value="{{ $blog->bottom_alt_en }}" required>
+                                        <input type="text" class="form-control" name="bottom_alt_en" value="{{ $blog->bottom_alt_en }}">
                                     </div>
                                     <div class="mb-3">
                                         <label>Daxili Alt Mətn (RU)</label>
-                                        <input type="text" class="form-control" name="bottom_alt_ru" value="{{ $blog->bottom_alt_ru }}" required>
+                                        <input type="text" class="form-control" name="bottom_alt_ru" value="{{ $blog->bottom_alt_ru }}">
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Etiketlər</label>
+                                <div id="tags-container">
+                                    @foreach(old('tags', $blog->tags ?? []) as $tag)
+                                        <div class="tag-input mb-2 input-group">
+                                            <input type="text" name="tags[]" class="form-control" value="{{ $tag }}">
+                                            <button type="button" class="btn btn-danger remove-tag">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <button type="button" class="btn btn-primary btn-sm mt-2" id="add-tag">
+                                    <i class="fas fa-plus me-1"></i>Yeni Etiket Əlavə Et
+                                </button>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Yadda Saxla</button>
@@ -215,6 +258,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script src="https://unpkg.com/@yaireo/tagify/dist/tagify.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Slug Generation Script
@@ -259,6 +303,36 @@ document.addEventListener('DOMContentLoaded', function() {
             ['view', ['fullscreen', 'codeview', 'help']]
         ]
     });
+
+    // Tagify initialization
+    var input = document.getElementById('tags-input');
+    var tagify = new Tagify(input, {
+        delimiters: ",", // Sadece vergül ile ayır
+        pattern: /^[a-zA-ZəƏğĞüÜşŞıİöÖçÇ]{2,20}$/, // Etiket formatı
+        maxTags: 10, // Maksimum etiket sayısı
+        dropdown: {
+            enabled: 0 // Otomatik tamamlama özəlliyi
+        }
+    });
+});
+
+document.getElementById('add-tag').addEventListener('click', function() {
+    const container = document.getElementById('tags-container');
+    const newInput = document.createElement('div');
+    newInput.className = 'tag-input mb-2 input-group';
+    newInput.innerHTML = `
+        <input type="text" name="tags[]" class="form-control">
+        <button type="button" class="btn btn-danger remove-tag">
+            <i class="fas fa-times"></i>
+        </button>
+    `;
+    container.appendChild(newInput);
+});
+
+document.addEventListener('click', function(e) {
+    if(e.target.closest('.remove-tag')) {
+        e.target.closest('.tag-input').remove();
+    }
 });
 </script>
 
@@ -299,5 +373,6 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 </style>
 
+<link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet">
 
 @endsection

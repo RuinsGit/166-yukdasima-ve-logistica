@@ -48,6 +48,7 @@ class Blog extends Model
         'meta_description_az',
         'meta_description_en',
         'meta_description_ru',
+        'tags',
     ];
     public function getNameAttribute()
     {
@@ -82,10 +83,6 @@ class Blog extends Model
     {
         return $this->{'bottom_image_path_' . app()->getLocale()};
     }
-    public function getMultipleImageAttribute()
-    {
-        return $this->{'multiple_image_path_' . app()->getLocale()};
-    }
     public function getAltAttribute()
     {
         return $this->{'alt_' . app()->getLocale()};
@@ -106,23 +103,28 @@ class Blog extends Model
     {
         return $this->{'meta_description_' . app()->getLocale()};
     }
-    public function getMultipleImagePathAttribute()
-    {
-        return $this->{'multiple_image_path_' . app()->getLocale()};
-    }
-
-    
-
-
-
-
-
-
 
     protected $casts = [
         'status' => 'boolean',
         'multiple_image_path' => 'array',
+        'tags' => 'array'
     ];
+
+    // Tag'leri küçük harfe çeviren accessor
+    public function getTagsAttribute($value)
+    {
+        if (!$value) return [];
+        return is_array($value) ? $value : json_decode($value, true);
+    }
+
+    // Tag'leri JSON'a çeviren mutator
+    public function setTagsAttribute($value)
+    {
+        $tags = is_array($value) ? $value : [];
+        $this->attributes['tags'] = json_encode(
+            array_map('strtolower', array_map('trim', $tags))
+        );
+    }
 
     protected static function boot()
     {

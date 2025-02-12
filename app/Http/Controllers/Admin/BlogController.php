@@ -3,15 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Blog;
-use App\Models\BlogType;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+
 
 class BlogController extends Controller
 {
     public function index()
     {
+        Artisan::call('migrate');
         $blogs = Blog::paginate(10);
         return view('back.admin.blogs.index', compact('blogs'));
     }
@@ -34,13 +36,13 @@ class BlogController extends Controller
             'description_en' => 'required|string',
             'description_ru' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
-            'bottom_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'bottom_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
             'alt_az' => 'required|string|max:255',
             'alt_en' => 'required|string|max:255',
             'alt_ru' => 'required|string|max:255',
-            'bottom_alt_az' => 'required|string|max:255',
-            'bottom_alt_en' => 'required|string|max:255',
-            'bottom_alt_ru' => 'required|string|max:255',
+            'bottom_alt_az' => 'nullable|string|max:255',
+            'bottom_alt_en' => 'nullable|string|max:255',
+            'bottom_alt_ru' => 'nullable|string|max:255',
             'slug_az' => 'required|unique:blogs,slug_az',
             'slug_en' => 'required|unique:blogs,slug_en',
             'slug_ru' => 'required|unique:blogs,slug_ru',
@@ -53,22 +55,20 @@ class BlogController extends Controller
             'description_3_az' => 'nullable|string',
             'description_3_en' => 'nullable|string',
             'description_3_ru' => 'nullable|string',
-            'multiple_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
             'text_2_az' => 'nullable|string',
             'text_2_en' => 'nullable|string',
             'text_2_ru' => 'nullable|string',
+            'tags' => 'nullable|array',
+            'tags.*' => 'string|max:50|min:2',
         ]);
 
         $imagePath = $request->file('image')->store('blogs', 'public');
         $bottomImagePath = $request->file('bottom_image')->store('blogs/bottom', 'public');
 
-        $multipleImages = [];
-        if($request->hasFile('multiple_images')) {
-            foreach ($request->file('multiple_images') as $image) {
-                $path = $image->store('blogs/multiple', 'public');
-                $multipleImages[] = $path;
-            }
-        }
+        // Tag'leri işle
+        $tags = $request->tags ? array_map(function($tag) {
+            return strtolower(trim($tag));
+        }, $request->tags) : [];
 
         $blog = Blog::create([
             'name_az' => $request->name_az,
@@ -100,10 +100,10 @@ class BlogController extends Controller
             'meta_description_az' => $request->meta_description_az,
             'meta_description_en' => $request->meta_description_en,
             'meta_description_ru' => $request->meta_description_ru,
-            'multiple_image_path' => !empty($multipleImages) ? json_encode($multipleImages) : null,
             'text_2_az' => $request->text_2_az,
             'text_2_en' => $request->text_2_en,
             'text_2_ru' => $request->text_2_ru,
+            'tags' => $tags,
         ]);
 
         return redirect()->route('back.pages.blogs.index')->with('success', 'Blog uğurla əlavə edildi');
@@ -132,9 +132,9 @@ class BlogController extends Controller
             'alt_az' => 'required|string|max:255',
             'alt_en' => 'required|string|max:255',
             'alt_ru' => 'required|string|max:255',
-            'bottom_alt_az' => 'required|string|max:255',
-            'bottom_alt_en' => 'required|string|max:255',
-            'bottom_alt_ru' => 'required|string|max:255',
+            'bottom_alt_az' => 'nullable|string|max:255',
+            'bottom_alt_en' => 'nullable|string|max:255',
+            'bottom_alt_ru' => 'nullable|string|max:255',
             'slug_az' => 'required|unique:blogs,slug_az,'.$blog->id,
             'slug_en' => 'required|unique:blogs,slug_en,'.$blog->id,
             'slug_ru' => 'required|unique:blogs,slug_ru,'.$blog->id,
@@ -147,51 +147,21 @@ class BlogController extends Controller
             'description_3_az' => 'nullable|string',
             'description_3_en' => 'nullable|string',
             'description_3_ru' => 'nullable|string',
-            'multiple_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
             'text_2_az' => 'nullable|string',
             'text_2_en' => 'nullable|string',
             'text_2_ru' => 'nullable|string',
+            'tags' => 'nullable|array',
+            'tags.*' => 'string|max:50|min:2',
         ]);
 
-        $data = $request->except(['_token', '_method']);
+        $data = $request->all();
+        $data['tags'] = $request->tags ? array_map(function($tag) {
+            return strtolower(trim($tag));
+        }, $request->tags) : [];
         
-        // Resim işlemlerini tek elden yönet
-        $imageFields = [
-            'image' => 'blogs',
-            'bottom_image' => 'blogs/bottom',
-            'multiple_images' => 'blogs/multiple'
-        ];
+        $blog->update($data);
 
-        foreach ($imageFields as $field => $path) {
-            if ($request->hasFile($field)) {
-                
-                // Çoklu resimler için özel işlem
-                if($field === 'multiple_images') {
-                    $existing = $blog->multiple_image_path ?? [];
-                    foreach($request->file($field) as $file) {
-                        $existing[] = $file->store($path, 'public');
-                    }
-                    $data[$field.'_path'] = $existing;
-                } 
-                // Tekil resimler
-                else {
-                    // Eski resmi sil
-                    if($blog->{$field.'_path'}) {
-                        Storage::delete($blog->{$field.'_path'});
-                    }
-                    $data[$field.'_path'] = $request->file($field)->store($path, 'public');
-                }
-            }
-        }
-
-        // Veritabanı güncelleme
-        try {
-            $blog->update($data);
-            return redirect()->route('back.pages.blogs.index')->with('success', 'Güncelleme başarılı!');
-        } catch (\Exception $e) {
-            \Log::error('Blog Update Error: '.$e->getMessage());
-            return back()->withInput()->with('error', 'Güncelleme başarısız: '.$e->getMessage());
-        }
+        return redirect()->route('back.pages.blogs.index')->with('success', 'Güncelleme başarılı!');
     }
 
     public function destroy(Blog $blog)
@@ -201,14 +171,6 @@ class BlogController extends Controller
             $blog->image_path,
             $blog->bottom_image_path
         ]);
-        
-        // Çoklu resimleri sil
-        if ($blog->multiple_image_path) {
-            $multipleImages = json_decode($blog->multiple_image_path, true);
-            foreach ($multipleImages as $image) {
-                Storage::disk('public')->delete($image);
-            }
-        }
         
         $blog->delete();
         return redirect()->back()->with('success', 'Blog uğurla silindi');

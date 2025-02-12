@@ -38,7 +38,7 @@ return new class extends Migration {
             $table->text('meta_description_ru')->nullable();
             $table->string('image_path')->nullable();
             $table->string('bottom_image_path')->nullable();
-            $table->json('multiple_image_path')->nullable();
+           
             $table->string('alt_az')->nullable();
             $table->string('alt_en')->nullable();
             $table->string('alt_ru')->nullable();

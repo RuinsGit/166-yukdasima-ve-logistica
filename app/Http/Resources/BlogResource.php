@@ -21,6 +21,7 @@ class BlogResource extends JsonResource
             //         ->map(fn($image) => asset("storage/{$image}"))
             //         ->toArray() 
             //     : [],
+            'tags' => $this->tags,
             'alt' => $this->alt,
             'bottom_alt' => $this->bottom_alt,
             'slug' => [
