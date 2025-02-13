@@ -78,7 +78,7 @@
                                 <label>Ölkə Kodu</label>
                                 <input type="text" class="form-control" name="country_code" 
                                        value="{{ old('country_code', $network->country_code) }}" 
-                                       required maxlength="3" readonly>
+                                       required maxlength="2" readonly>
                             </div>
 
                             <div class="mb-3">
