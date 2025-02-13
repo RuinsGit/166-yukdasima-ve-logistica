@@ -6,13 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Network;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Artisan;
+
 
 class NetworkController extends Controller
 {
     public function index(Request $request)
     {
-        Artisan::call('db:seed', ['class' => 'NetworkSeeder']);
         $search = $request->input('search');
         
         $networks = Network::when($search, function($query) use ($search) {
