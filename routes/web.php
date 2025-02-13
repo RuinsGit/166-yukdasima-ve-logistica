@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\NetworkController;
 use App\Http\Controllers\Admin\ContactDataController;
 use App\Http\Controllers\Admin\OurClientController;
+use App\Http\Controllers\Admin\ServicesHeroController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -293,6 +294,16 @@ Route::prefix('admin')->group(function () {
                 Route::put('/{ourClient}', [OurClientController::class, 'update'])->name('our-clients.update');
                 Route::delete('/{ourClient}', [OurClientController::class, 'destroy'])->name('our-clients.destroy');
                 Route::post('/toggle-status/{id}', [OurClientController::class, 'toggleStatus'])->name('our-clients.toggle-status');
+            });
+
+            Route::prefix('services-hero')->group(function () {
+                Route::get('/', [ServicesHeroController::class, 'index'])->name('services-hero.index');
+                Route::get('/create', [ServicesHeroController::class, 'create'])->name('services-hero.create');
+                Route::post('/', [ServicesHeroController::class, 'store'])->name('services-hero.store');
+                Route::get('/{servicesHero}/edit', [ServicesHeroController::class, 'edit'])->name('services-hero.edit');
+                Route::put('/{servicesHero}', [ServicesHeroController::class, 'update'])->name('services-hero.update');
+                Route::delete('/{servicesHero}', [ServicesHeroController::class, 'destroy'])->name('services-hero.destroy');
+                Route::post('/toggle-status/{id}', [ServicesHeroController::class, 'toggleStatus'])->name('services-hero.toggle-status');
             });
 
         });

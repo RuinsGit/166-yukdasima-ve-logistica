@@ -23,15 +23,9 @@ class BlogApiController extends Controller
     public function getBySlug($lang, $slug)
     {
         try {
-            // Dil geçerlilik kontrolü ekleyelim
-            if (!in_array($lang, ['az', 'en', 'ru'])) {
-                throw new \Exception('Invalid language');
-            }
-
-            app()->setLocale($lang); // ← DİLİ MANUEL AYARLA
-
+            $slugColumn = "slug_{$lang}";
             $blog = Blog::where('status', 1)
-                      ->where("slug_$lang", $slug)
+                      ->where($slugColumn, $slug)
                       ->with('images')
                       ->firstOrFail();
 

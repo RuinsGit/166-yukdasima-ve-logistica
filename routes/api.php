@@ -23,6 +23,7 @@ use App\Http\Controllers\Api\OurClientApiController;
 use App\Http\Controllers\Api\ServiceTypeApiController;
 use App\Http\Controllers\Api\ServiceApiController;
 use App\Http\Controllers\Api\NetworkApiController;
+use App\Http\Controllers\Api\ServicesHeroApiController;
 
 
 /*
@@ -178,3 +179,8 @@ Route::put('services/{id}/toggle-status', [\App\Http\Controllers\Api\ServiceApiC
 Route::get('networks', [\App\Http\Controllers\Api\NetworkApiController::class, 'index']);
 Route::get('networks/{id}', [\App\Http\Controllers\Api\NetworkApiController::class, 'show']);
 Route::put('networks/{id}/toggle-status', [\App\Http\Controllers\Api\NetworkApiController::class, 'toggleStatus']);
+
+// Services Hero Routes
+Route::get('services-hero', [\App\Http\Controllers\Api\ServicesHeroApiController::class, 'index']);
+Route::get('services-hero/{id}', [\App\Http\Controllers\Api\ServicesHeroApiController::class, 'show']);
+Route::put('services-hero/{id}/toggle-status', [\App\Http\Controllers\Api\ServicesHeroApiController::class, 'toggleStatus']);
