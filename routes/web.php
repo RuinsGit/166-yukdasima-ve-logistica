@@ -39,7 +39,10 @@ use App\Http\Controllers\Admin\ServicesHeroController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (auth()->guard('admin')->check()) {
+            return redirect()->route('back.pages.index');
+        }
+        return redirect()->route('admin.login');
 });
 
 Route::prefix('admin')->group(function () {

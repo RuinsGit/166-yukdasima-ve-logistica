@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Network;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Artisan;
+
 
 class NetworkSeeder extends Seeder
 {

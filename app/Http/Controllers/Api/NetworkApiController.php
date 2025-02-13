@@ -11,8 +11,7 @@ class NetworkApiController extends Controller
 {
     public function index()
     {
-        $networks = Network::where('status', true)
-            ->orderBy('name_'.app()->getLocale())
+        $networks = Network::orderBy('name_'.app()->getLocale())
             ->get();
 
         return NetworkResource::collection($networks);
@@ -21,8 +20,7 @@ class NetworkApiController extends Controller
     public function show($id)
     {
         try {
-            $network = Network::where('status', true)
-                ->findOrFail($id);
+            $network = Network::findOrFail($id);
 
             return new NetworkResource($network);
         } catch (\Exception $e) {
