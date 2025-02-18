@@ -10,12 +10,18 @@ use Illuminate\Http\Request;
 
 class BlogApiController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $blogs = Blog::where('status', 1)
+        $query = Blog::where('status', 1)
                     ->with('images')
-                    ->latest()
-                    ->get();
+                    ->latest();
+
+        if($request->filled('search')) {
+            $currentLocale = app()->getLocale(); 
+            $query->where("name_{$currentLocale}", 'LIKE', '%'.$request->search.'%');
+        }
+
+        $blogs = $query->get();
 
         return BlogResource::collection($blogs);
     }
