@@ -1,6 +1,6 @@
 @extends('back.layouts.master')
 
-@section('title', '�laqə')
+@section('title', 'Əlaqə')
 
 @section('content')
 <div class="content-wrapper">
@@ -36,7 +36,7 @@
                             {{ session('error') }}
                         </div>
                     @endif
-                    
+
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
@@ -54,38 +54,63 @@
                             @foreach($contacts as $contact)
                             <tr>
                                 <td>{{ $contact->id }}</td>
-                                <td>{{ $contact->number }}</td>
+                                <td>
+                                    {{ $contact->number }}
+                                    @if($contact->number_title_az || $contact->number_title_en || $contact->number_title_ru)
+                                        <br>
+                                        <small>
+                                            @if($contact->number_title_az) AZ: {{ $contact->number_title_az }}<br> @endif
+                                            @if($contact->number_title_en) EN: {{ $contact->number_title_en }}<br> @endif
+                                            @if($contact->number_title_ru) RU: {{ $contact->number_title_ru }} @endif
+                                        </small>
+                                    @endif
+                                </td>
                                 <td>
                                     @if($contact->number_image)
                                         <img src="{{ asset($contact->number_image) }}" alt="" 
                                         class="img-thumbnail" 
                                              style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;"
-                                        
                                         >
                                     @endif
                                 </td>
-                                <td>{{ $contact->mail }}</td>
+                                <td>
+                                    {{ $contact->mail }}
+                                    @if($contact->mail_title_az || $contact->mail_title_en || $contact->mail_title_ru)
+                                        <br>
+                                        <small>
+                                            @if($contact->mail_title_az) AZ: {{ $contact->mail_title_az }}<br> @endif
+                                            @if($contact->mail_title_en) EN: {{ $contact->mail_title_en }}<br> @endif
+                                            @if($contact->mail_title_ru) RU: {{ $contact->mail_title_ru }} @endif
+                                        </small>
+                                    @endif
+                                </td>
                                 <td>
                                     @if($contact->mail_image)
                                         <img src="{{ asset($contact->mail_image) }}" alt="" 
                                         class="img-thumbnail" 
                                              style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;"
-                                        
                                         >
                                     @endif
                                 </td>
-                                <td>{{ $contact->address_az }}</td>
                                 <td>
-
+                                    {{ $contact->address_az }}
+                                    @if($contact->address_title_az || $contact->address_title_en || $contact->address_title_ru)
+                                        <br>
+                                        <small>
+                                            @if($contact->address_title_az) AZ: {{ $contact->address_title_az }}<br> @endif
+                                            @if($contact->address_title_en) EN: {{ $contact->address_title_en }}<br> @endif
+                                            @if($contact->address_title_ru) RU: {{ $contact->address_title_ru }} @endif
+                                        </small>
+                                    @endif
+                                </td>
+                                <td>
                                     @if($contact->address_image)
                                         <img src="{{ asset($contact->address_image) }}" alt="" 
                                         class="img-thumbnail" 
                                              style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;"
-                                        
                                         >
                                     @endif
                                 </td>
-
                                 <td>
                                     <a href="{{ route('back.pages.contact.edit', $contact->id) }}" class="btn btn-sm btn-warning"
                                     style="background-color: #5bf91b; border-color: green">
@@ -96,7 +121,6 @@
                                     </button>
                                     <form id="delete-form-{{ $contact->id }}" action="{{ route('back.pages.contact.destroy', $contact->id) }}" method="POST" style="display: none;">
                                         @csrf
-
                                         @method('DELETE')
                                     </form>
                                 </td>

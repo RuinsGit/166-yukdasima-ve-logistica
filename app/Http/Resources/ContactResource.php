@@ -12,18 +12,22 @@ class ContactResource extends JsonResource
         return [
             [
                 'value' => $this->number,
+                'title' => $this->number_title,
                 'image' => $this->number_image ? asset($this->number_image) : null,
+                
                 
                 'id' => 1,
             ],
             [
                 'value' => $this->mail,
+                'title' => $this->mail_title,
                 'image' => $this->mail_image ? asset($this->mail_image) : null,
                 
                 'id' => 2,
             ],
             [
                 'value' => $this->address,
+                'title' => $this->address_title,
                 'image' => $this->address_image ? asset($this->address_image) : null,
                 
                 'id' => 3,

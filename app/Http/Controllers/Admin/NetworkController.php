@@ -83,7 +83,7 @@ class NetworkController extends Controller
             'address_en' => 'nullable|string',
             'address_ru' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
-            'country_code' => 'required|string|size:3',
+            'country_code' => 'required|string|size:2',
         ]);
 
         if ($request->hasFile('image')) {
