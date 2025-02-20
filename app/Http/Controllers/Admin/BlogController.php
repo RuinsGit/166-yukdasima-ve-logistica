@@ -154,14 +154,36 @@ class BlogController extends Controller
             'tags.*' => 'string|max:50|min:2',
         ]);
 
-        $data = $request->all();
+        $data = $request->except(['image', 'bottom_image', 'tags']);
+        
+        // Tag'leri işle
         $data['tags'] = $request->tags ? array_map(function($tag) {
             return strtolower(trim($tag));
         }, $request->tags) : [];
-        
+
+        // Ana resim işleme
+        if ($request->hasFile('image')) {
+            // Eski resmi sil
+            if ($blog->image_path && Storage::disk('public')->exists($blog->image_path)) {
+                Storage::disk('public')->delete($blog->image_path);
+            }
+            // Yeni resmi yükle
+            $data['image_path'] = $request->file('image')->store('blogs', 'public');
+        }
+
+        // Alt resim işleme
+        if ($request->hasFile('bottom_image')) {
+            // Eski alt resmi sil
+            if ($blog->bottom_image_path && Storage::disk('public')->exists($blog->bottom_image_path)) {
+                Storage::disk('public')->delete($blog->bottom_image_path);
+            }
+            // Yeni alt resmi yükle
+            $data['bottom_image_path'] = $request->file('bottom_image')->store('blogs/bottom', 'public');
+        }
+
         $blog->update($data);
 
-        return redirect()->route('back.pages.blogs.index')->with('success', 'Güncelleme başarılı!');
+        return redirect()->route('back.pages.blogs.index')->with('success', 'Blog başarıyla güncellendi!');
     }
 
     public function destroy(Blog $blog)
