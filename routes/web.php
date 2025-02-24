@@ -27,6 +27,8 @@ use App\Http\Controllers\Admin\NetworkController;
 use App\Http\Controllers\Admin\ContactDataController;
 use App\Http\Controllers\Admin\OurClientController;
 use App\Http\Controllers\Admin\ServicesHeroController;
+use App\Http\Controllers\Admin\BlogHeroController;
+use App\Http\Controllers\Admin\NetworkHeroController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -309,12 +311,27 @@ Route::prefix('admin')->group(function () {
                 Route::post('/toggle-status/{id}', [ServicesHeroController::class, 'toggleStatus'])->name('services-hero.toggle-status');
             });
 
+            // Network Hero Routes
+            Route::prefix('network-hero')->name('network-hero.')->group(function () {
+                Route::get('/', [NetworkHeroController::class, 'index'])->name('index');
+                Route::put('/update', [NetworkHeroController::class, 'update'])->name('update');
+                Route::get('/toggle-status', [NetworkHeroController::class, 'toggleStatus'])->name('toggle-status');
+            });
+
+            // Blog Hero Routes
+            Route::prefix('blog-hero')->name('blog-hero.')->group(function () {
+                Route::get('/', [BlogHeroController::class, 'index'])->name('index');
+                Route::put('/update', [BlogHeroController::class, 'update'])->name('update');
+                Route::get('/toggle-status', [BlogHeroController::class, 'toggleStatus'])->name('toggle-status');
+            });
+
         });
         
         
     });
 });
 
+// Blog Hero Routes
 
 
 Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'store'])

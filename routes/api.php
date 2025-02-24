@@ -24,6 +24,8 @@ use App\Http\Controllers\Api\ServiceTypeApiController;
 use App\Http\Controllers\Api\ServiceApiController;
 use App\Http\Controllers\Api\NetworkApiController;
 use App\Http\Controllers\Api\ServicesHeroApiController;
+use App\Http\Controllers\Api\BlogHeroApiController;
+use App\Http\Controllers\Api\NetworkHeroApiController;
 
 
 /*
@@ -184,3 +186,11 @@ Route::put('networks/{id}/toggle-status', [\App\Http\Controllers\Api\NetworkApiC
 Route::get('services-hero', [\App\Http\Controllers\Api\ServicesHeroApiController::class, 'index']);
 Route::get('services-hero/{id}', [\App\Http\Controllers\Api\ServicesHeroApiController::class, 'show']);
 Route::put('services-hero/{id}/toggle-status', [\App\Http\Controllers\Api\ServicesHeroApiController::class, 'toggleStatus']);
+
+// Blog Hero Routes
+Route::get('blog-hero', [\App\Http\Controllers\Api\BlogHeroApiController::class, 'index']);
+Route::get('blog-hero/{id}', [\App\Http\Controllers\Api\BlogHeroApiController::class, 'show']);
+
+// Network Hero Routes
+Route::get('network-hero', [\App\Http\Controllers\Api\NetworkHeroApiController::class, 'index']);
+Route::get('network-hero/{id}', [\App\Http\Controllers\Api\NetworkHeroApiController::class, 'show']);

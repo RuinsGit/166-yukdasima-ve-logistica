@@ -168,6 +168,12 @@
                             <span>Bloglar</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('back.pages.blog-hero.index') }}">
+                            <i class="ri-slideshow-line"></i>
+                            <span>Blog Hero</span>
+                        </a>
+                    </li>
                     </ul>
 
 
@@ -221,6 +227,12 @@
                         <a href="{{ route('back.pages.networks.index') }}">
                             <i class="ri-earth-line"></i>
                             <span>Global Networks</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('back.pages.network-hero.index') }}">
+                            <i class="ri-earth-line"></i>
+                            <span>Network Hero</span>
                         </a>
                     </li>
 
