@@ -6,6 +6,20 @@
     .swal2-popup {
         border-radius: 50px;
     }
+    .sortable-placeholder {
+        height: 100px;
+        background-color: #f9f9f9;
+        border: 1px dashed #ccc;
+        margin-bottom: 10px;
+    }
+    .sortable-item {
+        cursor: move;
+    }
+    .ui-sortable-helper {
+        display: table;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
 </style>
 <div class="page-content">
     <div class="container-fluid">
@@ -18,6 +32,14 @@
                             <i class="fas fa-plus"></i> Yeni Müştəri
                         </a>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-12">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> Sıralamayı deyisdirmey ucun suruklemek lazimdir.
                 </div>
             </div>
         </div>
@@ -41,9 +63,10 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <table class="table table-bordered dt-responsive nowrap">
+                        <table id="sortable-table" class="table table-bordered dt-responsive nowrap">
                             <thead>
                                 <tr>
+                                    <th width="10">#</th>
                                     <th>Əsas Şəkil</th>
                                     <th>Alt Şəkillər</th>
                                     <th>Başlıq</th>
@@ -51,9 +74,10 @@
                                     <th>Əməliyyatlar</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="sortable">
                                 @foreach($clients as $client)
-                                <tr>
+                                <tr class="sortable-item" data-id="{{ $client->id }}" data-order="{{ $client->order }}">
+                                    <td><i class="fas fa-arrows-alt"></i></td>
                                     <td>
                                         <img src="{{ asset('storage/'.$client->main_image_path) }}" 
                                         class="img-thumbnail" 
@@ -114,6 +138,9 @@
     </div>
 </div>
 
+@endsection
+
+@push('js')
 <script>
 function deleteData(id) {
     Swal.fire({
@@ -131,6 +158,84 @@ function deleteData(id) {
         }
     });
 }
-</script>
 
-@endsection 
+// Sayfa yüklendiğinde bu kod çalışsın
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Sayfa yüklendi, jQuery kontrol ediliyor...');
+    
+    if (typeof jQuery != 'undefined') {
+        console.log('jQuery yüklendi, jQuery sürümü:', $.fn.jquery);
+        console.log('jQuery UI yüklendi mi:', typeof $.ui != 'undefined');
+        
+        if (typeof $.ui != 'undefined') {
+            console.log('Sortable başlatılıyor...');
+            try {
+                $("#sortable").sortable({
+                    placeholder: "sortable-placeholder",
+                    handle: "td:first-child",
+                    update: function(event, ui) {
+                        console.log('Sıralama güncelleniyor...');
+                        let items = [];
+                        $('#sortable tr').each(function(index) {
+                            items.push({
+                                id: $(this).data('id'),
+                                order: index
+                            });
+                        });
+                        
+                        console.log('Gönderilecek veriler:', items);
+
+                        $.ajax({
+                            url: "{{ route('back.pages.our-clients.update-order') }}",
+                            method: "POST",
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                                items: items
+                            },
+                            success: function(response) {
+                                console.log('Sunucu yanıtı:', response);
+                                if (response.success) {
+                                    Swal.fire({
+                                        position: "center",
+                                        icon: "success",
+                                        title: "Sıralama Uğurla Yeniləndi",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        position: "center",
+                                        icon: "error",
+                                        title: "Bir Xəta Baş Verdi",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error('Ajax hatası:', error);
+                                Swal.fire({
+                                    position: "center",
+                                    icon: "error",
+                                    title: "Bir Xəta Baş Verdi: " + error,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            }
+                        });
+                    }
+                });
+                $("#sortable").disableSelection();
+                console.log('Sortable başarıyla başlatıldı');
+            } catch(e) {
+                console.error('Sortable başlatılırken hata oluştu:', e);
+            }
+        } else {
+            console.error('jQuery UI yüklenmemiş!');
+        }
+    } else {
+        console.error('jQuery yüklenmemiş!');
+    }
+});
+</script>
+@endpush 

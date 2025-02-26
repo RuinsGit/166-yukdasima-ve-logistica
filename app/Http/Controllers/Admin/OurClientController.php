@@ -6,12 +6,13 @@ use App\Models\OurClient;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Artisan;
 
 class OurClientController extends Controller
 {
     public function index()
     {
-        $clients = OurClient::all();
+        $clients = OurClient::orderBy('order', 'asc')->get();
         return view('back.admin.our_clients.index', compact('clients'));
     }
 
@@ -162,5 +163,20 @@ class OurClientController extends Controller
         $client->status = !$client->status;
         $client->save();
         return redirect()->back()->with('success', 'Status uğurla dəyişdirildi');
+    }
+    
+    public function updateOrder(Request $request)
+    {
+        $items = $request->input('items', []);
+        
+        foreach ($items as $item) {
+            $client = OurClient::find($item['id']);
+            if ($client) {
+                $client->order = $item['order'];
+                $client->save();
+            }
+        }
+        
+        return response()->json(['success' => true, 'message' => 'Sıralama başarıyla güncellendi']);
     }
 } 

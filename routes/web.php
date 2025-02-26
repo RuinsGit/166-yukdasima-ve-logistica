@@ -299,6 +299,7 @@ Route::prefix('admin')->group(function () {
                 Route::put('/{ourClient}', [OurClientController::class, 'update'])->name('our-clients.update');
                 Route::delete('/{ourClient}', [OurClientController::class, 'destroy'])->name('our-clients.destroy');
                 Route::post('/toggle-status/{id}', [OurClientController::class, 'toggleStatus'])->name('our-clients.toggle-status');
+                Route::post('/update-order', [OurClientController::class, 'updateOrder'])->name('our-clients.update-order');
             });
 
             Route::prefix('services-hero')->group(function () {
