@@ -229,6 +229,13 @@
                             <span>Komandamız</span>
                         </a>
                     </li>
+                    <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ri-earth-line"></i>
+                        <span>Networks</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                 
 
                     <li>
                         <a href="{{ route('back.pages.networks.index') }}">
@@ -254,6 +261,17 @@
                             <span>Ölkələr</span>
                         </a>
                     </li>
+
+
+
+                    </li>
+                    </ul>
+
+
+
+
+
+
 
                    
 
