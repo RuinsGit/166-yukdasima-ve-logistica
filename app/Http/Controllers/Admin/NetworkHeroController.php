@@ -6,13 +6,13 @@ use App\Models\NetworkHero;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Artisan;
+
 
 class NetworkHeroController extends Controller
 {
     public function index()
     {
-        Artisan::call('migrate');
+       
         $networkHero = NetworkHero::first();
         return view('back.admin.network-hero.index', compact('networkHero'));
     }

@@ -26,6 +26,7 @@ use App\Http\Controllers\Api\NetworkApiController;
 use App\Http\Controllers\Api\ServicesHeroApiController;
 use App\Http\Controllers\Api\BlogHeroApiController;
 use App\Http\Controllers\Api\NetworkHeroApiController;
+use App\Http\Controllers\Api\ContinentApiController;
 
 
 /*
@@ -194,3 +195,10 @@ Route::get('blog-hero/{id}', [\App\Http\Controllers\Api\BlogHeroApiController::c
 // Network Hero Routes
 Route::get('network-hero', [\App\Http\Controllers\Api\NetworkHeroApiController::class, 'index']);
 Route::get('network-hero/{id}', [\App\Http\Controllers\Api\NetworkHeroApiController::class, 'show']);
+
+// Continent Routes
+Route::prefix('continents')->group(function () {
+    Route::get('/', [ContinentApiController::class, 'index']);
+    Route::get('/{id}', [ContinentApiController::class, 'show']);
+    Route::get('/{id}/countries', [ContinentApiController::class, 'getCountriesByContinent']);
+});

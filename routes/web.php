@@ -29,6 +29,8 @@ use App\Http\Controllers\Admin\OurClientController;
 use App\Http\Controllers\Admin\ServicesHeroController;
 use App\Http\Controllers\Admin\BlogHeroController;
 use App\Http\Controllers\Admin\NetworkHeroController;
+use App\Http\Controllers\Admin\NetworkSectionController;
+use App\Http\Controllers\Admin\ContinentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -326,6 +328,26 @@ Route::prefix('admin')->group(function () {
                 Route::get('/toggle-status', [BlogHeroController::class, 'toggleStatus'])->name('toggle-status');
             });
 
+            Route::prefix('network-sections')->name('network-sections.')->group(function () {
+                Route::get('/', [NetworkSectionController::class, 'index'])->name('index');
+                Route::get('/create', [NetworkSectionController::class, 'create'])->name('create');
+                Route::post('/', [NetworkSectionController::class, 'store'])->name('store');
+                Route::get('/{id}/edit', [NetworkSectionController::class, 'edit'])->name('edit');
+                Route::put('/{id}', [NetworkSectionController::class, 'update'])->name('update');
+                Route::delete('/{id}', [NetworkSectionController::class, 'destroy'])->name('destroy');
+                Route::get('/toggle-status/{id}', [NetworkSectionController::class, 'toggleStatus'])->name('toggle-status');
+            });
+            // Continents Routes
+Route::prefix('continents')->name('continents.')->group(function () {
+    Route::get('/', [ContinentController::class, 'index'])->name('index');
+    Route::get('/create', [ContinentController::class, 'create'])->name('create');
+    Route::post('/', [ContinentController::class, 'store'])->name('store');
+    Route::get('/{id}/edit', [ContinentController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [ContinentController::class, 'update'])->name('update');
+    Route::delete('/{id}', [ContinentController::class, 'destroy'])->name('destroy');
+    Route::get('/toggle-status/{id}', [ContinentController::class, 'toggleStatus'])->name('toggle-status');
+});
+
         });
         
         
@@ -340,6 +362,8 @@ Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'store'
 
 Route::delete('/blogs/{blog}/delete-image/{index}', [BlogController::class, 'deleteImage'])
      ->name('back.pages.blogs.delete-image');
+
+
 
 
 

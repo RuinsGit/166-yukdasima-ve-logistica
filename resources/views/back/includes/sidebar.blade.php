@@ -235,6 +235,18 @@
                             <span>Network Hero</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('back.pages.continents.index') }}">
+                            <i class="ri-earth-line"></i>
+                            <span>Qiteler</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('back.pages.network-sections.index') }}">
+                            <i class="ri-earth-line"></i>
+                            <span>Olkeler</span>
+                        </a>
+                    </li>
 
                    
 
