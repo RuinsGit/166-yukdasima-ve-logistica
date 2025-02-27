@@ -190,6 +190,13 @@
                             <span>Contact Məlumatları</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                    <a href="{{ route('back.pages.contact-photos.index') }}" class="nav-link">
+                    <i class="ri-image-line"></i>
+                    <span>Əlaqə Şəkilləri</span>
+                    </a>
+                    </li>
+
 
                     <li>
                         <a href="{{ route('back.pages.contact-requests.index') }}">
@@ -238,13 +245,13 @@
                     <li>
                         <a href="{{ route('back.pages.continents.index') }}">
                             <i class="ri-earth-line"></i>
-                            <span>Qiteler</span>
+                            <span>Qitələr</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('back.pages.network-sections.index') }}">
                             <i class="ri-earth-line"></i>
-                            <span>Olkeler</span>
+                            <span>Ölkələr</span>
                         </a>
                     </li>
 
@@ -291,6 +298,7 @@
     </div>
 </div>
 <!-- Left Sidebar End -->
+
 
 
 

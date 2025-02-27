@@ -31,6 +31,7 @@ use App\Http\Controllers\Admin\BlogHeroController;
 use App\Http\Controllers\Admin\NetworkHeroController;
 use App\Http\Controllers\Admin\NetworkSectionController;
 use App\Http\Controllers\Admin\ContinentController;
+use App\Http\Controllers\Admin\ContactPhotoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -347,6 +348,17 @@ Route::prefix('continents')->name('continents.')->group(function () {
     Route::delete('/{id}', [ContinentController::class, 'destroy'])->name('destroy');
     Route::get('/toggle-status/{id}', [ContinentController::class, 'toggleStatus'])->name('toggle-status');
 });
+
+            // Contact Photo Routes
+            Route::prefix('contact-photos')->name('contact-photos.')->group(function () {
+                Route::get('/', [ContactPhotoController::class, 'index'])->name('index');
+                Route::get('/create', [ContactPhotoController::class, 'create'])->name('create');
+                Route::post('/', [ContactPhotoController::class, 'store'])->name('store');
+                Route::get('/{id}/edit', [ContactPhotoController::class, 'edit'])->name('edit');
+                Route::put('/{id}', [ContactPhotoController::class, 'update'])->name('update');
+                Route::delete('/{id}', [ContactPhotoController::class, 'destroy'])->name('destroy');
+                Route::get('/toggle-status/{id}', [ContactPhotoController::class, 'toggleStatus'])->name('toggle-status');
+            });
 
         });
         

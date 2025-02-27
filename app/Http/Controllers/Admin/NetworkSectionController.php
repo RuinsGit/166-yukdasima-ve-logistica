@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\NetworkSection;
 use App\Models\Continent;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Artisan;
 
 class NetworkSectionController extends Controller
 {
     public function index()
     { 
-       
+        Artisan::call('migrate');
         $networkSections = NetworkSection::with('continent')->latest()->get();
         return view('back.pages.network-sections.index', compact('networkSections'));
     }

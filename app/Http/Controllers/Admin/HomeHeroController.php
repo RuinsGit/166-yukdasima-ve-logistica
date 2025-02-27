@@ -22,7 +22,7 @@ class HomeHeroController extends Controller
 
     public function store(Request $request)
     {
-        // Validation'dan əvvəl
+        
         \Log::info('Form göndərildi', $request->all());
         
         $request->validate([
@@ -53,7 +53,7 @@ class HomeHeroController extends Controller
             'video_title.required_if' => 'Video başlığı tələb olunur'
         ]);
 
-        // Validation'dan sonra
+        
         \Log::info('Validation keçdi');
 
         $path = $request->file('media')->store('home_hero', 'public');
@@ -68,7 +68,7 @@ class HomeHeroController extends Controller
             'status' => true
         ]);
 
-        // Yoxlama üçün
+       
         \Log::info('Yeni hero yaradıldı:', $hero->toArray());
         return redirect()->route('back.pages.home-heroes.index')
             ->with('success', 'Yeni hero uğurla əlavə edildi');

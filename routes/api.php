@@ -27,6 +27,7 @@ use App\Http\Controllers\Api\ServicesHeroApiController;
 use App\Http\Controllers\Api\BlogHeroApiController;
 use App\Http\Controllers\Api\NetworkHeroApiController;
 use App\Http\Controllers\Api\ContinentApiController;
+use App\Http\Controllers\Api\ContactPhotoApiController;
 
 
 /*
@@ -201,4 +202,10 @@ Route::prefix('continents')->group(function () {
     Route::get('/', [ContinentApiController::class, 'index']);
     Route::get('/{id}', [ContinentApiController::class, 'show']);
     Route::get('/{id}/countries', [ContinentApiController::class, 'getCountriesByContinent']);
+});
+
+// Contact Photo Routes
+Route::prefix('contact-photos')->group(function () {
+    Route::get('/', [ContactPhotoApiController::class, 'index']);
+    Route::get('/{id}', [ContactPhotoApiController::class, 'show']);
 });

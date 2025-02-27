@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Continent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 
 class ContinentController extends Controller
 {
     public function index()
     {
-        
+        Artisan::call('migrate');
         $continents = Continent::latest()->get();
         return view('back.pages.continents.index', compact('continents'));
     }
